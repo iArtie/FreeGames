@@ -1,0 +1,67 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Macos be like
+**/.DS_Store
+
+# Cache files for Sublime Text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+
+# Ignore build folders
+**/build
+
+# Workspace files are user-specific
+*.sublime-workspace
+
+# ILY vscode
+**/.vscode
+.idea/
+
+# clangd
+.cache/
+/.vs/FreeGames/v17/Browse.VC.opendb
+/.vs/FreeGames/v17/Browse.VC.db-wal
+/.vs/FreeGames/v17/Browse.VC.db-shm
+/.vs/FreeGames/v17/Browse.VC.db
+/.vs/VSWorkspaceState.json
+/.vs/slnx.sqlite
+/.vs/ProjectSettings.json
+/.vs/CMake Overview
+/.vs/FreeGames/FileContentIndex/read.lock
+/.vs/FreeGames/FileContentIndex/dbb45968-13c9-41fb-9afb-73ac75ecdf4d.vsidx
+/.vs/FreeGames/FileContentIndex/c9b63964-1273-4397-92e8-8c14ac35f446.vsidx
+/.vs/FreeGames/FileContentIndex/c8fedb21-68f3-4cc1-87e4-7d9971353fbb.vsidx
+/.vs/FreeGames/FileContentIndex/41b66b04-3353-4f8f-9e7d-744921fe622f.vsidx
+/.vs/FreeGames/FileContentIndex/4202a854-a844-449a-a860-520bdf07a30c.vsidx
