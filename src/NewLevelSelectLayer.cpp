@@ -1,5 +1,5 @@
 #include "NewLevelSelectLayer.h"
-#include "../Pages/NewLevelPage.h"
+//#include "NewLevelPage.h"
 #include <Geode/Geode.hpp>
 #include <Geode/Geode.hpp>
 #include <Geode/modify/MenuLayer.hpp>
@@ -8,9 +8,19 @@
 #include <Geode/modify/LevelPage.hpp>
 #include <Geode/modify/GJGameLevel.hpp>
 #include <Geode/Enums.hpp>
-#include "../src/NewLevelSelectLayer.h"
+#include "NewLevelSelectLayer.h"
+#include <iostream>
+#include <windows.h>
 
 using namespace geode::prelude;
+
+ccColor3B colors[] = {
+    {255, 0, 0},    // Rojo
+    {0, 255, 0},    // Verde
+    {0, 0, 255}     // Azul
+};
+int numColors = sizeof(colors) / sizeof(colors[0]);
+int currentColorIndex = 0;
 
 NewLevelSelectLayer* NewLevelSelectLayer::create(int page) {
     auto ret = new NewLevelSelectLayer();
@@ -36,6 +46,7 @@ bool NewLevelSelectLayer::init(int page) {
     auto winSize = director->getWinSize();
     auto GM = GameManager::sharedState();
     auto GLM = GameLevelManager::sharedState();
+
 
     m_background = CCSprite::create("GJ_gradientBG.png");
     m_background->setAnchorPoint({ 0.f, 0.f });
@@ -70,8 +81,62 @@ bool NewLevelSelectLayer::init(int page) {
     m_levelPages = CCArray::create();
 
     m_level = 0;
-    for(int i = 1; i < 23; i++)
-        m_mainLevels->addObject(GLM->getMainLevel(i, true));
+
+    auto level3 = GJGameLevel::create();
+    		std::ifstream t3("./Resources/levels/4003.txt");
+    		std::string text3((std::istreambuf_iterator<char>(t3)), std::istreambuf_iterator<char>());
+    
+    		
+    		level3->m_levelName = "Power Trip";
+    		level3->m_levelID = 4003;
+    		level3->m_levelType = GJLevelType::Local;
+    		level3->m_stars = 8;
+    		level3->m_levelString = text3;
+    		level3->m_coins = 3;
+    		level3->m_audioTrack = 39;
+    		level3->m_difficulty = GJDifficulty::Harder;
+    		level3->m_creatorName = "RobTopGames";
+    
+            
+    		auto level2 = GJGameLevel::create();
+    	std::ifstream t2("./Resources/levels/4002.txt");
+    	std::string text2((std::istreambuf_iterator<char>(t2)), std::istreambuf_iterator<char>());
+    	
+    		level2->m_levelName = "Nock Em";
+    		level2->m_levelID = 4002;
+    		level2->m_levelType = GJLevelType::Local;
+    		level2->m_stars = 6;
+    		level2->m_levelString = text2;
+    		level2->m_coins = 3;
+    		level2->m_audioTrack = 38;
+    		level2->m_difficulty = GJDifficulty::Hard;
+    		level2->m_creatorName = "RobTopGames";
+    
+    		auto level1 = GJGameLevel::create();
+    		std::ifstream t("./Resources/levels/4001.txt");
+    		std::string text((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
+    		if (text != "")
+    		{
+    
+    			std::cout << text << std::endl;
+    		}
+    		level1->m_levelName = "Press Start";
+    		level1->m_levelID = 4001;
+    		level1->m_levelType = GJLevelType::Local;
+    		level1->m_stars = 4;
+    		level1->m_levelString = text;
+    		level1->m_coins = 3;
+    		level1->m_audioTrack = 37;
+    		level1->m_difficulty = GJDifficulty::Normal;
+    		level1->m_creatorName = "RobTopGames";
+
+      
+            m_mainLevels->addObject(level1);
+            m_mainLevels->addObject(level2);
+            m_mainLevels->addObject(level3);
+           
+   /* for(int i = 1; i < 23; i++)
+        m_mainLevels->addObject(GLM->getMainLevel(i, true));*/
     
     for(size_t i = 0; i < 3; i++)   
         m_levelPages->addObject(LevelPage::create(nullptr));
@@ -85,6 +150,10 @@ bool NewLevelSelectLayer::init(int page) {
     m_mainLevels->addObject(defaultLevel);
 
     m_scrollLayer = BoomScrollLayer::create(m_levelPages, 0, true, m_mainLevels, static_cast<DynamicScrollDelegate*>(this));
+   
+    auto pointer = (CCSpriteBatchNode*)m_scrollLayer->getChildren()->objectAtIndex(1);
+    /*pointer->setVisible(false);*/
+    pointer->setPositionY(director->getScreenBottom() - 45);
     addChild(m_scrollLayer);
 
     CCLabelBMFont* downloadLabel = CCLabelBMFont::create("Download the soundtracks", "bigFont.fnt");
@@ -175,20 +244,34 @@ ccColor3B NewLevelSelectLayer::getColorValue(int level1, int level2, float a3)
 void NewLevelSelectLayer::updatePageWithObject(CCObject* page, CCObject* object) {
     GJGameLevel* level = static_cast<GJGameLevel*>(object);
     static_cast<LevelPage*>(page)->updateDynamicPage(level);
+    currentColorIndex = (currentColorIndex + 1) % numColors;
+    updateColors();
 }
 
 void NewLevelSelectLayer::onNext(CCObject*) {
     m_level++;
     m_scrollLayer->moveToPage(m_level);
+    currentColorIndex = (currentColorIndex + 1) % numColors;
+    updateColors();
     //scrollLayerMoved({0, 0});
 }
 
 void NewLevelSelectLayer::onPrev(CCObject*) {
     m_level--;
     m_scrollLayer->moveToPage(m_level);
+    currentColorIndex = (currentColorIndex - 1 + numColors) % numColors;
+    updateColors();
     //scrollLayerMoved({0, 0});
 }
 
+
+
+void NewLevelSelectLayer::updateColors() {
+    ccColor3B color = colors[currentColorIndex];
+    m_background->setColor(color);
+    m_ground->updateGround01Color(color);
+    m_ground->updateGround02Color(color);
+}
 void NewLevelSelectLayer::scrollLayerMoved(CCPoint point) {
     log::info("scrollLayerMoved");
     ccColor3B color = getColorValue(m_level, m_level - 1, 12);

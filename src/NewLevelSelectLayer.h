@@ -1,5 +1,7 @@
 #pragma once
 #include <Geode/Geode.hpp>
+//#include "../src/NewLevelSelectLayer.cpp"
+
 
 class NewLevelSelectLayer : public cocos2d::CCLayer, public BoomScrollLayerDelegate, public DynamicScrollDelegate {
 protected:
@@ -15,6 +17,7 @@ public:
     bool init(int page);
     void onClose(CCObject*);
     void keyBackClicked();
+    void updateColors();
     void updatePageWithObject(CCObject* page, CCObject* object) override;
     void scrollLayerMoved(cocos2d::CCPoint) override;
     void onSoundtracks(CCObject*);

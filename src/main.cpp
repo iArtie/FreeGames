@@ -5,7 +5,8 @@
 #include <Geode/modify/LevelPage.hpp>
 #include <Geode/modify/GJGameLevel.hpp>
 #include <Geode/Enums.hpp>
-#include "../src/NewLevelSelectLayer.h"
+#include "NewLevelSelectLayer.h"
+#include "NewLevelSelectLayer.cpp"
 using namespace geode::prelude;
 
 #include <iostream>
