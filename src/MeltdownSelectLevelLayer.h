@@ -3,7 +3,7 @@
 //#include "../src/NewLevelSelectLayer.cpp"
 
 
-class NewLevelSelectLayer : public cocos2d::CCLayer, public BoomScrollLayerDelegate, public DynamicScrollDelegate {
+class MeltdownSelectLevelLayer : public cocos2d::CCLayer, public BoomScrollLayerDelegate, public DynamicScrollDelegate {
 protected:
     GJGroundLayer* m_ground;
     cocos2d::CCSprite* m_background;
@@ -29,7 +29,7 @@ public:
 	void keyDown(int);
 	void updateColors();
 	void instantPage(cocos2d::CCObject*,int);
-	static NewLevelSelectLayer* create(int);
+	static MeltdownSelectLevelLayer* create(int);
 	static cocos2d::CCScene* scene(int);
 	void updatePageWithObject(CCObject* page, CCObject* object);
 }; 

@@ -1,4 +1,4 @@
-#include "NewLevelSelectLayer.h"
+#include "MeltdownSelectLevelLayer.h"
 //#include "NewLevelPage.h"
 #include <Geode/Geode.hpp>
 #include <Geode/Geode.hpp>
@@ -14,16 +14,16 @@
 
 using namespace geode::prelude;
 
-ccColor3B colors[] = {
+ccColor3B colors2[] = {
     {255, 0, 0},    // Rojo
     {0, 255, 0},    // Verde
     {0, 0, 255}     // Azul
 };
-int numColors = sizeof(colors) / sizeof(colors[0]);
-int currentColorIndex = 0;
+int numColors2 = sizeof(colors2) / sizeof(colors2[0]);
+int currentColorIndex2 = 0;
 
-NewLevelSelectLayer* NewLevelSelectLayer::create(int page) {
-    auto ret = new NewLevelSelectLayer();
+MeltdownSelectLevelLayer* MeltdownSelectLevelLayer::create(int page) {
+    auto ret = new MeltdownSelectLevelLayer();
     if (ret && ret->init(page)) {
         ret->autorelease();
         return ret;
@@ -32,14 +32,14 @@ NewLevelSelectLayer* NewLevelSelectLayer::create(int page) {
     return nullptr;
 };
 
-CCScene* NewLevelSelectLayer::scene(int page) {
-    auto layer = NewLevelSelectLayer::create(page);
+CCScene* MeltdownSelectLevelLayer::scene(int page) {
+    auto layer = MeltdownSelectLevelLayer::create(page);
     auto scene = CCScene::create();
     scene->addChild(layer);
     return scene;
 }
 
-bool NewLevelSelectLayer::init(int page) {
+bool MeltdownSelectLevelLayer::init(int page) {
     if(!CCLayer::init()) return false;
 
     auto director = CCDirector::sharedDirector();
@@ -82,62 +82,61 @@ bool NewLevelSelectLayer::init(int page) {
 
     m_level = 0;
 
-    //Subzero levels
-    
-    auto level3 = GJGameLevel::create();
-    std::ifstream t3("./Resources/levels/4003.txt");
-    std::string text3((std::istreambuf_iterator<char>(t3)), std::istreambuf_iterator<char>());
-
-
-    level3->m_levelName = "Power Trip";
-    level3->m_levelID = 4003;
-    level3->m_levelType = GJLevelType::Local;
-    level3->m_stars = 8;
-    level3->m_levelString = text3;
-    level3->m_coins = 3;
-    level3->m_audioTrack = 39;
-    level3->m_difficulty = GJDifficulty::Harder;
-    level3->m_creatorName = "RobTopGames";
-    level3->m_normalPercent = Mod::get()->getSavedValue<int>("ptNormalMode");
-    level3->m_practicePercent = Mod::get()->getSavedValue<int>("ptPracticeMode");
-
-    auto level2 = GJGameLevel::create();
-    std::ifstream t2("./Resources/levels/4002.txt");
-    std::string text2((std::istreambuf_iterator<char>(t2)), std::istreambuf_iterator<char>());
-
-    level2->m_levelName = "Nock Em";
-    level2->m_levelID = 4002;
-    level2->m_levelType = GJLevelType::Local;
-    level2->m_stars = 6;
-    level2->m_levelString = text2;
-    level2->m_coins = 3;
-    level2->m_audioTrack = 38;
-    level2->m_difficulty = GJDifficulty::Hard;
-    level2->m_creatorName = "RobTopGames";
-    level2->m_normalPercent = Mod::get()->getSavedValue<int>("neNormalMode");
-    level2->m_practicePercent = Mod::get()->getSavedValue<int>("nePracticeMode");
-    auto level1 = GJGameLevel::create();
-    std::ifstream t("./Resources/levels/4001.txt");
-    std::string text((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
-
-    level1->m_levelName = "Press Start";
-    level1->m_levelID = 4001;
-    level1->m_levelType = GJLevelType::Local;
-    level1->m_stars = 4;
-    level1->m_levelString = text;
-    level1->m_coins = 3;
-    level1->m_audioTrack = 37;
-    level1->m_difficulty = GJDifficulty::Normal;
-    level1->m_creatorName = "RobTopGames";
-    level1->m_normalPercent = Mod::get()->getSavedValue<int>("psNormalMode");
-    level1->m_practicePercent = Mod::get()->getSavedValue<int>("psPracticeMode");
   
+    //meltdown levels
+    auto mlevel3 = GJGameLevel::create();
+    std::ifstream mt3("./Resources/levels/1003.txt");
+    std::string mtext3((std::istreambuf_iterator<char>(mt3)), std::istreambuf_iterator<char>());
 
+
+    mlevel3->m_levelName = "Airborne Robots";
+    mlevel3->m_levelID = 1003;
+    mlevel3->m_levelType = GJLevelType::Local;
+    mlevel3->m_stars = 3;
+    mlevel3->m_levelString = mtext3;
+    mlevel3->m_coins = 3;
+    mlevel3->m_audioTrack = 25;
+    mlevel3->m_difficulty = GJDifficulty::Hard;
+    mlevel3->m_creatorName = "RobTopGames";
+    mlevel3->m_normalPercent = Mod::get()->getSavedValue<int>("abNormalMode");
+    mlevel3->m_practicePercent = Mod::get()->getSavedValue<int>("abPracticeMode");
+
+    auto mlevel2 = GJGameLevel::create();
+    std::ifstream mt2("./Resources/levels/1002.txt");
+    std::string mtext2((std::istreambuf_iterator<char>(mt2)), std::istreambuf_iterator<char>());
+
+    mlevel2->m_levelName = "Viking Arena";
+    mlevel2->m_levelID = 1002;
+    mlevel2->m_levelType = GJLevelType::Local;
+    mlevel2->m_stars = 2;
+    mlevel2->m_levelString = mtext2;
+    mlevel2->m_coins = 3;
+    mlevel2->m_audioTrack = 24;
+    mlevel2->m_difficulty = GJDifficulty::Normal;
+    mlevel2->m_creatorName = "RobTopGames";
+    mlevel2->m_normalPercent = Mod::get()->getSavedValue<int>("vaNormalMode");
+    mlevel2->m_practicePercent = Mod::get()->getSavedValue<int>("vaPracticeMode");
+    auto mlevel1 = GJGameLevel::create();
+    std::ifstream mt("./Resources/levels/1001.txt");
+    std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+
+    mlevel1->m_levelName = "The Seven Seas";
+    mlevel1->m_levelID = 1001;
+    mlevel1->m_levelType = GJLevelType::Local;
+    mlevel1->m_stars = 1;
+    mlevel1->m_levelString = mtext;
+    mlevel1->m_coins = 3;
+    mlevel1->m_audioTrack = 23;
+    mlevel1->m_difficulty = GJDifficulty::Easy;
+    mlevel1->m_creatorName = "RobTopGames";
+    mlevel1->m_normalPercent = Mod::get()->getSavedValue<int>("tsNormalMode");
+    mlevel1->m_practicePercent = Mod::get()->getSavedValue<int>("tsPracticeMode");
     
-    
-        m_mainLevels->addObject(level1);
-        m_mainLevels->addObject(level2);
-        m_mainLevels->addObject(level3);
+    auto isSubzero = Mod::get()->getSavedValue<int>("onsubzero");
+  
+        m_mainLevels->addObject(mlevel1);
+        m_mainLevels->addObject(mlevel2);
+        m_mainLevels->addObject(mlevel3);
     
    
 
@@ -219,21 +218,21 @@ bool NewLevelSelectLayer::init(int page) {
     return true;
 }
 
-void NewLevelSelectLayer::keyBackClicked() {
+void MeltdownSelectLevelLayer::keyBackClicked() {
     onClose(nullptr);
 }
 
-void NewLevelSelectLayer::onClose(CCObject*) {
+void MeltdownSelectLevelLayer::onClose(CCObject*) {
     CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, MenuLayer::scene(false)));
 }
 
-void NewLevelSelectLayer::onSoundtracks(CCObject*) {
+void MeltdownSelectLevelLayer::onSoundtracks(CCObject*) {
     auto songs = SongsLayer::create();
     songs->enterLayer();
     CCDirector::get()->getRunningScene()->addChild(songs, 2);
 }
 
-ccColor3B NewLevelSelectLayer::colorForPage(int page) {
+ccColor3B MeltdownSelectLevelLayer::colorForPage(int page) {
     auto GM = GameManager::sharedState();
 	int colIDs[9] = { 5 ,7, 8, 9, 10, 11, 1, 3, 4 };
 
@@ -241,7 +240,7 @@ ccColor3B NewLevelSelectLayer::colorForPage(int page) {
 }
 
 
-ccColor3B NewLevelSelectLayer::getColorValue(int level1, int level2, float a3)
+ccColor3B MeltdownSelectLevelLayer::getColorValue(int level1, int level2, float a3)
 {
 	float mod = (a3 * (2 / 3)) - 0.2f;
 	if (mod < 1.0f)
@@ -259,44 +258,44 @@ ccColor3B NewLevelSelectLayer::getColorValue(int level1, int level2, float a3)
     return col3;
 }
 
-void NewLevelSelectLayer::updatePageWithObject(CCObject* page, CCObject* object) {
+void MeltdownSelectLevelLayer::updatePageWithObject(CCObject* page, CCObject* object) {
     GJGameLevel* level = static_cast<GJGameLevel*>(object);
     static_cast<LevelPage*>(page)->updateDynamicPage(level);
-    currentColorIndex = (currentColorIndex + 1) % numColors;
+    currentColorIndex2 = (currentColorIndex2 + 1) % numColors2;
     updateColors();
 }
 
-void NewLevelSelectLayer::onNext(CCObject*) {
+void MeltdownSelectLevelLayer::onNext(CCObject*) {
     m_level++;
     m_scrollLayer->moveToPage(m_level);
-    currentColorIndex = (currentColorIndex + 1) % numColors;
+    currentColorIndex2 = (currentColorIndex2 + 1) % numColors2;
     updateColors();
     //scrollLayerMoved({0, 0});
 }
 
-void NewLevelSelectLayer::onPrev(CCObject*) {
+void MeltdownSelectLevelLayer::onPrev(CCObject*) {
     m_level--;
     m_scrollLayer->moveToPage(m_level);
-    currentColorIndex = (currentColorIndex - 1 + numColors) % numColors;
+    currentColorIndex2 = (currentColorIndex2 - 1 + numColors2) % numColors2;
     updateColors();
     //scrollLayerMoved({0, 0});
 }
 
 
-void NewLevelSelectLayer::instantPage(CCObject* sender, int a1) {
+void MeltdownSelectLevelLayer::instantPage(CCObject* sender, int a1) {
     
     m_scrollLayer->instantMoveToPage(a1);
-    currentColorIndex = (currentColorIndex - 1 + numColors) % numColors;
+    currentColorIndex2 = (currentColorIndex2 - 1 + numColors2) % numColors2;
     updateColors();
     //scrollLayerMoved({0, 0});
 }
-void NewLevelSelectLayer::updateColors() {
-    ccColor3B color = colors[currentColorIndex];
-    m_background->setColor(color);
-    m_ground->updateGround01Color(color);
-    m_ground->updateGround02Color(color);
+void MeltdownSelectLevelLayer::updateColors() {
+    ccColor3B color2 = colors2[currentColorIndex2];
+    m_background->setColor(color2);
+    m_ground->updateGround01Color(color2);
+    m_ground->updateGround02Color(color2);
 }
-void NewLevelSelectLayer::scollLayerMoved(CCPoint point) {
+void MeltdownSelectLevelLayer::scollLayerMoved(CCPoint point) {
     log::info("scrollLayerMoved");
 
     std::cout << "Works!" << std::endl;

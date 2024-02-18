@@ -4,9 +4,18 @@
 #include <Geode/modify/LevelInfoLayer.hpp>
 #include <Geode/modify/LevelPage.hpp>
 #include <Geode/modify/GJGameLevel.hpp>
+#include <Geode/modify/BoomScrollLayerDelegate.hpp>
+#include <Geode/modify/PauseLayer.hpp>
+#include <Geode/modify/PlayLayer.hpp>
 #include <Geode/Enums.hpp>
 #include "NewLevelSelectLayer.h"
 #include "NewLevelSelectLayer.cpp"
+#include "MoreGamesLayer.hpp"
+#include "MoreGamesLayer.cpp"
+#include "ownWorldLevelPage.hpp"
+#include "MeltdownSelectLevelLayer.h"
+//#include "ownWorldLevelPage.cpp"
+
 using namespace geode::prelude;
 
 #include <iostream>
@@ -269,8 +278,25 @@ using namespace geode::prelude;
 class $modify(MenuLayer) {
 	void onMoreGames(CCObject*) {
 
+		/*auto leveltest = GJGameLevel::create();
+		leveltest->m_levelName = "Press Start";
+		leveltest->m_levelID = 4001;
+		leveltest->m_levelType = GJLevelType::Local;
+		leveltest->m_stars = 4;
+		leveltest->m_levelString = "";
+		leveltest->m_coins = 3;
+		leveltest->m_audioTrack = 37;
+		leveltest->m_difficulty = GJDifficulty::Normal;
+		leveltest->m_creatorName = "RobTopGames";
+		auto page = ownWorldLevelPage::create(leveltest);
+
+		addChild(page);*/
+		auto* layer = more::MoreGamesLayer::create();
+
+		addChild(layer, 100);
+		layer->showLayer(false);
 		
-		CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, NewLevelSelectLayer::scene(0)));
+		//CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, NewLevelSelectLayer::scene(0)));
 		
         }
 
@@ -278,6 +304,189 @@ class $modify(MenuLayer) {
 	
 };
 
+class $modify(PauseLayer) {
+	void onQuit(CCObject* sender) {
 
+		auto scene = CCScene::create();
+
+		auto isSubzero = Mod::get()->getSavedValue<int>("onsubzero");
+		auto SubZeroScene = NewLevelSelectLayer::create(1);
+		auto MeltdownScene = MeltdownSelectLevelLayer::create(1);
+
+		if (isSubzero == 1)
+		{
+			scene->addChild(SubZeroScene);
+		}
+		
+		if (isSubzero == 2)
+		{
+			scene->addChild(MeltdownScene);
+		}
+		int page = 0;
+		auto subzero = Mod::get()->getSavedValue<int>("subzerolevels");
+
+		switch (subzero) {
+		case 1:
+			std::cout << "on PressStart" << std::endl;
+			page = 0;
+			MeltdownScene->instantPage(sender, 0);
+			SubZeroScene->instantPage(sender, 0);
+			break;
+		case 2:
+			std::cout << "on Nock Em" << std::endl;
+			page = 1;
+			MeltdownScene->instantPage(sender, 1);
+			SubZeroScene->instantPage(sender, 1);
+			break;
+		case 3:
+			std::cout << "on Power Trip" << std::endl;
+			page = 2;
+			MeltdownScene->instantPage(sender, 2);
+			SubZeroScene->instantPage(sender, 2);
+			break;
+		default:
+			std::cout << "on a common level" << std::endl;
+			page = 5;
+			break;
+		}
+
+		if (page != 5) {
+			CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene));
+			PauseLayer::onQuit(sender);
+		}
+		else {
+			PauseLayer::onQuit(sender);
+		}
+
+	}
+
+
+
+};
+
+class $modify(PlayLayer) {
+	bool init(GJGameLevel * level, bool useReplay, bool dontCreateObjects){
+
+		std::cout << level->m_levelID << std::endl;
+
+		std::cout << level->m_levelString.c_str() << std::endl;
+		auto isSubzero = Mod::get()->getSavedValue<int>("onsubzero");
+		int subzero = 0;
+
+		if (isSubzero == 1)
+		{
+			if (level->m_levelID == 4001) {
+				subzero = 1;
+			}
+			else if (level->m_levelID == 4002) {
+				subzero = 2;
+			}
+			else if (level->m_levelID == 4003) {
+				subzero = 3;
+			}
+		}
+		if (isSubzero == 2)
+		{
+			if (level->m_levelID == 1001) {
+				subzero = 1;
+			}
+			else if (level->m_levelID == 1002) {
+				subzero = 2;
+			}
+			else if (level->m_levelID == 1003) {
+				subzero = 3;
+			}
+		}
+		
+		Mod::get()->setSavedValue("subzerolevels", subzero);
+
+		return PlayLayer::init(level, useReplay, dontCreateObjects);
+		
+	}
+
+	int getCurrentPercentInt()
+	{
+		//Subzero percentage levels
+
+		if (this->m_level->m_levelID == 4001) {
+			int currentPercent = Mod::get()->getSavedValue<int>(this->m_isPracticeMode ? "psPracticeMode" : "psNormalMode");
+			if (PlayLayer::getCurrentPercentInt() > currentPercent) {
+				if (this->m_isPracticeMode) {
+					Mod::get()->setSavedValue("psPracticeMode", PlayLayer::getCurrentPercentInt());
+				}
+				else {
+					Mod::get()->setSavedValue("psNormalMode", PlayLayer::getCurrentPercentInt());
+				}
+			}
+		}
+		else if (this->m_level->m_levelID == 4002) {
+			int currentPercent = Mod::get()->getSavedValue<int>(this->m_isPracticeMode ? "nePracticeMode" : "neNormalMode");
+			if (PlayLayer::getCurrentPercentInt() > currentPercent) {
+				if (this->m_isPracticeMode) {
+					Mod::get()->setSavedValue("nePracticeMode", PlayLayer::getCurrentPercentInt());
+				}
+				else {
+					Mod::get()->setSavedValue("neNormalMode", PlayLayer::getCurrentPercentInt());
+				}
+			}
+		}
+		else if (this->m_level->m_levelID == 4003) {
+			int currentPercent = Mod::get()->getSavedValue<int>(this->m_isPracticeMode ? "ptPracticeMode" : "ptNormalMode");
+			if (PlayLayer::getCurrentPercentInt() > currentPercent) {
+				if (this->m_isPracticeMode) {
+					Mod::get()->setSavedValue("ptPracticeMode", PlayLayer::getCurrentPercentInt());
+				}
+				else {
+					Mod::get()->setSavedValue("ptNormalMode", PlayLayer::getCurrentPercentInt());
+				}
+			}
+		}
+
+		//meltdown percenttage levels
+		if (this->m_level->m_levelID == 1001) {
+			int currentPercent = Mod::get()->getSavedValue<int>(this->m_isPracticeMode ? "psPracticeMode" : "psNormalMode");
+			if (PlayLayer::getCurrentPercentInt() > currentPercent) {
+				if (this->m_isPracticeMode) {
+					Mod::get()->setSavedValue("tsPracticeMode", PlayLayer::getCurrentPercentInt());
+				}
+				else {
+					Mod::get()->setSavedValue("tsNormalMode", PlayLayer::getCurrentPercentInt());
+				}
+			}
+		}
+		else if (this->m_level->m_levelID == 1002) {
+			int currentPercent = Mod::get()->getSavedValue<int>(this->m_isPracticeMode ? "nePracticeMode" : "neNormalMode");
+			if (PlayLayer::getCurrentPercentInt() > currentPercent) {
+				if (this->m_isPracticeMode) {
+					Mod::get()->setSavedValue("vaPracticeMode", PlayLayer::getCurrentPercentInt());
+				}
+				else {
+					Mod::get()->setSavedValue("vaNormalMode", PlayLayer::getCurrentPercentInt());
+				}
+			}
+		}
+		else if (this->m_level->m_levelID == 1003) {
+			int currentPercent = Mod::get()->getSavedValue<int>(this->m_isPracticeMode ? "ptPracticeMode" : "ptNormalMode");
+			if (PlayLayer::getCurrentPercentInt() > currentPercent) {
+				if (this->m_isPracticeMode) {
+					Mod::get()->setSavedValue("abPracticeMode", PlayLayer::getCurrentPercentInt());
+				}
+				else {
+					Mod::get()->setSavedValue("abNormalMode", PlayLayer::getCurrentPercentInt());
+				}
+			}
+		}
+		return PlayLayer::getCurrentPercentInt();
+		
+	}
+
+};
+//class $modify(BoomScrollLayerDelegate) {
+//	void scrollLayerMoved(cocos2d::CCPoint a1) {
+//
+//		BoomScrollLayerDelegate::scrollLayerMoved(a1);
+//	
+//	}
+//};
 
 

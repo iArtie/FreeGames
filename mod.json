@@ -7,5 +7,12 @@
 	"description": "All free Geometry Dash games within a single mod!",
 	"gd": {
 		"win": "2.204"
+	},
+	"resources": {
+		"spritesheets": {
+			"IconSheet": [
+				"resources/icon/*.png"
+			]
+		}
 	}
 }
