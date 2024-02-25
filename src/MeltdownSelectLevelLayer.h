@@ -25,13 +25,14 @@ public:
 	void onPlay(cocos2d::CCObject*);
 	void onBack(cocos2d::CCObject*);
 	void keyBackClicked();
-	void scollLayerMoved(cocos2d::CCPoint);
+	/*void pageNumberForPosition(cocos2d::CCPoint);*/
 	void keyDown(int);
 	void updateColors();
 	void instantPage(cocos2d::CCObject*,int);
 	static MeltdownSelectLevelLayer* create(int);
 	static cocos2d::CCScene* scene(int);
 	void updatePageWithObject(CCObject* page, CCObject* object);
+	
 }; 
 
 //static NewLevelSelectLayer* create(int page);

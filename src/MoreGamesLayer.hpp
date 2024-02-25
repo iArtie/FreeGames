@@ -14,7 +14,8 @@ public:
 
 private:
     cocos2d::CCArray* getGames();
-
+    /*void onClose(CCObject*);
+    virtual void keyBackClicked();*/
     void onCallback(cocos2d::CCObject* sender);
     void onMeltdown(cocos2d::CCObject* sender);
     void onSubzero(cocos2d::CCObject* sender);

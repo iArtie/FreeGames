@@ -30,16 +30,16 @@ MoreGamesLayer* MoreGamesLayer::create() {
 void MoreGamesLayer::customSetup() {
     m_games = getGames();
     m_games->retain();
-
-    auto* listView = ListView::create(m_games, 60.0f);
+    
+    auto* listView = ListView::create(m_games, 72.0f);
     m_listLayer->addChild(listView);
 }
 
 CCArray* MoreGamesLayer::getGames() {
-    const CCSize cellSize = { 358.0f, 60.0f };
+    const CCSize cellSize = { 358.0f, 72.0f };
     CCArray* games = CCArray::create();
 
-
+   /* setKeypadEnabled(true);*/
     auto game1 = MoreGamesCell::create({
            cellSize,
            "meltdownIcon_001.png"_spr,
@@ -75,8 +75,9 @@ CCArray* MoreGamesLayer::getGames() {
 
 void MoreGamesLayer::onCallback(CCObject* sender) {
     CCScene* scene = WorldSelectLayerDecomp::scene();
-    CCTransitionFade* fade = CCTransitionFade::create(0.5f, scene);
 
+    CCTransitionFade* fade = CCTransitionFade::create(0.5f, scene);
+    Mod::get()->setSavedValue("onsubzero", 3);
     CCDirector::sharedDirector()->pushScene(fade);
 }
 
@@ -97,4 +98,12 @@ void MoreGamesLayer::onSubzero(CCObject* sender) {
 
     CCDirector::sharedDirector()->pushScene(fade);
 }
+
+//void MoreGamesLayer::keyBackClicked() {
+//    CCDirector::sharedDirector()->popSceneWithTransition(0.5F, PopTransition::kPopTransitionFade);
+//}
+//
+//void MoreGamesLayer::onClose(CCObject*) {
+//    keyBackClicked();
+//}
 } // namespace more

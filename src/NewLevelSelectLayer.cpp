@@ -55,12 +55,13 @@ bool NewLevelSelectLayer::init(int page) {
     m_background->setScaleX((winSize.width + 10.f) / m_background->getTextureRect().size.width);
     m_background->setScaleY((winSize.height + 10.f) / m_background->getTextureRect().size.height);
     m_background->setPosition(ccp(-5, -5));
-    m_background->setColor({ 40, 125, 255 });
+    m_background->setColor({ 0, 0, 255 });
 
     m_ground = GJGroundLayer::create(GM->m_loadedGroundID, -1);
     m_ground->setPositionY(std::min(128.f, (winSize.height / 2) - 110.f));
     addChild(m_ground ,-1);
-
+    m_ground->updateGround01Color({ 0, 0, 255 });
+    m_ground->updateGround02Color({ 0, 0, 255 });
     CCSprite* topBar = CCSprite::createWithSpriteFrameName("GJ_topBar_001.png");
     topBar->setAnchorPoint({ 0.5f, 1.f });
     topBar->setPosition(ccp(winSize.width / 2, director->getScreenTop() + 1.f));
@@ -84,47 +85,46 @@ bool NewLevelSelectLayer::init(int page) {
 
     //Subzero levels
     
-    auto level3 = GJGameLevel::create();
+  /*  auto level3 = GJGameLevel::create();
     std::ifstream t3("./Resources/levels/4003.txt");
-    std::string text3((std::istreambuf_iterator<char>(t3)), std::istreambuf_iterator<char>());
+    std::string text3((std::istreambuf_iterator<char>(t3)), std::istreambuf_iterator<char>());*/
 
-
+    GJGameLevel* level3 = GLM->getMainLevel(4003, true);
     level3->m_levelName = "Power Trip";
     level3->m_levelID = 4003;
-    level3->m_levelType = GJLevelType::Local;
     level3->m_stars = 8;
-    level3->m_levelString = text3;
     level3->m_coins = 3;
     level3->m_audioTrack = 39;
     level3->m_difficulty = GJDifficulty::Harder;
     level3->m_creatorName = "RobTopGames";
-    level3->m_normalPercent = Mod::get()->getSavedValue<int>("ptNormalMode");
-    level3->m_practicePercent = Mod::get()->getSavedValue<int>("ptPracticeMode");
 
-    auto level2 = GJGameLevel::create();
-    std::ifstream t2("./Resources/levels/4002.txt");
-    std::string text2((std::istreambuf_iterator<char>(t2)), std::istreambuf_iterator<char>());
-
+    //auto level2 = GJGameLevel::create();
+    //std::ifstream t2("./Resources/levels/4002.txt");
+    //std::string text2((std::istreambuf_iterator<char>(t2)), std::istreambuf_iterator<char>());
+    GJGameLevel* level2 = GLM->getMainLevel(4002, true);
     level2->m_levelName = "Nock Em";
-    level2->m_levelID = 4002;
-    level2->m_levelType = GJLevelType::Local;
     level2->m_stars = 6;
-    level2->m_levelString = text2;
     level2->m_coins = 3;
     level2->m_audioTrack = 38;
     level2->m_difficulty = GJDifficulty::Hard;
     level2->m_creatorName = "RobTopGames";
-    level2->m_normalPercent = Mod::get()->getSavedValue<int>("neNormalMode");
-    level2->m_practicePercent = Mod::get()->getSavedValue<int>("nePracticeMode");
-    auto level1 = GJGameLevel::create();
-    std::ifstream t("./Resources/levels/4001.txt");
-    std::string text((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
 
+   /* auto level1 = GJGameLevel::create();
+    std::ifstream t("./Resources/levels/4001.txt");
+    std::string text((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());*/
+
+
+    GJGameLevel* level1 = GLM->getMainLevel(4001, true);
+   /* level1->m_levelName = "Press Start";
+    level1->m_stars = 1;
+    level1->m_coins = 3;
+    level1->m_audioTrack = 23;
+    level1->m_difficulty = GJDifficulty::Easy;
+    level1->m_creatorName = "RobTopGames";*/
     level1->m_levelName = "Press Start";
     level1->m_levelID = 4001;
     level1->m_levelType = GJLevelType::Local;
     level1->m_stars = 4;
-    level1->m_levelString = text;
     level1->m_coins = 3;
     level1->m_audioTrack = 37;
     level1->m_difficulty = GJDifficulty::Normal;
@@ -210,7 +210,7 @@ bool NewLevelSelectLayer::init(int page) {
     addChild(infoMenu);
 
     cocos2d::CCSprite* info = cocos2d::CCSprite::createWithSpriteFrameName("GJ_infoIcon_001.png");
-    CCMenuItemSpriteExtra* infoBtn = CCMenuItemSpriteExtra::create(info, this, menu_selector(LevelSelectLayer::onInfo));
+    CCMenuItemSpriteExtra* infoBtn = CCMenuItemSpriteExtra::create(info, this, menu_selector(NewLevelSelectLayer::onInfo));
     infoMenu->addChild(infoBtn);
 
     infoMenu->setPosition({ director->getScreenRight() - 20.0f, director->getScreenTop() - 20.0f });
@@ -224,6 +224,9 @@ void NewLevelSelectLayer::keyBackClicked() {
 }
 
 void NewLevelSelectLayer::onClose(CCObject*) {
+    auto back = Mod::get()->getSavedValue<int>("onsubzero");
+    back = 10;
+    Mod::get()->setSavedValue("onsubzero", back);
     CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, MenuLayer::scene(false)));
 }
 
@@ -262,15 +265,59 @@ ccColor3B NewLevelSelectLayer::getColorValue(int level1, int level2, float a3)
 void NewLevelSelectLayer::updatePageWithObject(CCObject* page, CCObject* object) {
     GJGameLevel* level = static_cast<GJGameLevel*>(object);
     static_cast<LevelPage*>(page)->updateDynamicPage(level);
+    auto lol = Mod::get()->getSavedValue<int>("subzerolevellol");
+    if (level->m_levelID == 4001)
+    {
+        lol = 1;
+    }
+
+    if (level->m_levelID == 4002)
+    {
+        lol = 2;
+    }
+
+    if (level->m_levelID == 4003)
+    {
+        lol = 3;
+    }
+    if (level->m_levelID == -1)
+    {
+        lol = 4;
+    }
+
+    Mod::get()->setSavedValue("subzerolevellol", lol);
     currentColorIndex = (currentColorIndex + 1) % numColors;
-    updateColors();
+  /*  updateColors();*/
 }
 
 void NewLevelSelectLayer::onNext(CCObject*) {
     m_level++;
+
+  /*  auto lol = Mod::get()->getSavedValue<int>("subzerolevellol");
+
+    int levellol = 0;
+    if (lol == 1)
+    {
+        levellol = 3;
+    }
+
+    if (lol == 2)
+    {
+        levellol = 0;
+    }
+
+    if (lol == 3)
+    {
+        levellol = 1;
+    }
+
+    if (lol == 4)
+    {
+        levellol = 2;
+    }*/
     m_scrollLayer->moveToPage(m_level);
     currentColorIndex = (currentColorIndex + 1) % numColors;
-    updateColors();
+   /* updateColors();*/
     //scrollLayerMoved({0, 0});
 }
 
@@ -278,7 +325,7 @@ void NewLevelSelectLayer::onPrev(CCObject*) {
     m_level--;
     m_scrollLayer->moveToPage(m_level);
     currentColorIndex = (currentColorIndex - 1 + numColors) % numColors;
-    updateColors();
+    //updateColors();
     //scrollLayerMoved({0, 0});
 }
 
@@ -287,7 +334,7 @@ void NewLevelSelectLayer::instantPage(CCObject* sender, int a1) {
     
     m_scrollLayer->instantMoveToPage(a1);
     currentColorIndex = (currentColorIndex - 1 + numColors) % numColors;
-    updateColors();
+  /*  updateColors();*/
     //scrollLayerMoved({0, 0});
 }
 void NewLevelSelectLayer::updateColors() {
@@ -313,4 +360,75 @@ void NewLevelSelectLayer::scollLayerMoved(CCPoint point) {
     Color2.g = color.g * 0.9;
     Color2.b = color.b * 0.9;
     m_ground->updateGround02Color(Color2);
+}
+
+
+void show(GJGameLevel* level) {
+
+    if (level == nullptr) return;
+
+
+    if (level->m_levelID == -1) {
+        FLAlertLayer::create(nullptr, "It's a secret...", "<cr>Roses are red</c>\n<cl>Violets are blue</c>\n<cg>Welcome to</c>\n<cy>2.2</c>", "OK", nullptr, 360)->show();
+        return;
+    }
+
+    if (level->m_levelID == -2) {
+        FLAlertLayer::create(nullptr, "The Tower", "The path leads to an <cr>old tower</c>. It's been left alone for <cg>years</c>, with little reason to <co>explore</c>.", "OK", nullptr, 360)->show();
+        return;
+    }
+
+
+    if(level->m_levelID != -1 && level->m_levelID != -2)
+    {
+        std::string name = level->m_levelName;
+        std::string contentStream = 
+            "<cy>" + name +"</c>"+
+            "\n<cg>Total Attempts</c>: " + std::to_string(level->m_attempts) +
+            "\n<cl>Total Jumps</c>: " + std::to_string(level->m_jumps) +
+            "\n<cp>Normal</c>: " + std::to_string(level->m_normalPercent) + "%" +
+            "\n<co>Practice</c>: " + std::to_string(level->m_practicePercent) + "%";
+
+        FLAlertLayer::create(nullptr, "Level Stats", contentStream, "OK", nullptr, 360)->show();
+        return;
+    }
+}
+  
+
+    
+
+    
+
+void NewLevelSelectLayer::onInfo(CCObject* sender) {
+
+
+    auto lol = Mod::get()->getSavedValue<int>("subzerolevellol");
+   
+    int levellol = 0;
+    if (lol == 1)
+    {
+        levellol = 3;
+    }
+
+    if (lol == 2)
+    {
+        levellol = 0;
+    }
+
+    if (lol == 3)
+    {
+        levellol = 1;
+    }
+    
+    if (lol == 4)
+    {
+        levellol = 2;
+    }
+
+    std::cout << levellol << std::endl;
+    auto levelObject = m_mainLevels->objectAtIndex(levellol);
+    // Verificar si el objeto es de tipo GJGameLevel
+    if (auto gameLevel = dynamic_cast<GJGameLevel*>(levelObject)) {
+        show(gameLevel);
+    }
 }

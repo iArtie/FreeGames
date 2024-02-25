@@ -4,9 +4,11 @@
 #include <Geode/modify/LevelInfoLayer.hpp>
 #include <Geode/modify/LevelPage.hpp>
 #include <Geode/modify/GJGameLevel.hpp>
-#include <Geode/modify/BoomScrollLayerDelegate.hpp>
+#include <Geode/modify/BoomScrollLayer.hpp>
 #include <Geode/modify/PauseLayer.hpp>
 #include <Geode/modify/PlayLayer.hpp>
+#include <Geode/modify/EndLevelLayer.hpp>
+#include <Geode/modify/GJGarageLayer.hpp>
 #include <Geode/Enums.hpp>
 #include "NewLevelSelectLayer.h"
 #include "NewLevelSelectLayer.cpp"
@@ -14,12 +16,16 @@
 #include "MoreGamesLayer.cpp"
 #include "ownWorldLevelPage.hpp"
 #include "MeltdownSelectLevelLayer.h"
+#include "WorldSelectLayerDecomp.hpp"
+//#include "WorldSelectLayerDecomp.cpp"
+
 //#include "ownWorldLevelPage.cpp"
 
 using namespace geode::prelude;
 
 #include <iostream>
 #include <filesystem> 
+using namespace more;
 
 //class TestLayer : public CCLayer, BoomScrollLayerDelegate, DynamicScrollDelegate {
 //public:
@@ -291,6 +297,8 @@ class $modify(MenuLayer) {
 		auto page = ownWorldLevelPage::create(leveltest);
 
 		addChild(page);*/
+
+		
 		auto* layer = more::MoreGamesLayer::create();
 
 		addChild(layer, 100);
@@ -304,15 +312,28 @@ class $modify(MenuLayer) {
 	
 };
 
+
+class $modify(GJGarageLayer) {
+	bool init() {
+		auto back = Mod::get()->getSavedValue<int>("onsubzero");
+		back = 10;
+		Mod::get()->setSavedValue("onsubzero", back);
+		return GJGarageLayer::init();
+	}
+
+
+
+};
 class $modify(PauseLayer) {
 	void onQuit(CCObject* sender) {
 
 		auto scene = CCScene::create();
 
 		auto isSubzero = Mod::get()->getSavedValue<int>("onsubzero");
-		auto SubZeroScene = NewLevelSelectLayer::create(1);
-		auto MeltdownScene = MeltdownSelectLevelLayer::create(1);
-
+		auto SubZeroScene = NewLevelSelectLayer::create(0);
+		auto MeltdownScene = MeltdownSelectLevelLayer::create(0);
+		auto dashlandScene = WorldSelectLayerDecomp::create();
+		
 		if (isSubzero == 1)
 		{
 			scene->addChild(SubZeroScene);
@@ -321,6 +342,124 @@ class $modify(PauseLayer) {
 		if (isSubzero == 2)
 		{
 			scene->addChild(MeltdownScene);
+		}
+
+		if (isSubzero == 3)
+		{
+			scene->addChild(dashlandScene);
+		}
+		int page = 0;
+		auto subzero = Mod::get()->getSavedValue<int>("subzerolevels");
+		auto BG = (CCSprite*)dashlandScene->getChildren()->objectAtIndex(0);
+		switch (subzero) {
+		case 1:
+			std::cout << "on PressStart" << std::endl;
+			page = 0;
+			MeltdownScene->instantPage(sender, 0);
+			SubZeroScene->instantPage(sender, 0);
+			break;
+		case 2:
+			std::cout << "on Nock Em" << std::endl;
+			page = 1;
+			MeltdownScene->instantPage(sender, 1);
+			SubZeroScene->instantPage(sender, 1);
+			break;
+		case 3:
+			std::cout << "on Power Trip" << std::endl;
+			page = 2;
+			MeltdownScene->instantPage(sender, 2);
+			SubZeroScene->instantPage(sender, 2);
+			break;
+		case 4:
+			
+			page = 3;
+			
+			break;
+		case 5:
+			std::cout << "on FrontLines" << std::endl;
+			page = 4;
+			/*MeltdownScene->instantPage(sender, 2);*/
+			dashlandScene->instantPage(sender, 2);
+		
+			
+			
+		/*	BG->setColor({ 125, 0, 255 });*/
+			break;
+		case 6:
+			std::cout << "on Power Trip" << std::endl;
+			page = 5;
+			MeltdownScene->instantPage(sender, 2);
+			SubZeroScene->instantPage(sender, 2);
+			break;
+		case 7:
+			std::cout << "on Power Trip" << std::endl;
+			page = 6;
+			MeltdownScene->instantPage(sender, 2);
+			SubZeroScene->instantPage(sender, 2);
+			break;
+		case 8:
+			std::cout << "on Power Trip" << std::endl;
+			page = 7;
+			MeltdownScene->instantPage(sender, 2);
+			SubZeroScene->instantPage(sender, 2);
+			break;
+		case 9:
+			std::cout << "on Power Trip" << std::endl;
+			page = 8;
+			MeltdownScene->instantPage(sender, 2);
+			SubZeroScene->instantPage(sender, 2);
+			break;
+		case 10:
+			std::cout << "on Power Trip" << std::endl;
+			page = 9;
+			MeltdownScene->instantPage(sender, 2);
+			SubZeroScene->instantPage(sender, 2);
+			break;
+		default:
+			std::cout << "on a common level" << std::endl;
+			page = 10;
+			break;
+		}
+
+		if (page != 10) {
+			CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene));
+			PauseLayer::onQuit(sender);
+		}
+		else {
+			PauseLayer::onQuit(sender);
+		}
+
+	}
+
+
+
+};
+
+
+class $modify(EndLevelLayer) {
+	void onMenu(CCObject * sender) {
+
+		auto scene = CCScene::create();
+
+		auto isSubzero = Mod::get()->getSavedValue<int>("onsubzero");
+		auto SubZeroScene = NewLevelSelectLayer::create(0);
+		auto MeltdownScene = MeltdownSelectLevelLayer::create(0);
+
+		
+		auto dashlandScene = WorldSelectLayerDecomp::create();
+		if (isSubzero == 1)
+		{
+			scene->addChild(SubZeroScene);
+		}
+
+		if (isSubzero == 2)
+		{
+			scene->addChild(MeltdownScene);
+		}
+
+		if (isSubzero == 3)
+		{
+			scene->addChild(dashlandScene);
 		}
 		int page = 0;
 		auto subzero = Mod::get()->getSavedValue<int>("subzerolevels");
@@ -344,18 +483,60 @@ class $modify(PauseLayer) {
 			MeltdownScene->instantPage(sender, 2);
 			SubZeroScene->instantPage(sender, 2);
 			break;
+		case 4:
+			std::cout << "on Power Trip" << std::endl;
+			page = 3;
+			MeltdownScene->instantPage(sender, 2);
+			SubZeroScene->instantPage(sender, 2);
+			break;
+		case 5:
+			std::cout << "on Power Trip" << std::endl;
+			page = 4;
+			MeltdownScene->instantPage(sender, 2);
+			SubZeroScene->instantPage(sender, 2);
+			break;
+		case 6:
+			std::cout << "on Power Trip" << std::endl;
+			page = 5;
+			MeltdownScene->instantPage(sender, 2);
+			SubZeroScene->instantPage(sender, 2);
+			break;
+		case 7:
+			std::cout << "on Power Trip" << std::endl;
+			page = 6;
+			MeltdownScene->instantPage(sender, 2);
+			SubZeroScene->instantPage(sender, 2);
+			break;
+		case 8:
+			std::cout << "on Power Trip" << std::endl;
+			page = 7;
+			MeltdownScene->instantPage(sender, 2);
+			SubZeroScene->instantPage(sender, 2);
+			break;
+		case 9:
+			std::cout << "on Power Trip" << std::endl;
+			page = 8;
+			MeltdownScene->instantPage(sender, 2);
+			SubZeroScene->instantPage(sender, 2);
+			break;
+		case 10:
+			std::cout << "on Power Trip" << std::endl;
+			page = 9;
+			MeltdownScene->instantPage(sender, 2);
+			SubZeroScene->instantPage(sender, 2);
+			break;
 		default:
 			std::cout << "on a common level" << std::endl;
-			page = 5;
+			page = 10;
 			break;
 		}
 
-		if (page != 5) {
+		if (page != 10) {
 			CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene));
-			PauseLayer::onQuit(sender);
+			EndLevelLayer::onMenu(sender);
 		}
 		else {
-			PauseLayer::onQuit(sender);
+			EndLevelLayer::onMenu(sender);
 		}
 
 	}
@@ -363,7 +544,6 @@ class $modify(PauseLayer) {
 
 
 };
-
 class $modify(PlayLayer) {
 	bool init(GJGameLevel * level, bool useReplay, bool dontCreateObjects){
 
@@ -398,95 +578,270 @@ class $modify(PlayLayer) {
 			}
 		}
 		
+		if (isSubzero == 3)
+		{
+			if (level->m_levelID == 2001) {
+				subzero = 1;
+			}
+			else if (level->m_levelID == 2002) {
+				subzero = 2;
+			}
+			else if (level->m_levelID == 2003) {
+				subzero = 3;
+			}
+			else if (level->m_levelID == 2004) {
+				subzero = 4;
+			}
+			else if (level->m_levelID == 2005) {
+				subzero = 5;
+			}
+			else if (level->m_levelID == 2006) {
+				subzero = 6;
+			}
+			else if (level->m_levelID == 2007) {
+				subzero = 7;
+			}
+			else if (level->m_levelID == 2008) {
+				subzero = 8;
+			}
+			else if (level->m_levelID == 2009) {
+				subzero = 9;
+			}
+			else if (level->m_levelID == 2010) {
+				subzero = 10;
+			}
+		}
 		Mod::get()->setSavedValue("subzerolevels", subzero);
 
 		return PlayLayer::init(level, useReplay, dontCreateObjects);
 		
 	}
-
-	int getCurrentPercentInt()
-	{
-		//Subzero percentage levels
-
-		if (this->m_level->m_levelID == 4001) {
-			int currentPercent = Mod::get()->getSavedValue<int>(this->m_isPracticeMode ? "psPracticeMode" : "psNormalMode");
-			if (PlayLayer::getCurrentPercentInt() > currentPercent) {
-				if (this->m_isPracticeMode) {
-					Mod::get()->setSavedValue("psPracticeMode", PlayLayer::getCurrentPercentInt());
-				}
-				else {
-					Mod::get()->setSavedValue("psNormalMode", PlayLayer::getCurrentPercentInt());
-				}
-			}
-		}
-		else if (this->m_level->m_levelID == 4002) {
-			int currentPercent = Mod::get()->getSavedValue<int>(this->m_isPracticeMode ? "nePracticeMode" : "neNormalMode");
-			if (PlayLayer::getCurrentPercentInt() > currentPercent) {
-				if (this->m_isPracticeMode) {
-					Mod::get()->setSavedValue("nePracticeMode", PlayLayer::getCurrentPercentInt());
-				}
-				else {
-					Mod::get()->setSavedValue("neNormalMode", PlayLayer::getCurrentPercentInt());
-				}
-			}
-		}
-		else if (this->m_level->m_levelID == 4003) {
-			int currentPercent = Mod::get()->getSavedValue<int>(this->m_isPracticeMode ? "ptPracticeMode" : "ptNormalMode");
-			if (PlayLayer::getCurrentPercentInt() > currentPercent) {
-				if (this->m_isPracticeMode) {
-					Mod::get()->setSavedValue("ptPracticeMode", PlayLayer::getCurrentPercentInt());
-				}
-				else {
-					Mod::get()->setSavedValue("ptNormalMode", PlayLayer::getCurrentPercentInt());
-				}
-			}
-		}
-
-		//meltdown percenttage levels
-		if (this->m_level->m_levelID == 1001) {
-			int currentPercent = Mod::get()->getSavedValue<int>(this->m_isPracticeMode ? "psPracticeMode" : "psNormalMode");
-			if (PlayLayer::getCurrentPercentInt() > currentPercent) {
-				if (this->m_isPracticeMode) {
-					Mod::get()->setSavedValue("tsPracticeMode", PlayLayer::getCurrentPercentInt());
-				}
-				else {
-					Mod::get()->setSavedValue("tsNormalMode", PlayLayer::getCurrentPercentInt());
-				}
-			}
-		}
-		else if (this->m_level->m_levelID == 1002) {
-			int currentPercent = Mod::get()->getSavedValue<int>(this->m_isPracticeMode ? "nePracticeMode" : "neNormalMode");
-			if (PlayLayer::getCurrentPercentInt() > currentPercent) {
-				if (this->m_isPracticeMode) {
-					Mod::get()->setSavedValue("vaPracticeMode", PlayLayer::getCurrentPercentInt());
-				}
-				else {
-					Mod::get()->setSavedValue("vaNormalMode", PlayLayer::getCurrentPercentInt());
-				}
-			}
-		}
-		else if (this->m_level->m_levelID == 1003) {
-			int currentPercent = Mod::get()->getSavedValue<int>(this->m_isPracticeMode ? "ptPracticeMode" : "ptNormalMode");
-			if (PlayLayer::getCurrentPercentInt() > currentPercent) {
-				if (this->m_isPracticeMode) {
-					Mod::get()->setSavedValue("abPracticeMode", PlayLayer::getCurrentPercentInt());
-				}
-				else {
-					Mod::get()->setSavedValue("abNormalMode", PlayLayer::getCurrentPercentInt());
-				}
-			}
-		}
-		return PlayLayer::getCurrentPercentInt();
-		
-	}
-
-};
-//class $modify(BoomScrollLayerDelegate) {
-//	void scrollLayerMoved(cocos2d::CCPoint a1) {
 //
-//		BoomScrollLayerDelegate::scrollLayerMoved(a1);
-//	
+//	int getCurrentPercentInt()
+//	{
+//		//Subzero percentage levels
+//
+//		if (this->m_level->m_levelID == 4001) {
+//			int currentPercent = Mod::get()->getSavedValue<int>(this->m_isPracticeMode ? "psPracticeMode" : "psNormalMode");
+//			if (PlayLayer::getCurrentPercentInt() > currentPercent) {
+//				if (this->m_isPracticeMode) {
+//					Mod::get()->setSavedValue("psPracticeMode", PlayLayer::getCurrentPercentInt());
+//				}
+//				else {
+//					Mod::get()->setSavedValue("psNormalMode", PlayLayer::getCurrentPercentInt());
+//				}
+//			}
+//		}
+//		else if (this->m_level->m_levelID == 4002) {
+//			int currentPercent = Mod::get()->getSavedValue<int>(this->m_isPracticeMode ? "nePracticeMode" : "neNormalMode");
+//			if (PlayLayer::getCurrentPercentInt() > currentPercent) {
+//				if (this->m_isPracticeMode) {
+//					Mod::get()->setSavedValue("nePracticeMode", PlayLayer::getCurrentPercentInt());
+//				}
+//				else {
+//					Mod::get()->setSavedValue("neNormalMode", PlayLayer::getCurrentPercentInt());
+//				}
+//			}
+//		}
+//		else if (this->m_level->m_levelID == 4003) {
+//			int currentPercent = Mod::get()->getSavedValue<int>(this->m_isPracticeMode ? "ptPracticeMode" : "ptNormalMode");
+//			if (PlayLayer::getCurrentPercentInt() > currentPercent) {
+//				if (this->m_isPracticeMode) {
+//					Mod::get()->setSavedValue("ptPracticeMode", PlayLayer::getCurrentPercentInt());
+//				}
+//				else {
+//					Mod::get()->setSavedValue("ptNormalMode", PlayLayer::getCurrentPercentInt());
+//				}
+//			}
+//		}
+//
+//		//meltdown percenttage levels
+//		if (this->m_level->m_levelID == 1001) {
+//			int currentPercent = Mod::get()->getSavedValue<int>(this->m_isPracticeMode ? "tsPracticeMode" : "tsNormalMode");
+//			if (PlayLayer::getCurrentPercentInt() > currentPercent) {
+//				if (this->m_isPracticeMode) {
+//					Mod::get()->setSavedValue("tsPracticeMode", PlayLayer::getCurrentPercentInt());
+//				}
+//				else {
+//					Mod::get()->setSavedValue("tsNormalMode", PlayLayer::getCurrentPercentInt());
+//				}
+//			}
+//		}
+//		else if (this->m_level->m_levelID == 1002) {
+//			int currentPercent = Mod::get()->getSavedValue<int>(this->m_isPracticeMode ? "vaPracticeMode" : "vaNormalMode");
+//			if (PlayLayer::getCurrentPercentInt() > currentPercent) {
+//				if (this->m_isPracticeMode) {
+//					Mod::get()->setSavedValue("vaPracticeMode", PlayLayer::getCurrentPercentInt());
+//				}
+//				else {
+//					Mod::get()->setSavedValue("vaNormalMode", PlayLayer::getCurrentPercentInt());
+//				}
+//			}
+//		}
+//		else if (this->m_level->m_levelID == 1003) {
+//			int currentPercent = Mod::get()->getSavedValue<int>(this->m_isPracticeMode ? "abPracticeMode" : "abNormalMode");
+//			if (PlayLayer::getCurrentPercentInt() > currentPercent) {
+//				if (this->m_isPracticeMode) {
+//					Mod::get()->setSavedValue("abPracticeMode", PlayLayer::getCurrentPercentInt());
+//				}
+//				else {
+//					Mod::get()->setSavedValue("abNormalMode", PlayLayer::getCurrentPercentInt());
+//				}
+//			}
+//		}
+//		return PlayLayer::getCurrentPercentInt();
+//		
 //	}
-//};
+//
+};
+
+
+ccColor3B colorForPage(int page) {
+	auto GM = GameManager::sharedState();
+	int colIDs[9] = { 1 ,3, 5, 0, 9, 11, 1, 3, 4 };
+
+	return GM->colorForIdx(colIDs[page % 5]);
+}
+
+ccColor3B getColorValue(int level1, int level2, float a3)
+{
+	float mod = (a3 * (2 / 3)) - 0.2f;
+	if (mod < 1.0f)
+	{
+		if (mod <= 0.0f)
+			mod = 0.0f;
+	}
+	else
+		mod = 1.0f;
+
+	ccColor3B col1 = colorForPage(level1);
+	ccColor3B col2 = colorForPage(level2);
+
+	ccColor3B col3 = { ((col2.r * mod) + col1.r * (1.0f - mod)), (((col2.g * mod) + col1.g * (1.0f - mod))), (((col2.b * mod) + col1.b * (1.0f - mod))) };
+	return col3;
+}
+ccColor3B colorForPage2(int page) {
+	auto GM = GameManager::sharedState();
+	int colIDs[9] = { 4 ,6, 17, 3, 9, 11, 1, 3, 4 };
+
+	return GM->colorForIdx(colIDs[page % 5]);
+}
+
+ccColor3B getColorValue2(int level1, int level2, float a3)
+{
+	float mod = (a3 * (2 / 3)) - 0.2f;
+	if (mod < 1.0f)
+	{
+		if (mod <= 0.0f)
+			mod = 0.0f;
+	}
+	else
+		mod = 1.0f;
+
+	ccColor3B col1 = colorForPage2(level1);
+	ccColor3B col2 = colorForPage2(level2);
+
+	ccColor3B col3 = { ((col2.r * mod) + col1.r * (1.0f - mod)), (((col2.g * mod) + col1.g * (1.0f - mod))), (((col2.b * mod) + col1.b * (1.0f - mod))) };
+	return col3;
+}
+
+class $modify(BoomScrollLayer) {
+	TodoReturn pageNumberForPosition(cocos2d::CCPoint a1) {
+		
+		auto lol = this->getParent();
+		auto meltdown = Mod::get()->getSavedValue<int>("onsubzero");
+
+
+		
+		int m_level = 0;
+		if (meltdown == 2 || meltdown == 1)
+		{
+			if (meltdown == 2)
+			{
+				m_level = Mod::get()->getSavedValue<int>("meltdownlevel");
+			}
+			if (meltdown == 1)
+			{
+				m_level = Mod::get()->getSavedValue<int>("subzerolevellol");
+			}
+		
+			auto m_background = (CCSprite*)lol->getChildren()->objectAtIndex(0);
+			auto m_ground = (GJGroundLayer*)lol->getChildren()->objectAtIndex(1);
+			ccColor3B color = getColorValue(m_level, m_level - 1, 12);
+			m_background->setColor(color);
+			ccColor3B Color1 = color;
+			Color1.r = color.r * 0.8;
+			Color1.g = color.g * 0.8;
+			Color1.b = color.b * 0.8;
+			m_ground->updateGround01Color(Color1);
+
+			ccColor3B Color2 = color;
+			Color2.r = color.r * 0.9;
+			Color2.g = color.g * 0.9;
+			Color2.b = color.b * 0.9;
+			m_ground->updateGround02Color(Color2);
+		}
+
+		if (meltdown == 3)
+		{
+			auto extendedlayer = (CCSpriteBatchNode*)this->getChildren()->objectAtIndex(1);
+			int hola = 0;
+			auto point1 = (CCSprite*)extendedlayer->getChildren()->objectAtIndex(0);
+			auto point2 = (CCSprite*)extendedlayer->getChildren()->objectAtIndex(1);
+			auto point3 = (CCSprite*)extendedlayer->getChildren()->objectAtIndex(2);
+			auto m_background = (CCSprite*)lol->getChildren()->objectAtIndex(0);
+			/*std::cout << page1->getTag() << std::endl;*/
+			ccColor3B color = getColorValue2(hola, hola - 1, 12);
+			/*m_background->setColor(color);*/
+			if (point1->getColor() == ccColor3B{255, 255, 255} && point1->isVisible() && point1->getPositionX() != 0)
+			{
+				/*std::cout << "pagina 1" << std::endl;*/
+
+				hola = 0;
+				color = getColorValue2(hola, hola - 1, 12);
+				m_background->setColor(color);
+			}
+			auto levelsas = Mod::get()->getSavedValue<int>("subzerolevels");
+
+			/*if (levelsas <= 5)
+			{
+				m_background->setColor({ 0, 125, 255 });
+			}
+			else
+			{
+				m_background->setColor({ 125, 0, 255 });
+			}*/
+			if (point2->getColor() == ccColor3B{255, 255, 255} && point2->getPositionX() != 0)
+			{
+				/*std::cout << "pagina 2" << std::endl;*/
+				hola = 1;
+				color = getColorValue2(hola, hola - 1, 12);
+				m_background->setColor(color);
+			}
+			if (point3->getColor() == ccColor3B{255, 255, 255} && point3->getPositionX() != 0)
+			{
+			/*	std::cout << "pagina 3" << std::endl;*/
+				hola = 2;
+				color = getColorValue2(hola, hola - 1, 12);
+				m_background->setColor(color);
+			}
+			Mod::get()->setSavedValue("worldpages",hola);
+			
+			
+			ccColor3B Color1 = color;
+			Color1.r = color.r * 0.8;
+			Color1.g = color.g * 0.8;
+			Color1.b = color.b * 0.8;
+			
+
+			ccColor3B Color2 = color;
+			Color2.r = color.r * 0.9;
+			Color2.g = color.g * 0.9;
+			Color2.b = color.b * 0.9;
+			
+		}
+		BoomScrollLayer::pageNumberForPosition(a1);
+	}
+};
 
 
