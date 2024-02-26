@@ -14,6 +14,8 @@
 #include "ownWorldLevelPage.hpp"
 #include "WorldLevel.cpp"
 #include "ownParticleCoin.hpp"
+#include "ownDialogObject.h"
+
 //#include "WorldLevelPage.cpp"
 
 using namespace geode::prelude;
@@ -89,7 +91,7 @@ bool WorldSelectLayerDecomp::init() {
     CCSprite* sprite3 = CCSprite::createWithSpriteFrameName(
         path->getCString()
     );
-    
+   
 
     CCSprite* backSpr = CCSprite::createWithSpriteFrameName("GJ_arrow_01_001.png");
     CCMenuItemSpriteExtra* backBtn = CCMenuItemSpriteExtra::create(backSpr, this, menu_selector(WorldSelectLayerDecomp::onClose));
@@ -196,6 +198,9 @@ bool WorldSelectLayerDecomp::init() {
     CCSprite* Epoint3 = CCSprite::createWithSpriteFrameName("uiDot_001.png");
     CCSprite* Epoint4 = CCSprite::createWithSpriteFrameName("uiDot_001.png");
     CCSprite* Epoint5 = CCSprite::createWithSpriteFrameName("uiDot_001.png");
+    CCSprite* Epoint6 = CCSprite::createWithSpriteFrameName("uiDot_001.png");
+    CCSprite* Epoint7 = CCSprite::createWithSpriteFrameName("uiDot_001.png");
+    CCSprite* Epoint8 = CCSprite::createWithSpriteFrameName("uiDot_001.png");
 
     //pointers animation 9
     CCSprite* Rpoint1 = CCSprite::createWithSpriteFrameName("uiDot_001.png");
@@ -392,7 +397,7 @@ bool WorldSelectLayerDecomp::init() {
     Mpoint5->setScale(0.5);
     Mpoint5->setScaleX(1);
 
-
+    
     //animation for levels transitions
     auto scaleAction = CCScaleTo::create(0.5,1, 0.5); // Escala al 60% durante 0.5 segundos
     auto scaleAction2 = CCScaleTo::create(0.5, 1);
@@ -525,7 +530,7 @@ bool WorldSelectLayerDecomp::init() {
         }
        
     }
-
+ 
     if (wlevel2->m_normalPercent != 100)
     {
         Mod::get()->setSavedValue("worldlevel2complete", 0);
@@ -759,82 +764,537 @@ bool WorldSelectLayerDecomp::init() {
         }
     }
  
-
+    auto ToxicFactoryMenu = CCMenu::create();
     CCMenuItemSpriteExtra* level6Btn = CCMenuItemSpriteExtra::create(unkspr5, this, menu_selector(WorldSelectLayerDecomp::onWorldLevel));
 
     level6Btn->setTag(35);
-    level6Btn->setPosition(-189, -13);
+    level6Btn->setPosition(-175, -12);
+    level6Btn->setVisible(false);
+    level6->setPosition(level6Btn->getPosition());
 
+    //LEVEL 6 POINTS
+  //point 1
+    SPpoint1->setPosition(level6Btn->getPosition());
+    SPpoint1->setPositionX(SPpoint1->getPositionX() + 20);
+    SPpoint1->setPositionY(-16);
+    SPpoint1->setScale(0.5);
+    SPpoint1->setScaleX(1);
+    //point 2
+    SPpoint2->setPosition(level6Btn->getPosition());
+    SPpoint2->setPositionX(SPpoint2->getPositionX() + 38);
+    SPpoint2->setPositionY(-16.5);
+    SPpoint2->setScale(0.5);
+    SPpoint2->setScaleX(1);
+    //point 3
+    SPpoint3->setPosition(level6Btn->getPosition());
+    SPpoint3->setPositionX(SPpoint3->getPositionX() + 55);
+    SPpoint3->setPositionY(-11);
+    SPpoint3->setScale(0.5);
+    SPpoint3->setScaleX(1);
+    //point 4
+    SPpoint4->setPosition(level6Btn->getPosition());
+    SPpoint4->setPositionX(SPpoint4->getPositionX() + 72);
+    SPpoint4->setPositionY(-12);
+    SPpoint4->setScale(0.5);
+    SPpoint4->setScaleX(1);
+    //point 5
+    SPpoint5->setPosition(level6Btn->getPosition());
+    SPpoint5->setPositionX(SPpoint5->getPositionX() + 85);
+    SPpoint5->setPositionY(-19.5);
+    SPpoint5->setScale(0.5);
+    SPpoint5->setScaleX(1);
+
+
+    ToxicFactoryMenu->addChild(SPpoint1,2);
+    ToxicFactoryMenu->addChild(SPpoint2, 2);
+    ToxicFactoryMenu->addChild(SPpoint3, 2);
+    ToxicFactoryMenu->addChild(SPpoint4, 2);
+    ToxicFactoryMenu->addChild(SPpoint5, 2);
+
+  
     CCMenuItemSpriteExtra* level7Btn = CCMenuItemSpriteExtra::create(unkspr6, this, menu_selector(WorldSelectLayerDecomp::onWorldLevel));
 
     level7Btn->setTag(36);
-    level7Btn->setPosition(-80, -30);
+    level7Btn->setPosition(-73, -28);
     level7Btn->setVisible(false);
-    /*level2->setPosition({ -80, -30 });*/
+    level7->setPosition(level7Btn->getPosition());
 
-    CCMenuItemSpriteExtra* level8Btn = CCMenuItemSpriteExtra::create(unkspr7, this, menu_selector(WorldSelectLayerDecomp::onWorldLevel));
+    //LEVEL 7 POINTS
+   //point 1
+    Spoint1->setPosition(level7Btn->getPosition());
+    Spoint1->setPositionX(Spoint1->getPositionX() + 10);
+    Spoint1->setPositionY(-8);
+    Spoint1->setScale(0.5);
+    Spoint1->setScaleX(1);
+    //point 2
+    Spoint2->setPosition(level7Btn->getPosition());
+    Spoint2->setPositionX(Spoint2->getPositionX() + 15);
+    Spoint2->setPositionY(0);
+    Spoint2->setScale(0.5);
+    Spoint2->setScaleX(1);
+    //point 3
+    Spoint3->setPosition(level7Btn->getPosition());
+    Spoint3->setPositionX(Spoint3->getPositionX() + 30);
+    Spoint3->setPositionY(7);
+    Spoint3->setScale(0.5);
+    Spoint3->setScaleX(1);
+    //point 4
+    Spoint4->setPosition(level7Btn->getPosition());
+    Spoint4->setPositionX(Spoint4->getPositionX() + 44);
+    Spoint4->setPositionY(9.5);
+    Spoint4->setScale(0.5);
+    Spoint4->setScaleX(1);
+    //point 5
+    /*Spoint5->setPosition(level2Btn->getPosition());
+    Spoint5->setPositionX(Bpoint5->getPositionX() + 52);
+    Spoint5->setPositionY(5);
+    Spoint5->setScale(0.5);
+    Spoint5->setScaleX(1);*/
 
-    level8Btn->setTag(37);
-    level8Btn->setPosition(-10, 10);
-    level8Btn->setVisible(false);
-   /* level3->setPosition({ -10, 10 });*/
+    ToxicFactoryMenu->addChild(Spoint1, 2);
+    ToxicFactoryMenu->addChild(Spoint2, 2);
+    ToxicFactoryMenu->addChild(Spoint3, 2);
+    ToxicFactoryMenu->addChild(Spoint4, 2);
+   /* ToxicFactoryMenu->addChild(Spoint5, 2);*/
+    //level 6 to level 7 animation
 
-    CCMenuItemSpriteExtra* level9Btn = CCMenuItemSpriteExtra::create(unksp8, this, menu_selector(WorldSelectLayerDecomp::onWorldLevel));
-
-    level9Btn->setTag(38);
-    level9Btn->setPosition(50, -25);
-    level9Btn->setVisible(false);
-   /* level4->setPosition({ 50, -25 });*/
-
-    CCMenuItemSpriteExtra* level10Btn = CCMenuItemSpriteExtra::create(unkspr9, this, menu_selector(WorldSelectLayerDecomp::onWorldLevel));
-
-    level10Btn->setTag(39);
-    level10Btn->setPosition(155, -10);
-    level10Btn->setVisible(false);
-    /*level5->setPosition({ 155, -10 });*/
-
-
-    //level 1 to level 2 animation
-    if (wlevel5->m_normalPercent != 100)
+    if (wlevel6->m_normalPercent != 100)
     {
-        Mod::get()->setSavedValue("worldlevel5complete", 0);
+        Mod::get()->setSavedValue("worldlevel6complete", 0);
     }
-    if (wlevel5->m_normalPercent == 100 && wlevel6->m_normalPercent == 0 && level5complete == 0)
+    if (wlevel6->m_normalPercent == 100 && wlevel7->m_normalPercent == 0 && level6complete == 0)
     {
+        SPpoint1->setScaleY(1.2);
+        SPpoint2->setScaleY(1.2);
+        SPpoint3->setScaleY(1.2);
+        SPpoint4->setScaleY(1.2);
+        SPpoint5->setScaleY(1.2);
+
+        SPpoint1->setScaleX(2);
+        SPpoint2->setScaleX(2);
+        SPpoint3->setScaleX(2);
+        SPpoint4->setScaleX(2);
+        SPpoint5->setScaleX(2);
         //opacty
-      
-        level5Btn->setOpacity(0);
+        SPpoint1->setOpacity(0);
+        SPpoint2->setOpacity(0);
+        SPpoint3->setOpacity(0);
+        SPpoint4->setOpacity(0);
+        SPpoint5->setOpacity(0);
+        level7Btn->setOpacity(0);
 
-        level5Btn->setScale(1.5);
-        level5Btn->setVisible(true);
+        SPpoint1->runAction(CCSequence::create(CCDelayTime::create(0.3), CCFadeIn::create(0.1), CCEaseBounceOut::create(scaleWithBounce), nullptr));
+        SPpoint2->runAction(CCSequence::create(CCDelayTime::create(0.6), CCFadeIn::create(0.1), CCEaseBounceOut::create(scaleWithBounce), nullptr));
+        SPpoint3->runAction(CCSequence::create(CCDelayTime::create(0.9), CCFadeIn::create(0.1), CCEaseBounceOut::create(scaleWithBounce), nullptr));
+        SPpoint4->runAction(CCSequence::create(CCDelayTime::create(1.2), CCFadeIn::create(0.1), CCEaseBounceOut::create(scaleWithBounce), nullptr));
+        SPpoint5->runAction(CCSequence::create(CCDelayTime::create(1.5), CCFadeIn::create(0.1), CCEaseBounceOut::create(scaleWithBounce), nullptr));
 
-        Mod::get()->setSavedValue("wlevelunlocked", 1);
-        level6Btn->runAction(CCSequence::create(
+        level7Btn->setScale(1.5);
+        level7Btn->setVisible(true);
+
+        Mod::get()->setSavedValue("wlevelunlocked", 6);
+        level7Btn->runAction(CCSequence::create(
             CCDelayTime::create(1.8),
             CCCallFunc::create(this, callfunc_selector(WorldSelectLayerDecomp::runParticle)), // Utilizamos CCCallFunc para llamar a la función runParticle
             CCFadeIn::create(0.1),
             CCEaseBounceOut::create(scaleWithBounce2),
             nullptr
         ));
-
-        Mod::get()->setSavedValue("worldlevel5complete", 1);
+        Mod::get()->setSavedValue("worldlevel6complete", 1);
     }
     else
     {
-        if (wlevel4->m_normalPercent == 100)
+        if (wlevel6->m_normalPercent == 100)
         {
-            level5Btn->setVisible(true);
+            level7Btn->setVisible(true);
         }
         else
         {
-            Fpoint1->setOpacity(0);
-            Fpoint2->setOpacity(0);
-            Fpoint3->setOpacity(0);
-            Fpoint4->setOpacity(0);
-            Fpoint5->setOpacity(0);
+            SPpoint1->setOpacity(0);
+            SPpoint2->setOpacity(0);
+            SPpoint3->setOpacity(0);
+            SPpoint4->setOpacity(0);
+            SPpoint5->setOpacity(0);
         }
-
     }
+
+   
+    CCMenuItemSpriteExtra* level8Btn = CCMenuItemSpriteExtra::create(unkspr7, this, menu_selector(WorldSelectLayerDecomp::onWorldLevel));
+
+    level8Btn->setTag(37);
+    level8Btn->setPosition(-10, 15);
+    level8Btn->setVisible(false);
+    level8->setPosition(level8Btn->getPosition());
+
+    //LEVEL 8 POINTS
+   //point 1
+    Epoint1->setPosition(level8Btn->getPosition());
+    Epoint1->setPositionX(Epoint1->getPositionX() + 10);
+    Epoint1->setPositionY(3);
+    Epoint1->setScale(0.5);
+    Epoint1->setScaleX(1);
+    //point 2
+    Epoint2->setPosition(level8Btn->getPosition());
+    Epoint2->setPositionX(Epoint2->getPositionX());
+    Epoint2->setPositionY(-7);
+    Epoint2->setScale(0.5);
+    Epoint2->setScaleX(1);
+    //point 3
+    Epoint3->setPosition(level8Btn->getPosition());
+    Epoint3->setPositionX(Epoint3->getPositionX() - 10);
+    Epoint3->setPositionY(-11);
+    Epoint3->setScale(0.5);
+    Epoint3->setScaleX(1);
+    //point 4
+    Epoint4->setPosition(level8Btn->getPosition());
+    Epoint4->setPositionX(Epoint4->getPositionX() - 15 );
+    Epoint4->setPositionY(-20);
+    Epoint4->setScale(0.5);
+    Epoint4->setScaleX(1);
+    //point 5
+    Epoint5->setPosition(level8Btn->getPosition());
+    Epoint5->setPositionX(Epoint5->getPositionX() - 5);
+    Epoint5->setPositionY(-32);
+    Epoint5->setScale(0.5);
+    Epoint5->setScaleX(1);
+    //point 6
+    Epoint6->setPosition(level8Btn->getPosition());
+    Epoint6->setPositionX(Epoint6->getPositionX() + 17);
+    Epoint6->setPositionY(-36.5);
+    Epoint6->setScale(0.5);
+    Epoint6->setScaleX(1);
+    //point 7
+    Epoint7->setPosition(level8Btn->getPosition());
+    Epoint7->setPositionX(Epoint7->getPositionX() + 41);
+    Epoint7->setPositionY(-40);
+    Epoint7->setScale(0.5);
+    Epoint7->setScaleX(1);
+    //point 8
+    Epoint8->setPosition(level8Btn->getPosition());
+    Epoint8->setPositionX(Epoint8->getPositionX() + 63);
+    Epoint8->setPositionY(-40.5);
+    Epoint8->setScale(0.5);
+    Epoint8->setScaleX(1);
+
+
+    ToxicFactoryMenu->addChild(Epoint1, 2);
+    ToxicFactoryMenu->addChild(Epoint2, 2);
+    ToxicFactoryMenu->addChild(Epoint3, 2);
+    ToxicFactoryMenu->addChild(Epoint4, 2);
+    ToxicFactoryMenu->addChild(Epoint5, 2);
+    ToxicFactoryMenu->addChild(Epoint6, 2);
+    ToxicFactoryMenu->addChild(Epoint7, 2);
+    ToxicFactoryMenu->addChild(Epoint8, 2);
+    if (wlevel7->m_normalPercent != 100)
+    {
+        Mod::get()->setSavedValue("worldlevel7complete", 0);
+    }
+    ////level 7 to level 8 animation
+    if (wlevel7->m_normalPercent == 100 && wlevel8->m_normalPercent == 0 && level7complete == 0)
+    {
+        Spoint1->setScaleY(1.2);
+        Spoint2->setScaleY(1.2);
+        Spoint3->setScaleY(1.2);
+        Spoint4->setScaleY(1.2);
+    
+
+        Spoint1->setScaleX(2);
+        Spoint2->setScaleX(2);
+        Spoint3->setScaleX(2);
+        Spoint4->setScaleX(2);
+
+        //opacty
+        Spoint1->setOpacity(0);
+        Spoint2->setOpacity(0);
+        Spoint3->setOpacity(0);
+        Spoint4->setOpacity(0);
+
+        level8Btn->setOpacity(0);
+
+        Spoint1->runAction(CCSequence::create(CCDelayTime::create(0.3), CCFadeIn::create(0.1), CCEaseBounceOut::create(scaleWithBounce), nullptr));
+        Spoint2->runAction(CCSequence::create(CCDelayTime::create(0.6), CCFadeIn::create(0.1), CCEaseBounceOut::create(scaleWithBounce), nullptr));
+        Spoint3->runAction(CCSequence::create(CCDelayTime::create(0.9), CCFadeIn::create(0.1), CCEaseBounceOut::create(scaleWithBounce), nullptr));
+        Spoint4->runAction(CCSequence::create(CCDelayTime::create(1.2), CCFadeIn::create(0.1), CCEaseBounceOut::create(scaleWithBounce), nullptr));
+      
+
+        level8Btn->setScale(1.5);
+        level8Btn->setVisible(true);
+
+        Mod::get()->setSavedValue("wlevelunlocked", 7);
+        level8Btn->runAction(CCSequence::create(
+            CCDelayTime::create(1.5),
+            CCCallFunc::create(this, callfunc_selector(WorldSelectLayerDecomp::runParticle)), // Utilizamos CCCallFunc para llamar a la función runParticle
+            CCFadeIn::create(0.1),
+            CCEaseBounceOut::create(scaleWithBounce2),
+            nullptr
+        ));
+        Mod::get()->setSavedValue("worldlevel7complete", 1);
+    }
+    else
+    {
+        if (wlevel7->m_normalPercent == 100)
+        {
+            level8Btn->setVisible(true);
+        }
+        else
+        {
+            Spoint1->setOpacity(0);
+            Spoint2->setOpacity(0);
+            Spoint3->setOpacity(0);
+            Spoint4->setOpacity(0);
+            Spoint5->setOpacity(0);
+        }
+    }
+
+    
+    CCMenuItemSpriteExtra* level9Btn = CCMenuItemSpriteExtra::create(unksp8, this, menu_selector(WorldSelectLayerDecomp::onWorldLevel));
+
+    level9Btn->setTag(38);
+    level9Btn->setPosition(80, -38);
+    level9Btn->setVisible(false);
+    level9->setPosition(level9Btn->getPosition());
+
+    //LEVEL 9 POINTS
+   //point 1
+    Rpoint1->setPosition(level9Btn->getPosition());
+    Rpoint1->setPositionX(Rpoint1->getPositionX() + 16);
+    Rpoint1->setPositionY(-34);
+    Rpoint1->setScale(0.5);
+    Rpoint1->setScaleX(1);
+    //point 2
+    Rpoint2->setPosition(level9Btn->getPosition());
+    Rpoint2->setPositionX(Rpoint2->getPositionX() + 25);
+    Rpoint2->setPositionY(-27);
+    Rpoint2->setScale(0.5);
+    Rpoint2->setScaleX(1);
+    //point 3
+    Rpoint3->setPosition(level9Btn->getPosition());
+    Rpoint3->setPositionX(Rpoint3->getPositionX() + 34);
+    Rpoint3->setPositionY(-20.5);
+    Rpoint3->setScale(0.5);
+    Rpoint3->setScaleX(1);
+    //point 4
+    Rpoint4->setPosition(level9Btn->getPosition());
+    Rpoint4->setPositionX(Rpoint4->getPositionX() + 45);
+    Rpoint4->setPositionY(-16);
+    Rpoint4->setScale(0.5);
+    Rpoint4->setScaleX(1);
+    //point 5
+    Rpoint5->setPosition(level9Btn->getPosition());
+    Rpoint5->setPositionX(Rpoint5->getPositionX() + 67);
+    Rpoint5->setPositionY(-12);
+    Rpoint5->setScale(0.5);
+    Rpoint5->setScaleX(1);
+
+
+    ToxicFactoryMenu->addChild(Rpoint1, 2);
+    ToxicFactoryMenu->addChild(Rpoint2, 2);
+    ToxicFactoryMenu->addChild(Rpoint3, 2);
+    ToxicFactoryMenu->addChild(Rpoint4, 2);
+    ToxicFactoryMenu->addChild(Rpoint5, 2);
+
+    if (wlevel8->m_normalPercent != 100)
+    {
+        Mod::get()->setSavedValue("worldlevel8complete", 0);
+    }
+    //level 8 to level 9 animation
+    if (wlevel8->m_normalPercent == 100 && wlevel9->m_normalPercent == 0 && level8complete == 0)
+    {
+        Epoint1->setScaleY(1.2);
+        Epoint2->setScaleY(1.2);
+        Epoint3->setScaleY(1.2);
+        Epoint4->setScaleY(1.2);
+        Epoint5->setScaleY(1.2);
+        Epoint6->setScaleY(1.2);
+        Epoint7->setScaleY(1.2);
+        Epoint8->setScaleY(1.2);
+
+        Epoint1->setScaleX(2);
+        Epoint2->setScaleX(2);
+        Epoint3->setScaleX(2);
+        Epoint4->setScaleX(2);
+        Epoint5->setScaleX(2);
+        Epoint6->setScaleX(2);
+        Epoint7->setScaleX(2);
+        Epoint8->setScaleX(2);
+        //opacty
+        Epoint1->setOpacity(0);
+        Epoint2->setOpacity(0);
+        Epoint3->setOpacity(0);
+        Epoint4->setOpacity(0);
+        Epoint5->setOpacity(0);
+        Epoint6->setOpacity(0);
+        Epoint7->setOpacity(0);
+        Epoint8->setOpacity(0);
+      
+
+        level9Btn->setOpacity(0);
+
+        Epoint1->runAction(CCSequence::create(CCDelayTime::create(0.3), CCFadeIn::create(0.1), CCEaseBounceOut::create(scaleWithBounce), nullptr));
+        Epoint2->runAction(CCSequence::create(CCDelayTime::create(0.6), CCFadeIn::create(0.1), CCEaseBounceOut::create(scaleWithBounce), nullptr));
+        Epoint3->runAction(CCSequence::create(CCDelayTime::create(0.9), CCFadeIn::create(0.1), CCEaseBounceOut::create(scaleWithBounce), nullptr));
+        Epoint4->runAction(CCSequence::create(CCDelayTime::create(1.2), CCFadeIn::create(0.1), CCEaseBounceOut::create(scaleWithBounce), nullptr));
+        Epoint5->runAction(CCSequence::create(CCDelayTime::create(1.5), CCFadeIn::create(0.1), CCEaseBounceOut::create(scaleWithBounce), nullptr));
+        Epoint6->runAction(CCSequence::create(CCDelayTime::create(1.8), CCFadeIn::create(0.1), CCEaseBounceOut::create(scaleWithBounce), nullptr));
+        Epoint7->runAction(CCSequence::create(CCDelayTime::create(2.1), CCFadeIn::create(0.1), CCEaseBounceOut::create(scaleWithBounce), nullptr));
+        Epoint8->runAction(CCSequence::create(CCDelayTime::create(2.4), CCFadeIn::create(0.1), CCEaseBounceOut::create(scaleWithBounce), nullptr));
+
+        level9Btn->setScale(1.5);
+        level9Btn->setVisible(true);
+
+        Mod::get()->setSavedValue("wlevelunlocked", 8);
+        level9Btn->runAction(CCSequence::create(
+            CCDelayTime::create(2.7),
+            CCCallFunc::create(this, callfunc_selector(WorldSelectLayerDecomp::runParticle)), // Utilizamos CCCallFunc para llamar a la función runParticle
+            CCFadeIn::create(0.1),
+            CCEaseBounceOut::create(scaleWithBounce2),
+            nullptr
+        ));
+        Mod::get()->setSavedValue("worldlevel8complete", 1);
+    }
+    else
+    {
+        if (wlevel8->m_normalPercent == 100)
+        {
+            level9Btn->setVisible(true);
+        }
+        else
+        {
+            Epoint1->setOpacity(0);
+            Epoint2->setOpacity(0);
+            Epoint3->setOpacity(0);
+            Epoint4->setOpacity(0);
+            Epoint5->setOpacity(0);
+            Epoint6->setOpacity(0);
+            Epoint7->setOpacity(0);
+            Epoint8->setOpacity(0);
+        }
+    }
+
+    CCMenuItemSpriteExtra* level10Btn = CCMenuItemSpriteExtra::create(unkspr9, this, menu_selector(WorldSelectLayerDecomp::onWorldLevel));
+
+    level10Btn->setTag(39);
+    level10Btn->setPosition(170, -10);
+
+    level10Btn->setVisible(false);
+    level10->setPosition(level10Btn->getPosition());
+
+    if (wlevel9->m_normalPercent != 100)
+    {
+        Mod::get()->setSavedValue("worldlevel9complete", 0);
+    }
+    ////level 9 to level 10 animation
+    if (wlevel9->m_normalPercent == 100 && wlevel10->m_normalPercent == 0 && level9complete == 0)
+    {
+        Rpoint1->setScaleY(1.2);
+        Rpoint2->setScaleY(1.2);
+        Rpoint3->setScaleY(1.2);
+        Rpoint4->setScaleY(1.2);
+        Rpoint5->setScaleY(1.2);
+
+        Rpoint1->setScaleX(2);
+        Rpoint2->setScaleX(2);
+        Rpoint3->setScaleX(2);
+        Rpoint4->setScaleX(2);
+        Rpoint5->setScaleX(2);
+
+        //opacty
+        Rpoint1->setOpacity(0);
+        Rpoint2->setOpacity(0);
+        Rpoint3->setOpacity(0);
+        Rpoint4->setOpacity(0);
+        Rpoint5->setOpacity(0);
+
+        level10Btn->setOpacity(0);
+
+        Rpoint1->runAction(CCSequence::create(CCDelayTime::create(0.3), CCFadeIn::create(0.1), CCEaseBounceOut::create(scaleWithBounce), nullptr));
+        Rpoint2->runAction(CCSequence::create(CCDelayTime::create(0.6), CCFadeIn::create(0.1), CCEaseBounceOut::create(scaleWithBounce), nullptr));
+        Rpoint3->runAction(CCSequence::create(CCDelayTime::create(0.9), CCFadeIn::create(0.1), CCEaseBounceOut::create(scaleWithBounce), nullptr));
+        Rpoint4->runAction(CCSequence::create(CCDelayTime::create(1.2), CCFadeIn::create(0.1), CCEaseBounceOut::create(scaleWithBounce), nullptr));
+        Rpoint5->runAction(CCSequence::create(CCDelayTime::create(1.5), CCFadeIn::create(0.1), CCEaseBounceOut::create(scaleWithBounce), nullptr));
+
+        level10Btn->setScale(1.5);
+        level10Btn->setVisible(true);
+
+        Mod::get()->setSavedValue("wlevelunlocked", 9);
+        level10Btn->runAction(CCSequence::create(
+            CCDelayTime::create(1.8),
+            CCCallFunc::create(this, callfunc_selector(WorldSelectLayerDecomp::runParticle)), // Utilizamos CCCallFunc para llamar a la función runParticle
+            CCFadeIn::create(0.1),
+            CCEaseBounceOut::create(scaleWithBounce2),
+            nullptr
+        ));
+        Mod::get()->setSavedValue("worldlevel9complete", 1);
+    }
+    else
+    {
+        if (wlevel9->m_normalPercent == 100)
+        {
+            level10Btn->setVisible(true);
+        }
+        else
+        {
+            Rpoint1->setOpacity(0);
+            Rpoint2->setOpacity(0);
+            Rpoint3->setOpacity(0);
+            Rpoint4->setOpacity(0);
+            Rpoint5->setOpacity(0);
+        }
+    }
+
+    if (wlevel10->m_normalPercent != 100)
+    {
+        Mod::get()->setSavedValue("worldlevel10complete", 0);
+    }
+    //final dialogue
+    if (wlevel10->m_normalPercent == 100 && level10complete == 0)
+    {
+        CCArray* arr = CCArray::create();
+        int colour = 2; //gjsquare thingy
+
+        auto dialog1 = ownDialogObject::create("The Keymaster", "Well, well, well...<d020> I see you have <cg>completed</c> the <cl>first two</c> islands.", 2 /*dialog icon*/, 1, false, { 255,255,255 });
+
+        auto dialog2 = ownDialogObject::create("The Keymaster", "Not bad,<d030> not bad at all.\n<d030>I have <co>unlocked</c> <cg>online levels</c> for you.", 2 /*dialog icon*/, 1, false, { 255,255,255 });
+
+        auto dialog3 = ownDialogObject::create("The Keymaster", "Or maybe, if you were in <cy>Geometry Dash World game</c>, LOL.", 2 /*dialog icon*/, 1, false, { 255,255,255 });
+
+        auto dialog4 = ownDialogObject::create("The Keymaster", "<cl>Let's see what more you can do<d010>.<d010>.<d010>.</c>", 2 /*dialog icon*/, 1, false, { 255,255,255 });
+        arr->addObject(dialog1);
+
+        arr->addObject(dialog2);
+
+        arr->addObject(dialog3);
+
+        arr->addObject(dialog4);
+        auto dl = DialogLayer::createDialogLayer(nullptr, arr, colour);
+        dl->animateIn(DialogAnimationType::FromLeft);
+        dl->setZOrder(2);
+
+        this->addChild(dl, 3);
+        Mod::get()->setSavedValue("worldlevel10complete", 1);
+    }
+    else
+    {
+        if (wlevel10->m_normalPercent == 100)
+        {
+            level10Btn->setVisible(true);
+        }
+      
+    }
+    ToxicFactoryMenu->addChild(level6Btn,2);
+    ToxicFactoryMenu->addChild(level7Btn, 2);
+    ToxicFactoryMenu->addChild(level8Btn,2);
+    ToxicFactoryMenu->addChild(level9Btn, 2);
+    ToxicFactoryMenu->addChild(level10Btn,2);
+
+    ToxicFactoryMenu->addChild(level6);
+    ToxicFactoryMenu->addChild(level7);
+    ToxicFactoryMenu->addChild(level8);
+    ToxicFactoryMenu->addChild(level9);
+    ToxicFactoryMenu->addChild(level10);
+
+   
+   
     //LEVEL 5 POINTS
     //point 1
     MDOpoint1->setPosition(level5Btn->getPosition());
@@ -895,8 +1355,11 @@ bool WorldSelectLayerDecomp::init() {
 
     node2->addChild(sprite2);
     node2->addChild(ToxicFactory);
+    node2->addChild(ToxicFactoryMenu);
     node2->setTag(22);
 
+    ToxicFactoryMenu->setPosition(winSize / 2);
+    ToxicFactoryMenu->setPositionY(ToxicFactoryMenu->getPositionY());
 
     node3->addChild(sprite3);
     node3->addChild(CommingSoon);
@@ -915,6 +1378,52 @@ bool WorldSelectLayerDecomp::init() {
 
     addChild(m_scrollLayer);
 
+ 
+    //level 5 to level 6 animation
+    if (wlevel5->m_normalPercent != 100)
+    {
+        Mod::get()->setSavedValue("worldlevel5complete", 0);
+    }
+    if (wlevel5->m_normalPercent == 100 && wlevel6->m_normalPercent == 0 && level5complete == 0)
+    {
+        //opacty
+
+        level6Btn->setOpacity(0);
+
+        level6Btn->setScale(1.5);
+        level6Btn->setVisible(true);
+
+        Mod::get()->setSavedValue("wlevelunlocked", 5);
+
+        m_sscrollLayer->moveToPage(1);
+        level6Btn->runAction(CCSequence::create(
+            CCDelayTime::create(1.2),
+            CCCallFunc::create(this, callfunc_selector(WorldSelectLayerDecomp::runParticle)), // Utilizamos CCCallFunc para llamar a la función runParticle
+            CCFadeIn::create(0.1),
+            CCEaseBounceOut::create(scaleWithBounce2),
+            nullptr
+        ));
+
+        Mod::get()->setSavedValue("worldlevel5complete", 1);
+    }
+    else
+    {
+        if (wlevel5->m_normalPercent == 100)
+        {
+            level6Btn->setVisible(true);
+        }
+        else
+        {
+            Fpoint1->setOpacity(0);
+            Fpoint2->setOpacity(0);
+            Fpoint3->setOpacity(0);
+            Fpoint4->setOpacity(0);
+            Fpoint5->setOpacity(0);
+        }
+
+    }
+
+  
     sprite->setPosition(winSize / 2);
     sprite->setPositionY(sprite->getPositionY() - 30);
     /*sprite->setPositionX(sprite->getPositionX() + 279);
@@ -940,23 +1449,25 @@ bool WorldSelectLayerDecomp::init() {
     CommingSoon->setPositionX(sprite3->getPositionX());
     CommingSoon->setPositionY(sprite3->getPositionY() + 150);
     CommingSoon->setScale(0.8);
-    //island 1 loop
-    auto moveUp = CCMoveBy::create(1.0f, ccp(0, 1)); 
-    auto moveDown = moveUp->reverse(); 
+    
 
-    auto moveUp1 = CCMoveBy::create(1.0f, ccp(0, 1));
-    auto moveDown1 = moveUp->reverse();
+    //start arrow animation
+    auto moveUp = CCMoveBy::create(0.5f, ccp(0, 5)); 
+    auto moveDown = CCMoveBy::create(0.5f, ccp(0, -5));
 
-    auto easeOutUp = CCEaseOut::create(moveUp, 1.0f);   
-    auto easeInDown = CCEaseIn::create(moveDown, 1.0f); 
+   /* auto moveUp1 = CCMoveBy::create(0.5f, ccp(0, 5));
+    auto moveDown1 = moveUp->reverse();*/
 
-    auto easeOutDown = CCEaseOut::create(moveDown1, 1.0f);
-    auto easeInUp = CCEaseIn::create(moveUp1, 1.0f); 
-    auto moveSequence = CCSequence::create(easeOutUp, easeInDown, easeOutDown, easeInUp, nullptr);
+    auto easeOutUp = CCEaseInOut::create(moveUp,1.5f);   
+    auto easeInDown = CCEaseInOut::create(moveDown, 1.5f);
+
+    /*auto easeOutDown = CCEaseOut::create(moveDown1, 1.5f);
+    auto easeInUp = CCEaseIn::create(moveUp1, 1.5f); */
+    auto moveSequence = CCSequence::create(easeOutUp, easeInDown, nullptr);
 
     auto repeatAction = CCRepeatForever::create(moveSequence);
 
-    //buttons loop
+    //island 1 loop
     
     auto moveUp21 = CCMoveBy::create(1.0f, ccp(0, 1));
     auto moveDown21 = moveUp21->reverse();
@@ -964,11 +1475,11 @@ bool WorldSelectLayerDecomp::init() {
     auto moveUp121 = CCMoveBy::create(1.0f, ccp(0, 1));
     auto moveDown121 = moveUp121->reverse();
 
-    auto easeOutUp21 = CCEaseOut::create(moveUp21, 1.0f);
-    auto easeInDown21 = CCEaseIn::create(moveDown21, 1.0f);
+    auto easeOutUp21 = CCEaseOut::create(moveUp21, 1.5f);
+    auto easeInDown21 = CCEaseIn::create(moveDown21, 1.5f);
 
-    auto easeOutDown21 = CCEaseOut::create(moveDown121, 1.0f);
-    auto easeInUp21 = CCEaseIn::create(moveUp1, 1.0f);
+    auto easeOutDown21 = CCEaseOut::create(moveDown121, 1.5f);
+    auto easeInUp21 = CCEaseIn::create(moveUp121, 1.5f);
     auto moveSequence21 = CCSequence::create(easeOutUp21, easeInDown21, easeOutDown21, easeInUp21, nullptr);
 
     auto repeatAction21 = CCRepeatForever::create(moveSequence21);
@@ -979,11 +1490,11 @@ bool WorldSelectLayerDecomp::init() {
     auto moveUp12 = CCMoveBy::create(1.0f, ccp(0, 1)); 
     auto moveDown12 = moveUp2->reverse();
 
-    auto easeOutUp2 = CCEaseOut::create(moveUp2, 1.0f); 
-    auto easeInDown2 = CCEaseIn::create(moveDown2, 1.0f); 
+    auto easeOutUp2 = CCEaseOut::create(moveUp2, 1.5f); 
+    auto easeInDown2 = CCEaseIn::create(moveDown2, 1.5f); 
 
-    auto easeOutDown2 = CCEaseOut::create(moveDown12, 1.0f); 
-    auto easeInUp2 = CCEaseIn::create(moveUp12, 1.0f); 
+    auto easeOutDown2 = CCEaseOut::create(moveDown12, 1.5f); 
+    auto easeInUp2 = CCEaseIn::create(moveUp12, 1.5f); 
     auto moveSequence2 = CCSequence::create(easeOutUp2, easeInDown2, easeOutDown2, easeInUp2, nullptr);
 
     auto repeatAction2 = CCRepeatForever::create(moveSequence2);
@@ -991,9 +1502,22 @@ bool WorldSelectLayerDecomp::init() {
    /* sprite->runAction(repeatAction);*/
     node->runAction(repeatAction21);
 
-    sprite2->runAction(repeatAction2);
+    node2->runAction(repeatAction2);
 
-    
+
+   
+    if (wlevel1->m_normalPercent != 100)
+    {
+        auto level1arrow = CCSprite::createWithSpriteFrameName("GJ_arrow_02_001.png");
+
+        level1arrow->setPosition(level1Btn->getPosition());
+
+        level1arrow->setPositionY(level1arrow->getPositionY() + 40);
+        level1arrow->setRotation(-90);
+        level1arrow->setScale(0.6);
+        dashlandsmenu->addChild(level1arrow);
+        level1arrow->runAction(repeatAction);
+    }
     auto pointer = (CCSpriteBatchNode*)m_scrollLayer->getChildren()->objectAtIndex(1);
   
     pointer->setPositionY(CCDirector::sharedDirector()->getScreenBottom() - 45);
@@ -1006,7 +1530,7 @@ bool WorldSelectLayerDecomp::init() {
 
 
    
-    auto menu3 = CCMenu::create();
+    menu3 = CCMenu::create();
     menu3->setPosition(CCDirector::sharedDirector()->getScreenRight() - 50,
         CCDirector::sharedDirector()->getScreenTop() - 30);
     auto btn3 = CCSprite::createWithSpriteFrameName("garageRope_001.png");
@@ -1015,8 +1539,17 @@ bool WorldSelectLayerDecomp::init() {
         btn3,
         this,
         menu_selector(WorldSelectLayerDecomp::onGarage));
+    menu3->setTouchEnabled(false);
+    auto delay = CCDelayTime::create(0.6f); // Crear una acción de retraso de 2 segundos
+    auto callFunc = CCCallFunc::create(this, callfunc_selector(WorldSelectLayerDecomp::runScroll)); // Crear una acción que llame a la función deseada
+  
+    auto sequence = CCSequence::create(delay, callFunc,nullptr); // Crear una secuencia de acciones
+    this->runAction(sequence); // Ejecutar la secuencia en un nodo o capa apropiada
 
-   
+
+    //myButton3->runAction(CCSequence::create(CCDelayTime::create(1),
+    //    CCCallFunc::create(this, callfunc_selector(WorldSelectLayerDecomp::runScroll)) // Utilizamos CCCallFunc para llamar a la función runParticle
+    //));
     myButton3->setSizeMult(1);
     myButton3->m_animationType = MenuAnimationType{ 1 };
     myButton3->m_startPosition = btn3->getPosition();
@@ -1033,12 +1566,29 @@ bool WorldSelectLayerDecomp::init() {
     return true;
 }
 
+void WorldSelectLayerDecomp::runScroll()
+{
+    Mod::get()->setSavedValue("onsubzero", 3);
+    menu3->setTouchEnabled(true);
+}
 void WorldSelectLayerDecomp::runParticle()
 {
     auto winSize = CCDirector::sharedDirector()->getWinSize();
     auto particles = CCParticleSystemQuad::create("coinPickupEffect.plist", 1);
 
     auto levelunlocked = Mod::get()->getSavedValue<int>("wlevelunlocked");
+
+    auto extendedLayer = (ExtendedLayer*)m_sscrollLayer->getChildren()->objectAtIndex(0);
+
+    auto levelsnode1 = (GJWorldNodeDecomp*)extendedLayer->getChildren()->objectAtIndex(0);
+
+    auto levelsmenu1 = (CCMenu*)levelsnode1->getChildren()->objectAtIndex(2);
+
+
+    auto levelsnode2 = (GJWorldNodeDecomp*)extendedLayer->getChildren()->objectAtIndex(1);
+
+    auto levelsmenu2 = (CCMenu*)levelsnode2->getChildren()->objectAtIndex(2);
+
    /* particles->setPosition({ ((winSize.width / 2) - 118) + 100, 136 });*/
     particles->setAnchorPoint({ 0.5f, 0.5f });
     particles->setScale(0.5f);
@@ -1056,30 +1606,59 @@ void WorldSelectLayerDecomp::runParticle()
     circlewave->setZOrder(3);
     if (levelunlocked == 1)
     {
-        particles->setPosition({ 203.5,130 });
-        circlewave->setPositionY(particles->getPositionY() - 100);
-        circlewave2->setPositionY(particles->getPositionY() - 100);
+        particles->setPosition({ -80, -30 });
+      /*  circlewave->setPositionY(particles->getPositionY() - 100);
+        circlewave2->setPositionY(particles->getPositionY() - 100);*/
     }
 
     if (levelunlocked == 2)
     {
-        particles->setPosition({ 274.5,170 });
-        circlewave->setPositionY(particles->getPositionY() - 150);
-        circlewave2->setPositionY(particles->getPositionY() - 150);
+        particles->setPosition({ -10, 10 });
+      /*  circlewave->setPositionY(particles->getPositionY() - 150);
+        circlewave2->setPositionY(particles->getPositionY() - 150);*/
     }
     if (levelunlocked == 3)
     {
-        particles->setPosition({ 332.5,136 });
-        circlewave->setPositionY(particles->getPositionY() - 150);
-        circlewave2->setPositionY(particles->getPositionY() - 150);
+        particles->setPosition({ 50, -25 });
+       /* circlewave->setPositionY(particles->getPositionY() - 150);
+        circlewave2->setPositionY(particles->getPositionY() - 150);*/
     }
     if (levelunlocked == 4)
     {
-        particles->setPosition({ 439.5,153 });
-        circlewave->setPositionY(particles->getPositionY() - 150);
-        circlewave2->setPositionY(particles->getPositionY() - 150);
+        particles->setPosition({ 155, -10 });
+       /* circlewave->setPositionY(particles->getPositionY() - 150);
+        circlewave2->setPositionY(particles->getPositionY() - 150);*/
     }
-    
+    if (levelunlocked == 5)
+    {
+        particles->setPosition({ -175, -12 });
+      /*  circlewave->setPositionY(particles->getPositionY() - 150);
+        circlewave2->setPositionY(particles->getPositionY() - 150);*/
+    }
+    if (levelunlocked == 6)
+    {
+        particles->setPosition({ -73, -28 });
+       /* circlewave->setPositionY(particles->getPositionY() - 150);
+        circlewave2->setPositionY(particles->getPositionY() - 150);*/
+    }
+    if (levelunlocked == 7)
+    {
+        particles->setPosition({ -10, 15 });
+       /* circlewave->setPositionY(particles->getPositionY() - 150);
+        circlewave2->setPositionY(particles->getPositionY() - 150);*/
+    }
+    if (levelunlocked == 8)
+    {
+        particles->setPosition({ 80, -38 });
+      /*  circlewave->setPositionY(particles->getPositionY() - 150);
+        circlewave2->setPositionY(particles->getPositionY() - 150);*/
+    }
+    if (levelunlocked == 9)
+    {
+        particles->setPosition({ 170, -10 });
+      /*  circlewave->setPositionY(particles->getPositionY() - 150);
+        circlewave2->setPositionY(particles->getPositionY() - 150);*/
+    }
  /*   circlewave->setPositionX(particles->getPositionX()+50);
     circlewave2->setPositionX(particles->getPositionX() + 50);*/
     
@@ -1087,7 +1666,15 @@ void WorldSelectLayerDecomp::runParticle()
     //203.5 - 130
 
     particles->init();
-    addChild(particles, 2);
+
+ /*   addChild(particles, 2);*/
+    if (levelunlocked >= 1 && levelunlocked <= 4) {
+        levelsmenu1->addChild(particles, 2);
+   
+    }
+    else if (levelunlocked >= 5 && levelunlocked <= 9) {
+        levelsmenu2->addChild(particles, 2);
+    }
     particles->addChild(circlewave, 2);
     particles->addChild(circlewave2, 2);
 }
@@ -1211,6 +1798,8 @@ void WorldSelectLayerDecomp::keyBackClicked() {
     auto back = Mod::get()->getSavedValue<int>("onsubzero");
     back = 10;
     Mod::get()->setSavedValue("onsubzero", back);
+    Mod::get()->setSavedValue("onworldpages", back);
+    //Mod::get()->getSavedValue<int>("onworldpages");
     CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, MenuLayer::scene(false)));
 }
 
@@ -1252,14 +1841,24 @@ void WorldSelectLayerDecomp::onWorldLevel(CCObject* sender) {
     //corner 4 =  left + down
     corner4->setPositionX(corner4->getPositionX() - 125.45);
     corner4->setPositionY(corner4->getPositionY() - 105.1);
+
+    cocos2d::CCMenu* infoMenu = cocos2d::CCMenu::create();
+    cocos2d::CCSprite* info = cocos2d::CCSprite::createWithSpriteFrameName("GJ_infoIcon_001.png");
+    CCMenuItemSpriteExtra* infoBtn = CCMenuItemSpriteExtra::create(info, this, menu_selector(WorldSelectLayerDecomp::onInfo));
+
+    infoBtn->setTag(button->getTag());
+    infoMenu->addChild(infoBtn);
+    infoMenu->setPositionX(infoMenu->getPositionX() + 146.5);
+    infoMenu->setPositionY(infoMenu->getPositionY() + 126.1);
+    info->setTag(button->getTag());
+    infoMenu->setTag(button->getTag());
+    Layer->addChild(infoMenu,2);
     Layer->addChild(corner4);
 
     Layer->addChild(m_buttonMenu);
 
     
-    auto playBtn = CCMenuItemSpriteExtra::create(CCSprite::createWithSpriteFrameName("GJ_playBtn2_001.png"), this, menu_selector(WorldSelectLayerDecomp::onPlay));
-    playBtn->setPositionY(40);
-    m_buttonMenu->addChild(playBtn);
+   
     if(button->getTag() == 30)
     { 
         std::ifstream mt("./Resources/levels/2001.txt");
@@ -1378,7 +1977,7 @@ void WorldSelectLayerDecomp::onWorldLevel(CCObject* sender) {
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
         level = GLM->getMainLevel(2009, false);
         level->m_levelName = "Round 1";
-        level->m_stars = 2;
+        level->m_stars = 3;
         level->m_levelString = mtext;
         level->m_audioTrack = 35;
         level->m_difficulty = GJDifficulty::Normal;
@@ -1401,12 +2000,17 @@ void WorldSelectLayerDecomp::onWorldLevel(CCObject* sender) {
         level->m_coins = 0;
     }
 
+    auto playBtn = CCMenuItemSpriteExtra::create(CCSprite::createWithSpriteFrameName("GJ_playBtn2_001.png"), this, menu_selector(WorldSelectLayerDecomp::onPlay));
+    playBtn->setPositionY(38);
+    m_buttonMenu->addChild(playBtn);
+    Mod::get()->setSavedValue("worldpopuptag", button->getTag());
     std::string title = level->m_levelName;
 
     const char* font = "goldFont.fnt";
     float scale = .7f;
     float offset = 80.f;
     auto m_title = cocos2d::CCLabelBMFont::create(title.c_str(), font);
+    m_title->setScale(0.9);
     /*auto winSize = cocos2d::CCDirector::get()->getWinSize();*/
 
     //Normal mode progress bar
@@ -1542,6 +2146,16 @@ void WorldSelectLayerDecomp::onWorldLevel(CCObject* sender) {
 
 void WorldSelectLayerDecomp::instantPage(CCObject* sender, int a1) {
 
+    if (a1 == 1)
+    {
+        auto GM = GameManager::sharedState();
+        CCSprite* BG = (CCSprite*)m_background;
+        /* BG->setColor(GM->colorForIdx(6));*/
+        auto extendedLayer = (ExtendedLayer*)m_sscrollLayer->getChildren()->objectAtIndex(0);
+
+        /* extendedLayer->setPositionX(-569);*/
+        m_sscrollLayer->instantMoveToPage(0);
+    }
     if (a1 == 2)
     {
         auto GM = GameManager::sharedState();
@@ -1552,7 +2166,26 @@ void WorldSelectLayerDecomp::instantPage(CCObject* sender, int a1) {
        /* extendedLayer->setPositionX(-569);*/
         m_sscrollLayer->instantMoveToPage(1);
     }
-    
+    //if (a1 == 3)
+    //{
+    //    auto GM = GameManager::sharedState();
+    //    CCSprite* BG = (CCSprite*)m_background;
+    //    BG->setColor(GM->colorForIdx(17));
+    //    auto extendedLayer = (ExtendedLayer*)m_sscrollLayer->getChildren()->objectAtIndex(0);
+
+    //    /* extendedLayer->setPositionX(-569);*/
+    //    m_sscrollLayer->instantMoveToPage(2);
+    //}
+    //if (a1 == 3)
+    //{
+    //    auto GM = GameManager::sharedState();
+    //    CCSprite* BG = (CCSprite*)m_background;
+    //    /*BG->setColor(GM->colorForIdx(6));*/
+    //    auto extendedLayer = (ExtendedLayer*)m_sscrollLayer->getChildren()->objectAtIndex(0);
+
+    //    /* extendedLayer->setPositionX(-569);*/
+    //    m_sscrollLayer->instantMoveToPage(2);
+    //}
     /*m_sscrollLayer->instantMoveToPage(a1);*/
     //m_sscrollLayer->moveToPage(a1);
   /*  currentColorIndex = (currentColorIndex - 1 + numColors) % numColors;*/
@@ -1596,7 +2229,7 @@ void WorldSelectLayerDecomp::onGarage(CCObject* sender) {
     Mod::get()->setSavedValue("onsubzero", 10);
 
     // Reemplazar la escena actual con la nueva escena usando la transición
-    CCDirector::sharedDirector()->replaceScene(transition);
+    CCDirector::sharedDirector()->pushScene(transition);
  
 }
 void WorldSelectLayerDecomp::createStars(GJGameLevel* level, CCLayer* layer) {
@@ -1668,6 +2301,204 @@ void WorldSelectLayerDecomp::onNext(CCObject* sender) {
 
     m_level = m_level+ 1;
     m_sscrollLayer->moveToPage(m_level);
+}
+
+void WorldSelectLayerDecomp::onInfo(CCObject* sender) {
+
+    /*Mod::get()->setSavedValue("subzerolevels", subzero);*/
+    auto lol = Mod::get()->getSavedValue<int>("worldpopuptag");
+    auto GLM = GameLevelManager::sharedState();
+
+    auto level21 = GJGameLevel::create();
+    int levellol = 0;
+    if (lol == 30)
+    {
+        std::ifstream mt("./Resources/levels/2001.txt");
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+        level21 = GLM->getMainLevel(2001, false);
+        level21->m_levelName = "Payload";
+        level21->m_stars = 2;
+        level21->m_levelString = mtext;
+        level21->m_audioTrack = 27;
+        level21->m_difficulty = GJDifficulty::Normal;
+        level21->m_creatorName = "RobTopGames";
+        level21->m_requiredCoins = 0;
+        level21->m_coins = 0;
+    }
+
+    if (lol == 31)
+    {
+        std::ifstream mt("./Resources/levels/2002.txt");
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+
+        level21 = GLM->getMainLevel(2002, false);
+        level21->m_levelName = "Beast Mode";
+        level21->m_stars = 2;
+        level21->m_levelString = mtext;
+        level21->m_audioTrack = 28;
+        level21->m_difficulty = GJDifficulty::Normal;
+        level21->m_creatorName = "RobTopGames";
+        level21->m_requiredCoins = 0;
+        level21->m_coins = 0;
+    }
+
+    if (lol == 32)
+    {
+        std::ifstream mt("./Resources/levels/2003.txt");
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+
+        level21 = GLM->getMainLevel(2003, false);
+        level21->m_levelName = "Machina";
+        level21->m_stars = 3;
+        level21->m_levelString = mtext;
+        level21->m_audioTrack = 29;
+        level21->m_difficulty = GJDifficulty::Normal;
+        level21->m_creatorName = "RobTopGames";
+        level21->m_requiredCoins = 0;
+        level21->m_coins = 0;
+    }
+
+    if (lol == 33)
+    {
+        std::ifstream mt("./Resources/levels/2004.txt");
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+
+        level21 = GLM->getMainLevel(2004, false);
+        level21->m_levelName = "Years";
+        level21->m_stars = 3;
+        level21->m_levelString = mtext;
+        level21->m_audioTrack = 30;
+        level21->m_difficulty = GJDifficulty::Normal;
+        level21->m_creatorName = "RobTopGames";
+        level21->m_requiredCoins = 0;
+        level21->m_coins = 0;
+    }
+    if (lol == 34)
+    {
+        std::ifstream mt("./Resources/levels/2005.txt");
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+
+        
+        level21 = GLM->getMainLevel(2005, false);
+        level21->m_levelName = "Frontlines";
+        level21->m_stars = 3;
+        level21->m_levelString = mtext;
+        level21->m_audioTrack = 31;
+        level21->m_difficulty = GJDifficulty::Normal;
+        level21->m_creatorName = "RobTopGames";
+        level21->m_requiredCoins = 0;
+        level21->m_coins = 0;
+    }
+    if (lol == 35)
+    {
+        std::ifstream mt("./Resources/levels/2006.txt");
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+
+        level21 = GLM->getMainLevel(2006, false);
+        level21->m_levelName = "Space Pirates";
+        level21->m_stars = 3;
+        level21->m_levelString = mtext;
+        level21->m_audioTrack = 32;
+        level21->m_difficulty = GJDifficulty::Normal;
+        level21->m_creatorName = "RobTopGames";
+        level21->m_requiredCoins = 0;
+        level21->m_coins = 0;
+    }
+    if (lol == 36)
+    {
+        std::ifstream mt("./Resources/levels/2007.txt");
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+
+        level21 = GLM->getMainLevel(2007, false);
+        level21->m_levelName = "Striker";
+        level21->m_stars = 3;
+        level21->m_levelString = mtext;
+        level21->m_audioTrack = 33;
+        level21->m_difficulty = GJDifficulty::Normal;
+        level21->m_creatorName = "RobTopGames";
+        level21->m_requiredCoins = 0;
+        level21->m_coins = 0;
+    }
+    if (lol == 37)
+    {
+        std::ifstream mt("./Resources/levels/2008.txt");
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+
+        level21 = GLM->getMainLevel(2008, false);
+        level21->m_levelName = "Embers";
+        level21->m_stars = 3;
+        level21->m_levelString = mtext;
+        level21->m_audioTrack = 34;
+        level21->m_difficulty = GJDifficulty::Normal;
+        level21->m_creatorName = "RobTopGames";
+        level21->m_requiredCoins = 0;
+        level21->m_coins = 0;
+    }
+    if (lol == 38)
+    {
+        std::ifstream mt("./Resources/levels/2009.txt");
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+
+        level21 = GLM->getMainLevel(2009, false);
+        level21->m_levelName = "Round 1";
+        level21->m_stars = 3;
+        level21->m_levelString = mtext;
+        level21->m_audioTrack = 35;
+        level21->m_difficulty = GJDifficulty::Normal;
+        level21->m_creatorName = "RobTopGames";
+        level21->m_requiredCoins = 0;
+        level21->m_coins = 0;
+    }
+    if (lol == 39)
+    {
+        std::ifstream mt("./Resources/levels/2010.txt");
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+
+        level21 = GLM->getMainLevel(2010, false);
+        level21->m_levelName = "Monster Dance Off";
+        level21->m_stars = 3;
+        level21->m_levelString = mtext;
+        level21->m_audioTrack = 36;
+        level21->m_difficulty = GJDifficulty::Normal;
+        level21->m_creatorName = "RobTopGames";
+        level21->m_requiredCoins = 0;
+        level21->m_coins = 0;
+    }
+   
+    std::cout << levellol << std::endl;
+
+    WorldSelectLayerDecomp::show2(level21);
+}
+
+void WorldSelectLayerDecomp::show2(GJGameLevel* level212) {
+
+    if (level == nullptr) return;
+
+
+    if (level212->m_levelID == -1) {
+        FLAlertLayer::create(nullptr, "It's a secret...", "<cr>Roses are red</c>\n<cl>Violets are blue</c>\n<cg>Welcome to</c>\n<cy>2.2</c>", "OK", nullptr, 360)->show();
+        return;
+    }
+
+    if (level212->m_levelID == -2) {
+        FLAlertLayer::create(nullptr, "The Tower", "The path leads to an <cr>old tower</c>. It's been left alone for <cg>years</c>, with little reason to <co>explore</c>.", "OK", nullptr, 360)->show();
+        return;
+    }
+
+
+    if (level212->m_levelID != -1 && level->m_levelID != -2)
+    {
+        std::string name = level212->m_levelName;
+        std::string contentStream =
+            "<cy>" + name + "</c>" +
+            "\n<cg>Total Attempts</c>: " + std::to_string(level212->m_attempts) +
+            "\n<cl>Total Jumps</c>: " + std::to_string(level212->m_jumps) +
+            "\n<cp>Normal</c>: " + std::to_string(level212->m_normalPercent) + "%" +
+            "\n<co>Practice</c>: " + std::to_string(level212->m_practicePercent) + "%";
+
+        FLAlertLayer::create(nullptr, "Level Stats", contentStream, "OK", nullptr, 360)->show();
+        return;
+    }
 }
 
 } // namespace more

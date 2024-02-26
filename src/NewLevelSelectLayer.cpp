@@ -129,8 +129,7 @@ bool NewLevelSelectLayer::init(int page) {
     level1->m_audioTrack = 37;
     level1->m_difficulty = GJDifficulty::Normal;
     level1->m_creatorName = "RobTopGames";
-    level1->m_normalPercent = Mod::get()->getSavedValue<int>("psNormalMode");
-    level1->m_practicePercent = Mod::get()->getSavedValue<int>("psPracticeMode");
+    
   
 
     

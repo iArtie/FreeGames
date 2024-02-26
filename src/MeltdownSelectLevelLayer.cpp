@@ -200,7 +200,7 @@ bool MeltdownSelectLevelLayer::init(int page) {
     addChild(infoMenu);
 
     cocos2d::CCSprite* info = cocos2d::CCSprite::createWithSpriteFrameName("GJ_infoIcon_001.png");
-    CCMenuItemSpriteExtra* infoBtn = CCMenuItemSpriteExtra::create(info, this, menu_selector(LevelSelectLayer::onInfo));
+    CCMenuItemSpriteExtra* infoBtn = CCMenuItemSpriteExtra::create(info, this, menu_selector(MeltdownSelectLevelLayer::onInfo));
     infoMenu->addChild(infoBtn);
 
     infoMenu->setPosition({ director->getScreenRight() - 20.0f, director->getScreenTop() - 20.0f });
@@ -305,6 +305,75 @@ void MeltdownSelectLevelLayer::instantPage(CCObject* sender, int a1) {
     currentColorIndex2 = (currentColorIndex2 - 1 + numColors2) % numColors2;
    /* updateColors();*/
     //scrollLayerMoved({0, 0});
+}
+void show3(GJGameLevel* level) {
+
+    if (level == nullptr) return;
+
+
+    if (level->m_levelID == -1) {
+        FLAlertLayer::create(nullptr, "It's a secret...", "<cr>Roses are red</c>\n<cl>Violets are blue</c>\n<cg>Welcome to</c>\n<cy>2.2</c>", "OK", nullptr, 360)->show();
+        return;
+    }
+
+    if (level->m_levelID == -2) {
+        FLAlertLayer::create(nullptr, "The Tower", "The path leads to an <cr>old tower</c>. It's been left alone for <cg>years</c>, with little reason to <co>explore</c>.", "OK", nullptr, 360)->show();
+        return;
+    }
+
+
+    if (level->m_levelID != -1 && level->m_levelID != -2)
+    {
+        std::string name = level->m_levelName;
+        std::string contentStream =
+            "<cy>" + name + "</c>" +
+            "\n<cg>Total Attempts</c>: " + std::to_string(level->m_attempts) +
+            "\n<cl>Total Jumps</c>: " + std::to_string(level->m_jumps) +
+            "\n<cp>Normal</c>: " + std::to_string(level->m_normalPercent) + "%" +
+            "\n<co>Practice</c>: " + std::to_string(level->m_practicePercent) + "%";
+
+        FLAlertLayer::create(nullptr, "Level Stats", contentStream, "OK", nullptr, 360)->show();
+        return;
+    }
+}
+
+
+
+
+
+
+void MeltdownSelectLevelLayer::onInfo(CCObject* sender) {
+
+
+    auto lol = Mod::get()->getSavedValue<int>("meltdownlevel");
+
+    int levellol = 0;
+    if (lol == 1)
+    {
+        levellol = 3;
+    }
+
+    if (lol == 2)
+    {
+        levellol = 0;
+    }
+
+    if (lol == 3)
+    {
+        levellol = 1;
+    }
+
+    if (lol == 4)
+    {
+        levellol = 2;
+    }
+
+    std::cout << levellol << std::endl;
+    auto levelObject = m_mainLevels->objectAtIndex(levellol);
+    // Verificar si el objeto es de tipo GJGameLevel
+    if (auto gameLevel = dynamic_cast<GJGameLevel*>(levelObject)) {
+        show3(gameLevel);
+    }
 }
 //void MeltdownSelectLevelLayer::updateColors() {
 //    ccColor3B color2 = colors2[currentColorIndex2];

@@ -25,6 +25,7 @@ public:
 	void onPlay(cocos2d::CCObject*);
 	void onBack(cocos2d::CCObject*);
 	void keyBackClicked();
+	
 	/*void pageNumberForPosition(cocos2d::CCPoint);*/
 	void keyDown(int);
 	void updateColors();

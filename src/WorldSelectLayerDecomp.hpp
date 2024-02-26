@@ -26,10 +26,12 @@ private:
     void createStars(GJGameLevel* level, CCLayer* layer);
     void playStep2();
     void playStep3();
-   
+    void runScroll();
     cocos2d::CCNode* createBackground();
     cocos2d::CCNode* createSideArt();
     cocos2d::CCNode* createArrows();
+    void onInfo(CCObject* sender);
+    void show2(GJGameLevel* level212);
     /*void updatePageWithObject(CCObject* page, CCObject* object);*/
     void onClose(CCObject*);
     cocos2d::CCNode* m_background;
@@ -37,7 +39,7 @@ private:
     cocos2d::CCArray* m_mainLevels2;
     GJGameLevel* level;
     int m_level;
-    
+    CCMenu* menu3;
 };
 
 } // namespace more
