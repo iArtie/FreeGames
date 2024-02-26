@@ -71,6 +71,7 @@ CCArray* MoreGamesLayer::getGames() {
         });
     auto gamebg3= CCSprite::createWithSpriteFrameName("cell2.png"_spr);
 
+
     gamebg3->setPosition({ gamebg3->getPositionX() + 179, gamebg3->getPositionY()+ 36 });
     gamebg3->setScale(4);
     game3->addChild(gamebg3,-1);

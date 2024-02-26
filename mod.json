@@ -13,6 +13,13 @@
 			"IconSheet": [
 				"resources/icon/*.png"
 			]
-		}
+
+		},
+		"files": [
+		
+			"resources/levels/*.txt"
+
+		]
+
 	}
 }

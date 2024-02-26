@@ -1861,7 +1861,8 @@ void WorldSelectLayerDecomp::onWorldLevel(CCObject* sender) {
    
     if(button->getTag() == 30)
     { 
-        std::ifstream mt("./Resources/levels/2001.txt");
+        std::string dir = geode::Mod::get()->getResourcesDir().string();
+        std::ifstream mt(dir +"/2001.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
         level = GLM->getMainLevel(2001, false);
         level->m_levelName = "Payload";
@@ -1875,7 +1876,8 @@ void WorldSelectLayerDecomp::onWorldLevel(CCObject* sender) {
     }
     if (button->getTag() == 31)
     {
-        std::ifstream mt("./Resources/levels/2002.txt");
+        std::string dir = geode::Mod::get()->getResourcesDir().string();
+        std::ifstream mt(dir + "/2002.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
         level = GLM->getMainLevel(2002, false);
         level->m_levelName = "Beast Mode";
@@ -1889,7 +1891,8 @@ void WorldSelectLayerDecomp::onWorldLevel(CCObject* sender) {
     }
     if (button->getTag() == 32)
     {
-        std::ifstream mt("./Resources/levels/2003.txt");
+        std::string dir = geode::Mod::get()->getResourcesDir().string();
+        std::ifstream mt(dir + "/2003.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
         level = GLM->getMainLevel(2003, false);
         level->m_levelName = "Machina";
@@ -1903,7 +1906,9 @@ void WorldSelectLayerDecomp::onWorldLevel(CCObject* sender) {
     }
     if (button->getTag() == 33)
     {
-        std::ifstream mt("./Resources/levels/2004.txt");
+        std::string dir = geode::Mod::get()->getResourcesDir().string();
+        std::ifstream mt(dir + "/2004.txt");
+
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
         level = GLM->getMainLevel(2004, false);
         level->m_levelName = "Years";
@@ -1917,7 +1922,9 @@ void WorldSelectLayerDecomp::onWorldLevel(CCObject* sender) {
     }
     if (button->getTag() == 34)
     {
-        std::ifstream mt("./Resources/levels/2005.txt");
+        std::string dir = geode::Mod::get()->getResourcesDir().string();
+        std::ifstream mt(dir + "/2005.txt");
+       
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
         level = GLM->getMainLevel(2005, false);
         level->m_levelName = "Frontlines";
@@ -1931,7 +1938,8 @@ void WorldSelectLayerDecomp::onWorldLevel(CCObject* sender) {
     }
     if (button->getTag() == 35)
     {
-        std::ifstream mt("./Resources/levels/2006.txt");
+        std::string dir = geode::Mod::get()->getResourcesDir().string();
+        std::ifstream mt(dir + "/2006.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
         level = GLM->getMainLevel(2006, false);
         level->m_levelName = "Space Pirates";
@@ -1945,7 +1953,8 @@ void WorldSelectLayerDecomp::onWorldLevel(CCObject* sender) {
     }
     if (button->getTag() == 36)
     {
-        std::ifstream mt("./Resources/levels/2007.txt");
+        std::string dir = geode::Mod::get()->getResourcesDir().string();
+        std::ifstream mt(dir + "/2007.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
         level = GLM->getMainLevel(2007, false);
         level->m_levelName = "Striker";
@@ -1959,7 +1968,8 @@ void WorldSelectLayerDecomp::onWorldLevel(CCObject* sender) {
     }
     if (button->getTag() == 37)
     {
-        std::ifstream mt("./Resources/levels/2008.txt");
+        std::string dir = geode::Mod::get()->getResourcesDir().string();
+        std::ifstream mt(dir + "/2008.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
         level = GLM->getMainLevel(2008, false);
         level->m_levelName = "Embers";
@@ -1973,7 +1983,8 @@ void WorldSelectLayerDecomp::onWorldLevel(CCObject* sender) {
     }
     if (button->getTag() == 38)
     {
-        std::ifstream mt("./Resources/levels/2009.txt");
+        std::string dir = geode::Mod::get()->getResourcesDir().string();
+        std::ifstream mt(dir + "/2009.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
         level = GLM->getMainLevel(2009, false);
         level->m_levelName = "Round 1";
@@ -1987,7 +1998,8 @@ void WorldSelectLayerDecomp::onWorldLevel(CCObject* sender) {
     }
     if (button->getTag() == 39)
     {
-        std::ifstream mt("./Resources/levels/2010.txt");
+        std::string dir = geode::Mod::get()->getResourcesDir().string();
+        std::ifstream mt(dir + "/2010.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
         level = GLM->getMainLevel(2010, false);
         level->m_levelName = "Monster Dance Off";
@@ -2313,7 +2325,8 @@ void WorldSelectLayerDecomp::onInfo(CCObject* sender) {
     int levellol = 0;
     if (lol == 30)
     {
-        std::ifstream mt("./Resources/levels/2001.txt");
+        std::string dir = geode::Mod::get()->getResourcesDir().string();
+        std::ifstream mt(dir + "/2001.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
         level21 = GLM->getMainLevel(2001, false);
         level21->m_levelName = "Payload";
@@ -2328,7 +2341,8 @@ void WorldSelectLayerDecomp::onInfo(CCObject* sender) {
 
     if (lol == 31)
     {
-        std::ifstream mt("./Resources/levels/2002.txt");
+        std::string dir = geode::Mod::get()->getResourcesDir().string();
+        std::ifstream mt(dir + "/2002.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
 
         level21 = GLM->getMainLevel(2002, false);
@@ -2344,7 +2358,8 @@ void WorldSelectLayerDecomp::onInfo(CCObject* sender) {
 
     if (lol == 32)
     {
-        std::ifstream mt("./Resources/levels/2003.txt");
+        std::string dir = geode::Mod::get()->getResourcesDir().string();
+        std::ifstream mt(dir + "/2003.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
 
         level21 = GLM->getMainLevel(2003, false);
@@ -2360,7 +2375,8 @@ void WorldSelectLayerDecomp::onInfo(CCObject* sender) {
 
     if (lol == 33)
     {
-        std::ifstream mt("./Resources/levels/2004.txt");
+        std::string dir = geode::Mod::get()->getResourcesDir().string();
+        std::ifstream mt(dir + "/2004.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
 
         level21 = GLM->getMainLevel(2004, false);
@@ -2375,7 +2391,8 @@ void WorldSelectLayerDecomp::onInfo(CCObject* sender) {
     }
     if (lol == 34)
     {
-        std::ifstream mt("./Resources/levels/2005.txt");
+        std::string dir = geode::Mod::get()->getResourcesDir().string();
+        std::ifstream mt(dir + "/2005.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
 
         
@@ -2391,7 +2408,8 @@ void WorldSelectLayerDecomp::onInfo(CCObject* sender) {
     }
     if (lol == 35)
     {
-        std::ifstream mt("./Resources/levels/2006.txt");
+        std::string dir = geode::Mod::get()->getResourcesDir().string();
+        std::ifstream mt(dir + "/2006.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
 
         level21 = GLM->getMainLevel(2006, false);
@@ -2406,7 +2424,8 @@ void WorldSelectLayerDecomp::onInfo(CCObject* sender) {
     }
     if (lol == 36)
     {
-        std::ifstream mt("./Resources/levels/2007.txt");
+        std::string dir = geode::Mod::get()->getResourcesDir().string();
+        std::ifstream mt(dir + "/2007.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
 
         level21 = GLM->getMainLevel(2007, false);
@@ -2421,7 +2440,8 @@ void WorldSelectLayerDecomp::onInfo(CCObject* sender) {
     }
     if (lol == 37)
     {
-        std::ifstream mt("./Resources/levels/2008.txt");
+        std::string dir = geode::Mod::get()->getResourcesDir().string();
+        std::ifstream mt(dir + "/2008.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
 
         level21 = GLM->getMainLevel(2008, false);
@@ -2436,7 +2456,8 @@ void WorldSelectLayerDecomp::onInfo(CCObject* sender) {
     }
     if (lol == 38)
     {
-        std::ifstream mt("./Resources/levels/2009.txt");
+        std::string dir = geode::Mod::get()->getResourcesDir().string();
+        std::ifstream mt(dir + "/2009.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
 
         level21 = GLM->getMainLevel(2009, false);
@@ -2451,7 +2472,8 @@ void WorldSelectLayerDecomp::onInfo(CCObject* sender) {
     }
     if (lol == 39)
     {
-        std::ifstream mt("./Resources/levels/2010.txt");
+        std::string dir = geode::Mod::get()->getResourcesDir().string();
+        std::ifstream mt(dir + "/2010.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
 
         level21 = GLM->getMainLevel(2010, false);
