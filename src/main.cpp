@@ -933,7 +933,11 @@ ccColor3B getColorValue(int level1, int level2, float a3)
 	ccColor3B col1 = colorForPage(level1);
 	ccColor3B col2 = colorForPage(level2);
 
-	ccColor3B col3 = { ((col2.r * mod) + col1.r * (1.0f - mod)), (((col2.g * mod) + col1.g * (1.0f - mod))), (((col2.b * mod) + col1.b * (1.0f - mod))) };
+	ccColor3B col3 = {
+	static_cast<GLubyte>((col2.r * mod) + col1.r * (1.0f - mod)),
+	static_cast<GLubyte>((col2.g * mod) + col1.g * (1.0f - mod)),
+	static_cast<GLubyte>((col2.b * mod) + col1.b * (1.0f - mod))
+	};
 	return col3;
 }
 ccColor3B colorForPage2(int page) {
@@ -957,7 +961,11 @@ ccColor3B getColorValue2(int level1, int level2, float a3)
 	ccColor3B col1 = colorForPage2(level1);
 	ccColor3B col2 = colorForPage2(level2);
 
-	ccColor3B col3 = { ((col2.r * mod) + col1.r * (1.0f - mod)), (((col2.g * mod) + col1.g * (1.0f - mod))), (((col2.b * mod) + col1.b * (1.0f - mod))) };
+	ccColor3B col3 = {
+	static_cast<GLubyte>((col2.r * mod) + col1.r * (1.0f - mod)),
+	static_cast<GLubyte>((col2.g * mod) + col1.g * (1.0f - mod)),
+	static_cast<GLubyte>((col2.b * mod) + col1.b * (1.0f - mod))
+	};
 	return col3;
 }
 
