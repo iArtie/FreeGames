@@ -9,6 +9,7 @@
 #include <Geode/modify/PlayLayer.hpp>
 #include <Geode/modify/EndLevelLayer.hpp>
 #include <Geode/modify/GJGarageLayer.hpp>
+#include <Geode/modify/LoadingLayer.hpp>
 #include <Geode/modify/SecretLayer4.hpp>
 #include <Geode/Enums.hpp>
 #include "NewLevelSelectLayer.h"
@@ -282,6 +283,34 @@ using namespace more;
 //
 //	BoomScrollLayer* m_scrollLayer;
 //};
+#include <Geode/utils/web.hpp>
+class $modify(LoadingLayer)
+{
+	void loadAssets()
+	{
+		
+		LoadingLayer::loadAssets();
+		std::string zipFilePath = geode::Mod::get()->getResourcesDir().string() + "\\" + "SpinOffGames.zip";
+
+		std::string unzipDir = geode::Mod::get()->getResourcesDir().string() + "\\" + "SpinOffGames";
+
+		auto result = geode::utils::file::Unzip::intoDir(zipFilePath, unzipDir);
+		
+		CCFileUtils::get()->addTexturePack(CCTexturePack{
+		  .m_id = this->getID(),
+		  .m_paths = { unzipDir }
+			});
+
+		auto* textureCache = CCTextureCache::sharedTextureCache();
+		auto* spriteFrameCache = CCSpriteFrameCache::sharedSpriteFrameCache();
+
+		textureCache->addImage("WorldSheet.png", false);
+		spriteFrameCache->addSpriteFramesWithFile("WorldSheet.plist");
+		}
+
+	
+	
+};
 class $modify(MenuLayer) {
 	void onMoreGames(CCObject*) {
 
@@ -299,7 +328,6 @@ class $modify(MenuLayer) {
 
 		addChild(page);*/
 
-		
 		auto* layer = more::MoreGamesLayer::create();
 
 		addChild(layer, 100);
@@ -322,7 +350,7 @@ class $modify(SecretLayer4)
 		auto isSubzero = Mod::get()->getSavedValue<int>("onsubzero");
 		auto SubZeroScene = NewLevelSelectLayer::create(4);
 		auto MeltdownScene = MeltdownSelectLevelLayer::create(4);
-		auto dashlandScene = WorldSelectLayerDecomp::create();
+		auto dashlandScene = ownWorldSelectLayer::create();
 
 		if (isSubzero == 1)
 		{
@@ -363,40 +391,42 @@ class $modify(GJGarageLayer) {
 	{
 		auto pages = Mod::get()->getSavedValue<int>("onworldpages");
 
-		auto World = WorldSelectLayerDecomp::create();
+		auto World = ownWorldSelectLayer::create();
 		auto scene = CCScene::create();
 
 		scene->addChild(World);
 		
 		if (pages != 0 && pages != 10)
 		{
-			if (pages == 1)
-		{
-			auto transition = CCTransitionMoveInB::create(0.5f,scene);
-			
-			World->instantPage(sender, 1);
-			CCDirector::sharedDirector()->pushScene(transition);
-			
-		}
-		else 
-		if (pages == 2)
-		{
+			auto transitionScene = CCScene::create(); // Creamos una escena para la transición
 
-			World->instantPage(sender,2);
-			auto transition = CCTransitionMoveInB::create(0.5f, scene);
+			// Mover la escena actual hacia arriba (salida)
+			CCSize winSize = CCDirector::sharedDirector()->getWinSize();
+			CCActionInterval* moveUp = CCMoveBy::create(0.23f, ccp(0, winSize.height));
+			this->runAction(moveUp);
 
-			CCDirector::sharedDirector()->pushScene(transition);
-			
-		}
-		else
-		if (pages == 3)
-		{
-			auto transition = CCTransitionMoveInB::create(0.5f, scene);
+			if (pages == 1) {
+				World->instantPage(sender, 1);
+			}
+			else if (pages == 2) {
+				World->instantPage(sender, 2);
+			}
+			else if (pages == 3) {
+				// World->instantPage(sender, 3);
+			}
 
+			auto transition = CCTransitionMoveInB::create(0.31f, scene);
+
+			// Mover la nueva escena hacia abajo (entrada)
+			CCActionInterval* moveDown = CCMoveBy::create(0.5f, ccp(0, -winSize.height));
+			transitionScene->runAction(moveDown);
+
+			scene->setZOrder(1);
+			this->setZOrder(2);
+			transition->setZOrder(1);
+			transitionScene->setZOrder(2);
+			CCDirector::sharedDirector()->pushScene(transitionScene);
 			CCDirector::sharedDirector()->pushScene(transition);
-			World->instantPage(sender,3);
-			
-		}
 		}
 		
 		else
@@ -416,7 +446,7 @@ class $modify(PauseLayer) {
 		auto isSubzero = Mod::get()->getSavedValue<int>("onsubzero");
 		auto SubZeroScene = NewLevelSelectLayer::create(0);
 		auto MeltdownScene = MeltdownSelectLevelLayer::create(0);
-		auto dashlandScene = WorldSelectLayerDecomp::create();
+		auto dashlandScene = ownWorldSelectLayer::create();
 		
 		if (isSubzero == 1)
 		{
@@ -439,32 +469,85 @@ class $modify(PauseLayer) {
 		case 1:
 			std::cout << "on PressStart" << std::endl;
 			page = 0;
-			MeltdownScene->instantPage(sender, 0);
-			SubZeroScene->instantPage(sender, 0);
+			if (isSubzero == 1)
+			{
+				SubZeroScene->instantPage(sender, 0);
+			}
+			if (isSubzero == 2)
+			{
+				MeltdownScene->instantPage(sender, 0);
+			}
+			if (isSubzero == 3)
+			{
+				dashlandScene->instantPage(sender, 1);
+			}
 			break;
 		case 2:
 			std::cout << "on Nock Em" << std::endl;
 			page = 1;
-			MeltdownScene->instantPage(sender, 1);
-			SubZeroScene->instantPage(sender, 1);
+			if (isSubzero == 1)
+			{
+				SubZeroScene->instantPage(sender, 1);
+			}
+			if (isSubzero == 2)
+			{
+				MeltdownScene->instantPage(sender, 1);
+			}
+			if (isSubzero == 3)
+			{
+				dashlandScene->instantPage(sender, 1);
+			}
 			break;
 		case 3:
 			std::cout << "on Power Trip" << std::endl;
 			page = 2;
-			MeltdownScene->instantPage(sender, 2);
-			SubZeroScene->instantPage(sender, 2);
+			if (isSubzero == 1)
+			{
+				SubZeroScene->instantPage(sender, 2);
+			}
+			if (isSubzero == 2)
+			{
+				MeltdownScene->instantPage(sender, 2);
+			}
+			if (isSubzero == 3)
+			{
+				dashlandScene->instantPage(sender, 1);
+			}
+			
+			
 			break;
 		case 4:
 			
 			page = 3;
-			
+			if (isSubzero == 1)
+			{
+				SubZeroScene->instantPage(sender, 2);
+			}
+			if (isSubzero == 2)
+			{
+				MeltdownScene->instantPage(sender, 2);
+			}
+			if (isSubzero == 3)
+			{
+				dashlandScene->instantPage(sender, 1);
+			}
 			break;
 		case 5:
 			std::cout << "on FrontLines" << std::endl;
 			page = 4;
 			/*MeltdownScene->instantPage(sender, 2);*/
-			
-		
+			if (isSubzero == 1)
+			{
+				SubZeroScene->instantPage(sender, 2);
+			}
+			if (isSubzero == 2)
+			{
+				MeltdownScene->instantPage(sender, 2);
+			}
+			if (isSubzero == 3)
+			{
+				dashlandScene->instantPage(sender, 1);
+			}
 			
 			
 		/*	BG->setColor({ 125, 0, 255 });*/
@@ -510,7 +593,11 @@ class $modify(PauseLayer) {
 
 	}
 
-
+	void onEdit(cocos2d::CCObject* sender)
+	{
+		Mod::get()->setSavedValue("onsubzero", 25);
+		PauseLayer::onEdit(sender);
+	}
 
 };
 
@@ -525,7 +612,7 @@ class $modify(EndLevelLayer) {
 		auto MeltdownScene = MeltdownSelectLevelLayer::create(0);
 
 		
-		auto dashlandScene = WorldSelectLayerDecomp::create();
+		auto dashlandScene = ownWorldSelectLayer::create();
 		if (isSubzero == 1)
 		{
 			scene->addChild(SubZeroScene);
@@ -547,31 +634,83 @@ class $modify(EndLevelLayer) {
 		case 1:
 			std::cout << "on PressStart" << std::endl;
 			page = 0;
-			MeltdownScene->instantPage(sender, 0);
-			SubZeroScene->instantPage(sender, 0);
+			if (isSubzero == 1)
+			{
+				SubZeroScene->instantPage(sender, 0);
+			}
+			if (isSubzero == 2)
+			{
+				MeltdownScene->instantPage(sender, 0);
+			}
+			if (isSubzero == 3)
+			{
+				dashlandScene->instantPage(sender, 1);
+			}
 			break;
 		case 2:
 			std::cout << "on Nock Em" << std::endl;
 			page = 1;
-			MeltdownScene->instantPage(sender, 1);
-			SubZeroScene->instantPage(sender, 1);
+			if (isSubzero == 1)
+			{
+				SubZeroScene->instantPage(sender, 1);
+			}
+			if (isSubzero == 2)
+			{
+				MeltdownScene->instantPage(sender, 1);
+			}
+			if (isSubzero == 3)
+			{
+				dashlandScene->instantPage(sender, 1);
+			}
 			break;
 		case 3:
 			std::cout << "on Power Trip" << std::endl;
 			page = 2;
-			MeltdownScene->instantPage(sender, 2);
-			SubZeroScene->instantPage(sender, 2);
+			if (isSubzero == 1)
+			{
+				SubZeroScene->instantPage(sender, 2);
+			}
+			if (isSubzero == 2)
+			{
+				MeltdownScene->instantPage(sender, 2);
+			}
+			if (isSubzero == 3)
+			{
+				dashlandScene->instantPage(sender, 1);
+			}
 			break;
 		case 4:
 
 			page = 3;
-
+			if (isSubzero == 1)
+			{
+				SubZeroScene->instantPage(sender, 2);
+			}
+			if (isSubzero == 2)
+			{
+				MeltdownScene->instantPage(sender, 2);
+			}
+			if (isSubzero == 3)
+			{
+				dashlandScene->instantPage(sender, 1);
+			}
 			break;
 		case 5:
 			std::cout << "on FrontLines" << std::endl;
 			page = 4;
 			/*MeltdownScene->instantPage(sender, 2);*/
-
+			if (isSubzero == 1)
+			{
+				SubZeroScene->instantPage(sender, 2);
+			}
+			if (isSubzero == 2)
+			{
+				MeltdownScene->instantPage(sender, 2);
+			}
+			if (isSubzero == 3)
+			{
+				dashlandScene->instantPage(sender, 1);
+			}
 
 
 
@@ -827,7 +966,7 @@ class $modify(BoomScrollLayer) {
 		
 		auto lol = this->getParent();
 		auto meltdown = Mod::get()->getSavedValue<int>("onsubzero");
-
+		auto GM = GameManager::sharedState();
 
 		
 		int m_level = 0;
@@ -862,26 +1001,44 @@ class $modify(BoomScrollLayer) {
 		if (meltdown == 3)
 		{
 			auto extendedlayer = (CCSpriteBatchNode*)this->getChildren()->objectAtIndex(1);
-			int hola = 0;
+			
 			auto point1 = (CCSprite*)extendedlayer->getChildren()->objectAtIndex(0);
 			auto point2 = (CCSprite*)extendedlayer->getChildren()->objectAtIndex(1);
 			auto point3 = (CCSprite*)extendedlayer->getChildren()->objectAtIndex(2);
-			auto m_background = (CCSprite*)lol->getChildren()->objectAtIndex(0);
+			auto bg = (CCNode*)lol->getChildren()->objectAtIndex(0);
+			auto director = CCDirector::sharedDirector();
+			auto winSize = director->getWinSize();
 
 			
+			CCSprite* m_background = (CCSprite*)bg;
+			
+			
+			auto shitbg = (CCSprite*)lol->getChildByTag(120);
+
+			auto mm_background = (CCSprite*)lol->getChildByTag(121);
+
+			auto mm_background2 = (CCSprite*)lol->getChildByTag(122);
+
+			auto mm_background3 = (CCSprite*)lol->getChildByTag(123);
+			shitbg->setZOrder(-4);
 			/*std::cout << page1->getTag() << std::endl;*/
-			ccColor3B color = getColorValue2(hola, hola - 1, 12);
+			
 			/*m_background->setColor(color);*/
-			if (point1->getColor() == ccColor3B{255, 255, 255} && point1->isVisible() && point1->getPositionX() != 0)
+			if (point1->getColor() == ccWHITE && point1->isVisible() && point1->getPositionX() != 0)
 			{
 				/*std::cout << "pagina 1" << std::endl;*/
 
-				hola = 0;
-				color = getColorValue2(hola, hola - 1, 12);
-				m_background->setColor(color);
+				
+				/*	m_background->setColor(GM->colorForIdx(4));*/
+					
+				this->setVisible(true);
+				shitbg->setVisible(true);
+				mm_background->setVisible(true);
+			/*	mm_background2->setVisible(false);
+				mm_background3->setVisible(false);*/
 				Mod::get()->setSavedValue("onworldpages",1);
+				Mod::get()->setSavedValue("worldpages", 0);
 			}
-			auto levelsas = Mod::get()->getSavedValue<int>("subzerolevels");
 
 			/*if (levelsas <= 5)
 			{
@@ -891,35 +1048,33 @@ class $modify(BoomScrollLayer) {
 			{
 				m_background->setColor({ 125, 0, 255 });
 			}*/
-			if (point2->getColor() == ccColor3B{255, 255, 255} && point2->getPositionX() != 0)
+			if (point2->getColor() == ccWHITE && point2->getPositionX() != 0)
 			{
 				/*std::cout << "pagina 2" << std::endl;*/
-				hola = 1;
-				color = getColorValue2(hola, hola - 1, 12);
-				m_background->setColor(color);
+				this->setVisible(true);
+				shitbg->setVisible(false);
+				mm_background->setVisible(false);
+				mm_background2->setVisible(false);
+				mm_background3->setVisible(true);
 				Mod::get()->setSavedValue("onworldpages", 2);
+				Mod::get()->setSavedValue("worldpages", 1);
+			
 			}
-			if (point3->getColor() == ccColor3B{255, 255, 255} && point3->getPositionX() != 0)
+			if (point3->getColor() == ccWHITE && point3->getPositionX() != 0)
 			{
 			/*	std::cout << "pagina 3" << std::endl;*/
-				hola = 2;
-				color = getColorValue2(hola, hola - 1, 12);
-				m_background->setColor(color);
+				this->setVisible(true);
+				shitbg->setVisible(false);
+				mm_background->setVisible(false);
+				mm_background2->setVisible(true);
+				mm_background3->setVisible(false);
 				Mod::get()->setSavedValue("onworldpages", 3);
+				Mod::get()->setSavedValue("worldpages", 2);
+				
 			}
-			Mod::get()->setSavedValue("worldpages",hola);
 			
 			
-			ccColor3B Color1 = color;
-			Color1.r = color.r * 0.8;
-			Color1.g = color.g * 0.8;
-			Color1.b = color.b * 0.8;
-			
-
-			ccColor3B Color2 = color;
-			Color2.r = color.r * 0.9;
-			Color2.g = color.g * 0.9;
-			Color2.b = color.b * 0.9;
+		
 			
 		}
 		BoomScrollLayer::pageNumberForPosition(a1);

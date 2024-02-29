@@ -5,6 +5,7 @@
 #include "MoreGamesCell.hpp"
 #include "MoreGamesCell.cpp"
 #include "WorldSelectLayerDecomp.hpp"
+#include "ownWorldSelectLayer.h"
 #include "WorldSelectLayerDecomp.cpp"
 #include "MeltdownSelectLevelLayer.h"
 #include "../src/NewLevelSelectLayer.h"
@@ -18,6 +19,7 @@ namespace more {
 MoreGamesLayer* MoreGamesLayer::create() {
     auto* ret = new MoreGamesLayer();
 
+   
     if (ret && ret->init("More Games")) {
         ret->autorelease();   
     } else {
@@ -31,6 +33,9 @@ void MoreGamesLayer::customSetup() {
     m_games = getGames();
     m_games->retain();
     
+    auto disclaimer = FLAlertLayer::create("DISCLAIMER!!", "OMG HI", "OK");
+
+    //disclaimer->show();
     auto* listView = ListView::create(m_games, 72.0f);
     m_listLayer->addChild(listView);
 }
@@ -87,11 +92,13 @@ CCArray* MoreGamesLayer::getGames() {
 }
 
 void MoreGamesLayer::onCallback(CCObject* sender) {
-    CCScene* scene = WorldSelectLayerDecomp::scene();
+    CCScene* scene = ownWorldSelectLayer::scene();
+
 
     CCTransitionFade* fade = CCTransitionFade::create(0.5f, scene);
     Mod::get()->setSavedValue("onsubzero", 3);
     CCDirector::sharedDirector()->pushScene(fade);
+    
 }
 
 

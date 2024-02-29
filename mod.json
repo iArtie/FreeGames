@@ -1,8 +1,8 @@
 {
 	"geode": "2.0.0-beta.12",
 	"version": "v1.0.0",
-	"id": "bitz.freegames",
-	"name": "FreeGames",
+	"id": "bitz.moregames",
+	"name": "MoreGames",
 	"developer": "BitZ",
 	"description": "All free Geometry Dash games within a single mod!",
 	"gd": {
@@ -16,7 +16,7 @@
 
 		},
 		"files": [
-		
+			"resources/textures/*.zip",
 			"resources/levels/*.txt"
 
 		]

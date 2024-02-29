@@ -7,7 +7,7 @@ namespace more {
 
 GJWorldNodeDecomp* GJWorldNodeDecomp::create(
     int index,
-    WorldSelectLayerDecomp* worldSelectLayer
+    ownWorldSelectLayer* worldSelectLayer
 ) {
     GJWorldNodeDecomp* ret = new GJWorldNodeDecomp();
 
@@ -22,7 +22,7 @@ GJWorldNodeDecomp* GJWorldNodeDecomp::create(
 
 bool GJWorldNodeDecomp::init(
     int index,
-    WorldSelectLayerDecomp* worldSelectLayer
+    ownWorldSelectLayer* worldSelectLayer
 ) {
     if (!CCNode::init()) {
         return false;
