@@ -10,7 +10,6 @@
 #include <Geode/Enums.hpp>
 #include "NewLevelSelectLayer.h"
 #include <iostream>
-#include <windows.h>
 
 using namespace geode::prelude;
 

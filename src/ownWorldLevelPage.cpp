@@ -3,7 +3,7 @@
 
 #include "../src/ownWorldLevelPage.hpp"
 //#include "ownWorldLevelPage.hpp"
-#include <windows.h>
+
 #include <string>
 #include <cstdlib>
 #include <cocos2d.h>
