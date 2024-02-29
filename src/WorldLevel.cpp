@@ -24,7 +24,7 @@ protected:
 public:
     static WorldLevelPopup* create(std::string const& text) {
         auto ret = new WorldLevelPopup();
-        if (ret && ret->init(300.f, 260.f, text)) {
+        if (ret && ret->initAnchored(300.f, 260.f, text)) {
             ret->autorelease();
             return ret;
         }
