@@ -292,10 +292,28 @@ class $modify(LoadingLayer)
 		LoadingLayer::loadAssets();
 
 
-		std::string zipFilePath = geode::Mod::get()->getResourcesDir().string() + "\\" + "SpinOffGames.zip";
+		std::string zipFilePath;
+			
+		
+		std::string unzipDir;
+		
 
-		std::string unzipDir = geode::Mod::get()->getResourcesDir().string() + "\\" + "SpinOffGames";
+#ifdef GEODE_IS_WINDOWS
 
+
+		zipFilePath = geode::Mod::get()->getResourcesDir().string() + "\\" + "SpinOffGames.zip";
+
+		unzipDir = geode::Mod::get()->getResourcesDir().string() + "\\" + "SpinOffGames";
+
+#endif
+#ifdef GEODE_IS_ANDROID
+
+
+		zipFilePath = geode::Mod::get()->getResourcesDir().string() + "/" + "SpinOffGames.zip";
+
+		unzipDir = geode::Mod::get()->getResourcesDir().string() + "/" + "SpinOffGames";
+
+#endif
 		auto result = geode::utils::file::Unzip::intoDir(zipFilePath, unzipDir);
 		
 		CCFileUtils::get()->addTexturePack(CCTexturePack{

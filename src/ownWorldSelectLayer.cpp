@@ -1904,26 +1904,28 @@ void ownWorldSelectLayer::onWorldLevel(CCObject* sender) {
     auto GLM = GameLevelManager::sharedState();
     auto level1popup = WorldLevelPopup::create("");
     auto Layer = (CCLayer*)level1popup->getChildren()->objectAtIndex(0);
+
+    auto BG = (CCScale9Sprite*)Layer->getChildren()->objectAtIndex(0);
     auto m_buttonMenu = CCMenu::create();
     auto corner1 = CCSprite::createWithSpriteFrameName("dailyLevelCorner_001.png");
     auto director = CCDirector::sharedDirector();
     auto winSize = director->getWinSize();
-    corner1->setPosition({ winSize / 2 });
+    corner1->setPosition(BG->getPosition());
     corner1->setRotation(180);
     Layer->addChild(corner1);
 
     auto corner2 = CCSprite::createWithSpriteFrameName("dailyLevelCorner_001.png");
-    corner2->setPosition({ winSize / 2 });
+    corner2->setPosition(BG->getPosition());
     corner2->setRotation(90);
     Layer->addChild(corner2);
 
     auto corner3 = CCSprite::createWithSpriteFrameName("dailyLevelCorner_001.png");
-    corner3->setPosition({ winSize / 2 });
+    corner3->setPosition(BG->getPosition());
     corner3->setRotation(270);
     Layer->addChild(corner3);
 
     auto corner4 = CCSprite::createWithSpriteFrameName("dailyLevelCorner_001.png");
-    corner4->setPosition({ winSize / 2 });
+    corner4->setPosition(BG->getPosition());
     //corner 1 = right + up
     corner1->setPositionX(corner1->getPositionX() + 125.45);
     corner1->setPositionY(corner1->getPositionY() + 105.1);
@@ -1943,6 +1945,7 @@ void ownWorldSelectLayer::onWorldLevel(CCObject* sender) {
 
     infoBtn->setTag(button->getTag());
     infoMenu->addChild(infoBtn);
+    infoMenu->setPosition(BG->getPosition());
     infoMenu->setPositionX(infoMenu->getPositionX() + 146.5);
     infoMenu->setPositionY(infoMenu->getPositionY() + 126.1);
     info->setTag(button->getTag());
@@ -2108,8 +2111,10 @@ void ownWorldSelectLayer::onWorldLevel(CCObject* sender) {
     }
 
     auto playBtn = CCMenuItemSpriteExtra::create(CCSprite::createWithSpriteFrameName("GJ_playBtn2_001.png"), this, menu_selector(ownWorldSelectLayer::onPlay));
-    playBtn->setPositionY(38);
+    
     m_buttonMenu->addChild(playBtn);
+    m_buttonMenu->setPositionX(BG->getPositionX());
+    m_buttonMenu->setPositionY(BG->getPositionY()+35);
     Mod::get()->setSavedValue("worldpopuptag", button->getTag());
     std::string title = level->m_levelName;
 
@@ -2133,7 +2138,7 @@ void ownWorldSelectLayer::onWorldLevel(CCObject* sender) {
     //progress bar
     auto bar = CCSprite::create("GJ_progressBar_001.png");
     bar->setScale(0.7f);
-    bar->setPosition(winSize / 2);
+    bar->setPosition(BG->getPosition());
     bar->setPositionX(bar->getPositionX());
     bar->setPositionY(bar->getPositionY() - 153.5);
     bar->setColor({ 0, 0, 0 });
@@ -2193,7 +2198,7 @@ void ownWorldSelectLayer::onWorldLevel(CCObject* sender) {
     //progress bar
     auto pbar = CCSprite::create("GJ_progressBar_001.png");
     pbar->setScale(0.7f);
-    pbar->setPosition({ winSize / 2 });
+    pbar->setPosition(BG->getPosition());
 
     pbar->setPositionX(pbar->getPositionX());
     pbar->setPositionY(pbar->getPositionY() - 150.5);
@@ -2239,7 +2244,7 @@ void ownWorldSelectLayer::onWorldLevel(CCObject* sender) {
     CCRect pprogressRect = pprogress->getTextureRect();
     pprogressRect.size.width *= psize;
     pprogress->setTextureRect(pprogressRect);
-    m_title->setPosition({ winSize / 2 });
+    m_title->setPosition(BG->getPosition());
     m_title->setPositionY(m_title->getPositionY() + 110);
     Layer->addChild(m_title);
 
@@ -2342,7 +2347,7 @@ void ownWorldSelectLayer::onGarage(CCObject* sender) {
 void ownWorldSelectLayer::createStars(GJGameLevel* level, CCLayer* layer) {
     int totalstars = level->m_stars;
     float screenWidth = CCDirector::sharedDirector()->getWinSize().width;
-
+    auto BG = (CCScale9Sprite*)layer->getChildren()->objectAtIndex(0);
     auto director = CCDirector::sharedDirector();
     auto winSize = director->getWinSize();
 
@@ -2366,9 +2371,9 @@ void ownWorldSelectLayer::createStars(GJGameLevel* level, CCLayer* layer) {
     float totalWidth = totalstars * starWidth + (totalstars - 1) * spaceBetweenStars;
 
 
-    float startX = (screenWidth - totalWidth) / 2;
+    float startX = (BG->getPositionX() - totalWidth) + 35;
 
-    float startY = (winSize.height / 2) - 113;
+    float startY = (BG->getPositionY()) - 113;
 
     float currentX = startX;
 
