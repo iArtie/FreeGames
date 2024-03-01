@@ -1262,7 +1262,7 @@ bool ownWorldSelectLayer::init() {
       {
           CCArray* arr = CCArray::create();
           int colour = 2; //gjsquare thingy
-
+#ifdef GEODE_IS_WINDOWS
           auto dialog1 = ownDialogObject::create("The Keymaster", "Well, well, well...<d020> I see you have <cg>completed</c> the <cl>first two</c> islands.", 2 /*dialog icon*/, 1, false, { 255,255,255 });
 
           auto dialog2 = ownDialogObject::create("The Keymaster", "Not bad,<d030> not bad at all.\n<d030>I have <co>unlocked</c> <cg>online levels</c> for you.", 2 /*dialog icon*/, 1, false, { 255,255,255 });
@@ -1277,6 +1277,26 @@ bool ownWorldSelectLayer::init() {
           arr->addObject(dialog3);
 
           arr->addObject(dialog4);
+
+#endif
+
+#ifdef GEODE_IS_ANDROID
+          auto dialog1 = DialogObject::create("The Keymaster", "Well, well, well...<d020> I see you have <cg>completed</c> the <cl>first two</c> islands.", 2 /*dialog icon*/, 1, false, { 255,255,255 });
+
+          auto dialog2 = DialogObject::create("The Keymaster", "Not bad,<d030> not bad at all.\n<d030>I have <co>unlocked</c> <cg>online levels</c> for you.", 2 /*dialog icon*/, 1, false, { 255,255,255 });
+
+          auto dialog3 = DialogObject::create("The Keymaster", "Or maybe, if you were in <cy>Geometry Dash World game</c>, LOL.", 2 /*dialog icon*/, 1, false, { 255,255,255 });
+
+          auto dialog4 = DialogObject::create("The Keymaster", "<cl>Let's see what more you can do<d010>.<d010>.<d010>.</c>", 2 /*dialog icon*/, 1, false, { 255,255,255 });
+          arr->addObject(dialog1);
+
+          arr->addObject(dialog2);
+
+          arr->addObject(dialog3);
+
+          arr->addObject(dialog4);
+
+#endif
           auto dl = DialogLayer::createDialogLayer(nullptr, arr, colour);
           dl->animateIn(DialogAnimationType::FromLeft);
           dl->setZOrder(2);

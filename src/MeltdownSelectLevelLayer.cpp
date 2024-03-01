@@ -135,8 +135,8 @@ bool MeltdownSelectLevelLayer::init(int page) {
    /* for(int i = 1; i < 23; i++)
         m_mainLevels->addObject(GLM->getMainLevel(i, true));*/
     
-    for(size_t i = 0; i < 3; i++)   
-        m_levelPages->addObject(LevelPage::create(nullptr));
+        for(size_t i = 0; i < 3; i++)   
+            m_levelPages->addObject(LevelPage::create(nullptr));
     
     //GJGameLevel* theTower = GJGameLevel::create();
     //theTower->m_levelID = -2;

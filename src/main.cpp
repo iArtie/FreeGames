@@ -290,6 +290,8 @@ class $modify(LoadingLayer)
 	{
 		
 		LoadingLayer::loadAssets();
+
+
 		std::string zipFilePath = geode::Mod::get()->getResourcesDir().string() + "\\" + "SpinOffGames.zip";
 
 		std::string unzipDir = geode::Mod::get()->getResourcesDir().string() + "\\" + "SpinOffGames";
