@@ -1,3 +1,5 @@
-# FreeGames
+# More Games!
 
-This is where she makes a mod.
+All spinoff games in one mod!
+
+![scr](https://i.imgur.com/w1UVk4u.png)
