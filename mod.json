@@ -9,6 +9,11 @@
 		"android": "2.205",
 		"win": "2.204"
 	},
+	"repository": "https://github.com/iArtie/FreeGames",
+	"issues": {
+		"info": "Post your issues on the <cp>Issue tracking repository</c>.",
+		"url": "https://github.com/iArtie/FreeGames/issues/new/choose"
+	},
 	"resources": {
 		"spritesheets": {
 			"IconSheet": [
