@@ -8,7 +8,7 @@
 #include "ownWorldSelectLayer.h"
 #include "WorldSelectLayerDecomp.cpp"
 #include "MeltdownSelectLevelLayer.h"
-#include "../src/NewLevelSelectLayer.h"
+#include "SubZeroSelectLayer.h"
 
 
 
@@ -32,10 +32,48 @@ MoreGamesLayer* MoreGamesLayer::create() {
 void MoreGamesLayer::customSetup() {
     m_games = getGames();
     m_games->retain();
-    
-    auto disclaimer = FLAlertLayer::create("DISCLAIMER!!", "OMG HI", "OK");
 
-    //disclaimer->show();
+
+    auto discv = Mod::get()->getSavedValue<int>("disclaimervalue");
+
+
+    if (discv != 2)
+    {
+        auto disclaimer = FLAlertLayer::create("DISCLAIMER!!", "1. If you have 164 coins or approximately, I recommend <cr>NOT COMPLETING THE LEVELS WITH THE COINS</c> since it probably <cy>won't let you save your data</c> later because you exceed <cl>the coins limit</c>.\n \n 2. If you have already passed the levels in the spinoffs games, <cg>your data should load without any problem</c>, only that the coins <cl>will not be reflected in the levels</c>.\n \n3. Is <cr>HIGHLY RECOMMENDED</c> after passing all the levels to <cy>save your data and reload your account</c>, since this way you do not keep the coins that <cl>the game does not want you to have</c>.", "OK");
+
+        auto Layer = (CCLayer*)disclaimer->getChildren()->objectAtIndex(0);
+
+        disclaimer->show();
+
+        for (size_t i = 0; i <= 3; i++)
+        {
+            auto Object = (CCNode*)Layer->getChildren()->objectAtIndex(i);
+            Object->setScale(0.7);
+
+            //0 is text, 1 , 2 , 3 is  main menu
+            if (i == 1)
+            {
+                Object->setContentSize({ 300,435 });
+                Object->setPosition(Object->getPositionX(), Object->getPositionY());
+            }
+            if (i == 3)
+            {
+                Object->setPosition(Object->getPositionX() - 21, Object->getPositionY() + 14);
+            }
+            if (i == 2)
+            {
+                Object->setPosition(Object->getPositionX(), Object->getPositionY() - 62);
+                Object->setScale(0.6);
+            }
+
+        }
+
+        Mod::get()->setSavedValue("disclaimervalue",2);
+
+
+    }
+   
+        
     auto* listView = ListView::create(m_games, 72.0f);
     m_listLayer->addChild(listView);
 }
@@ -113,7 +151,7 @@ void MoreGamesLayer::onMeltdown(CCObject* sender) {
 void MoreGamesLayer::onSubzero(CCObject* sender) {
 
     Mod::get()->setSavedValue("onsubzero", 1);
-    CCScene* scene = NewLevelSelectLayer::scene(0);
+    CCScene* scene = SubZeroSelectLayer::scene(0);
     CCTransitionFade* fade = CCTransitionFade::create(0.5f, scene);
 
     CCDirector::sharedDirector()->pushScene(fade);

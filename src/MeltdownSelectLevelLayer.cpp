@@ -8,7 +8,7 @@
 #include <Geode/modify/LevelPage.hpp>
 #include <Geode/modify/GJGameLevel.hpp>
 #include <Geode/Enums.hpp>
-#include "NewLevelSelectLayer.h"
+#include "SubZeroSelectLayer.h"
 #include <iostream>
 
 using namespace geode::prelude;
@@ -156,7 +156,7 @@ bool MeltdownSelectLevelLayer::init(int page) {
     CCLabelBMFont* downloadLabel = CCLabelBMFont::create("Download the soundtracks", "bigFont.fnt");
     downloadLabel->setScale(0.5);
 
-    CCMenuItemSpriteExtra* downloadBtn = CCMenuItemSpriteExtra::create(downloadLabel, this, menu_selector(NewLevelSelectLayer::onSoundtracks));
+    CCMenuItemSpriteExtra* downloadBtn = CCMenuItemSpriteExtra::create(downloadLabel, this, menu_selector(SubZeroSelectLayer::onSoundtracks));
 
     CCMenu* downloadMenu = CCMenu::create();
     downloadMenu->addChild(downloadBtn);
@@ -170,20 +170,20 @@ bool MeltdownSelectLevelLayer::init(int page) {
     CCSprite* leftSpr = CCSprite::createWithSpriteFrameName("navArrowBtn_001.png");
     leftSpr->setFlipX(true);
 
-    CCMenuItemSpriteExtra* leftBtn = CCMenuItemSpriteExtra::create(leftSpr, this, menu_selector(NewLevelSelectLayer::onPrev));
+    CCMenuItemSpriteExtra* leftBtn = CCMenuItemSpriteExtra::create(leftSpr, this, menu_selector(MeltdownSelectLevelLayer::onPrev));
     btnMenu->addChild(leftBtn);
 
     leftBtn->setPosition(btnMenu->convertToNodeSpace(ccp(director->getScreenLeft() + 25.f, winSize.height / 2)));
 
     CCSprite* rightSpr = CCSprite::createWithSpriteFrameName("navArrowBtn_001.png");
 
-    CCMenuItemSpriteExtra* rightBtn = CCMenuItemSpriteExtra::create(rightSpr, this, menu_selector(NewLevelSelectLayer::onNext));
+    CCMenuItemSpriteExtra* rightBtn = CCMenuItemSpriteExtra::create(rightSpr, this, menu_selector(MeltdownSelectLevelLayer::onNext));
     btnMenu->addChild(rightBtn);
 
     rightBtn->setPosition(btnMenu->convertToNodeSpace(ccp(director->getScreenRight() - 25.f, winSize.height / 2)));
 
     CCSprite* backSpr = CCSprite::createWithSpriteFrameName("GJ_arrow_01_001.png");
-    CCMenuItemSpriteExtra* backBtn = CCMenuItemSpriteExtra::create(backSpr, this, menu_selector(NewLevelSelectLayer::onClose));
+    CCMenuItemSpriteExtra* backBtn = CCMenuItemSpriteExtra::create(backSpr, this, menu_selector(MeltdownSelectLevelLayer::onClose));
 
     CCMenu* backMenu = CCMenu::create();
     backMenu->addChild(backBtn);

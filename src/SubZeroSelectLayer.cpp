@@ -1,4 +1,4 @@
-#include "NewLevelSelectLayer.h"
+#include "SubZeroSelectLayer.h"
 //#include "NewLevelPage.h"
 #include <Geode/Geode.hpp>
 #include <Geode/Geode.hpp>
@@ -8,7 +8,7 @@
 #include <Geode/modify/LevelPage.hpp>
 #include <Geode/modify/GJGameLevel.hpp>
 #include <Geode/Enums.hpp>
-#include "NewLevelSelectLayer.h"
+#include "SubZeroSelectLayer.h"
 #include <iostream>
 
 using namespace geode::prelude;
@@ -21,8 +21,8 @@ ccColor3B colors[] = {
 int numColors = sizeof(colors) / sizeof(colors[0]);
 int currentColorIndex = 0;
 
-NewLevelSelectLayer* NewLevelSelectLayer::create(int page) {
-    auto ret = new NewLevelSelectLayer();
+SubZeroSelectLayer* SubZeroSelectLayer::create(int page) {
+    auto ret = new SubZeroSelectLayer();
     if (ret && ret->init(page)) {
         ret->autorelease();
         return ret;
@@ -31,14 +31,14 @@ NewLevelSelectLayer* NewLevelSelectLayer::create(int page) {
     return nullptr;
 };
 
-CCScene* NewLevelSelectLayer::scene(int page) {
-    auto layer = NewLevelSelectLayer::create(page);
+CCScene* SubZeroSelectLayer::scene(int page) {
+    auto layer = SubZeroSelectLayer::create(page);
     auto scene = CCScene::create();
     scene->addChild(layer);
     return scene;
 }
 
-bool NewLevelSelectLayer::init(int page) {
+bool SubZeroSelectLayer::init(int page) {
     if(!CCLayer::init()) return false;
 
     auto director = CCDirector::sharedDirector();
@@ -165,7 +165,7 @@ bool NewLevelSelectLayer::init(int page) {
     CCLabelBMFont* downloadLabel = CCLabelBMFont::create("Download the soundtracks", "bigFont.fnt");
     downloadLabel->setScale(0.5);
 
-    CCMenuItemSpriteExtra* downloadBtn = CCMenuItemSpriteExtra::create(downloadLabel, this, menu_selector(NewLevelSelectLayer::onSoundtracks));
+    CCMenuItemSpriteExtra* downloadBtn = CCMenuItemSpriteExtra::create(downloadLabel, this, menu_selector(SubZeroSelectLayer::onSoundtracks));
 
     CCMenu* downloadMenu = CCMenu::create();
     downloadMenu->addChild(downloadBtn);
@@ -179,20 +179,20 @@ bool NewLevelSelectLayer::init(int page) {
     CCSprite* leftSpr = CCSprite::createWithSpriteFrameName("navArrowBtn_001.png");
     leftSpr->setFlipX(true);
 
-    CCMenuItemSpriteExtra* leftBtn = CCMenuItemSpriteExtra::create(leftSpr, this, menu_selector(NewLevelSelectLayer::onPrev));
+    CCMenuItemSpriteExtra* leftBtn = CCMenuItemSpriteExtra::create(leftSpr, this, menu_selector(SubZeroSelectLayer::onPrev));
     btnMenu->addChild(leftBtn);
 
     leftBtn->setPosition(btnMenu->convertToNodeSpace(ccp(director->getScreenLeft() + 25.f, winSize.height / 2)));
 
     CCSprite* rightSpr = CCSprite::createWithSpriteFrameName("navArrowBtn_001.png");
 
-    CCMenuItemSpriteExtra* rightBtn = CCMenuItemSpriteExtra::create(rightSpr, this, menu_selector(NewLevelSelectLayer::onNext));
+    CCMenuItemSpriteExtra* rightBtn = CCMenuItemSpriteExtra::create(rightSpr, this, menu_selector(SubZeroSelectLayer::onNext));
     btnMenu->addChild(rightBtn);
 
     rightBtn->setPosition(btnMenu->convertToNodeSpace(ccp(director->getScreenRight() - 25.f, winSize.height / 2)));
 
     CCSprite* backSpr = CCSprite::createWithSpriteFrameName("GJ_arrow_01_001.png");
-    CCMenuItemSpriteExtra* backBtn = CCMenuItemSpriteExtra::create(backSpr, this, menu_selector(NewLevelSelectLayer::onClose));
+    CCMenuItemSpriteExtra* backBtn = CCMenuItemSpriteExtra::create(backSpr, this, menu_selector(SubZeroSelectLayer::onClose));
 
     CCMenu* backMenu = CCMenu::create();
     backMenu->addChild(backBtn);
@@ -208,7 +208,7 @@ bool NewLevelSelectLayer::init(int page) {
     addChild(infoMenu);
 
     cocos2d::CCSprite* info = cocos2d::CCSprite::createWithSpriteFrameName("GJ_infoIcon_001.png");
-    CCMenuItemSpriteExtra* infoBtn = CCMenuItemSpriteExtra::create(info, this, menu_selector(NewLevelSelectLayer::onInfo));
+    CCMenuItemSpriteExtra* infoBtn = CCMenuItemSpriteExtra::create(info, this, menu_selector(SubZeroSelectLayer::onInfo));
     infoMenu->addChild(infoBtn);
 
     infoMenu->setPosition({ director->getScreenRight() - 20.0f, director->getScreenTop() - 20.0f });
@@ -217,24 +217,24 @@ bool NewLevelSelectLayer::init(int page) {
     return true;
 }
 
-void NewLevelSelectLayer::keyBackClicked() {
+void SubZeroSelectLayer::keyBackClicked() {
     onClose(nullptr);
 }
 
-void NewLevelSelectLayer::onClose(CCObject*) {
+void SubZeroSelectLayer::onClose(CCObject*) {
     auto back = Mod::get()->getSavedValue<int>("onsubzero");
     back = 10;
     Mod::get()->setSavedValue("onsubzero", back);
     CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, MenuLayer::scene(false)));
 }
 
-void NewLevelSelectLayer::onSoundtracks(CCObject*) {
+void SubZeroSelectLayer::onSoundtracks(CCObject*) {
     auto songs = SongsLayer::create();
     songs->enterLayer();
     CCDirector::get()->getRunningScene()->addChild(songs, 2);
 }
 
-ccColor3B NewLevelSelectLayer::colorForPage(int page) {
+ccColor3B SubZeroSelectLayer::colorForPage(int page) {
     auto GM = GameManager::sharedState();
 	int colIDs[9] = { 5 ,7, 8, 9, 10, 11, 1, 3, 4 };
 
@@ -242,7 +242,7 @@ ccColor3B NewLevelSelectLayer::colorForPage(int page) {
 }
 
 
-ccColor3B NewLevelSelectLayer::getColorValue(int level1, int level2, float a3)
+ccColor3B SubZeroSelectLayer::getColorValue(int level1, int level2, float a3)
 {
 	float mod = (a3 * (2 / 3)) - 0.2f;
 	if (mod < 1.0f)
@@ -264,7 +264,7 @@ ccColor3B NewLevelSelectLayer::getColorValue(int level1, int level2, float a3)
     return col3;
 }
 
-void NewLevelSelectLayer::updatePageWithObject(CCObject* page, CCObject* object) {
+void SubZeroSelectLayer::updatePageWithObject(CCObject* page, CCObject* object) {
     GJGameLevel* level = static_cast<GJGameLevel*>(object);
     static_cast<LevelPage*>(page)->updateDynamicPage(level);
     auto lol = Mod::get()->getSavedValue<int>("subzerolevellol");
@@ -292,7 +292,7 @@ void NewLevelSelectLayer::updatePageWithObject(CCObject* page, CCObject* object)
   /*  updateColors();*/
 }
 
-void NewLevelSelectLayer::onNext(CCObject*) {
+void SubZeroSelectLayer::onNext(CCObject*) {
     m_level++;
 
   /*  auto lol = Mod::get()->getSavedValue<int>("subzerolevellol");
@@ -323,7 +323,7 @@ void NewLevelSelectLayer::onNext(CCObject*) {
     //scrollLayerMoved({0, 0});
 }
 
-void NewLevelSelectLayer::onPrev(CCObject*) {
+void SubZeroSelectLayer::onPrev(CCObject*) {
     m_level--;
     m_scrollLayer->moveToPage(m_level);
     currentColorIndex = (currentColorIndex - 1 + numColors) % numColors;
@@ -332,20 +332,20 @@ void NewLevelSelectLayer::onPrev(CCObject*) {
 }
 
 
-void NewLevelSelectLayer::instantPage(CCObject* sender, int a1) {
+void SubZeroSelectLayer::instantPage(CCObject* sender, int a1) {
     
     m_scrollLayer->instantMoveToPage(a1);
     currentColorIndex = (currentColorIndex - 1 + numColors) % numColors;
   /*  updateColors();*/
     //scrollLayerMoved({0, 0});
 }
-void NewLevelSelectLayer::updateColors() {
+void SubZeroSelectLayer::updateColors() {
     ccColor3B color = colors[currentColorIndex];
     m_background->setColor(color);
     m_ground->updateGround01Color(color);
     m_ground->updateGround02Color(color);
 }
-void NewLevelSelectLayer::scollLayerMoved(CCPoint point) {
+void SubZeroSelectLayer::scollLayerMoved(CCPoint point) {
     log::info("scrollLayerMoved");
 
     std::cout << "Works!" << std::endl;
@@ -401,7 +401,7 @@ void show(GJGameLevel* level) {
 
     
 
-void NewLevelSelectLayer::onInfo(CCObject* sender) {
+void SubZeroSelectLayer::onInfo(CCObject* sender) {
 
 
     auto lol = Mod::get()->getSavedValue<int>("subzerolevellol");

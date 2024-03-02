@@ -8,7 +8,7 @@
 #include <Geode/modify/LevelPage.hpp>
 #include <Geode/modify/GJGameLevel.hpp>
 #include <Geode/Enums.hpp>
-#include "NewLevelSelectLayer.h"
+#include "MeltdownSelectLevelLayer.h"
 #include <iostream>
 #include "WorldLevel.hpp"
 #include "WorldLevel.cpp"
@@ -2368,28 +2368,27 @@ void ownWorldSelectLayer::createStars(GJGameLevel* level, CCLayer* layer) {
     float spaceBetweenStars = 35.0f;
 
 
-    float totalWidth = totalstars * starWidth + (totalstars - 1) * spaceBetweenStars;
+    float totalWidth = totalstars * (starWidth * 0.65) + (totalstars - 1) * spaceBetweenStars;
 
+  
+    float startX = BG->getPositionX() - totalWidth / 2;
 
-    float startX = (BG->getPositionX() - totalWidth) + 35;
-
+   
     float startY = (BG->getPositionY()) - 113;
 
+   
     float currentX = startX;
 
 
     for (int i = 0; i < totalstars; ++i) {
         auto star = CCSprite::createWithSpriteFrameName(starspr.c_str());
 
-
         star->setPosition({ currentX, startY });
         star->setScale(0.65);
 
-
         layer->addChild(star);
 
-
-        currentX += starWidth + spaceBetweenStars;
+        currentX += (starWidth * 0.65) + spaceBetweenStars;
     }
 }
 

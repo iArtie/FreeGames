@@ -12,8 +12,8 @@
 #include <Geode/modify/LoadingLayer.hpp>
 #include <Geode/modify/SecretLayer4.hpp>
 #include <Geode/Enums.hpp>
-#include "NewLevelSelectLayer.h"
-#include "NewLevelSelectLayer.cpp"
+#include "SubZeroSelectLayer.h"
+#include "SubZeroSelectLayer.cpp"
 #include "MoreGamesLayer.hpp"
 #include "MoreGamesLayer.cpp"
 #include "ownWorldLevelPage.hpp"
@@ -368,7 +368,7 @@ class $modify(SecretLayer4)
 		auto scene = CCScene::create();
 
 		auto isSubzero = Mod::get()->getSavedValue<int>("onsubzero");
-		auto SubZeroScene = NewLevelSelectLayer::create(4);
+		auto SubZeroScene = SubZeroSelectLayer::create(4);
 		auto MeltdownScene = MeltdownSelectLevelLayer::create(4);
 		auto dashlandScene = ownWorldSelectLayer::create();
 
@@ -464,7 +464,7 @@ class $modify(PauseLayer) {
 		auto scene = CCScene::create();
 
 		auto isSubzero = Mod::get()->getSavedValue<int>("onsubzero");
-		auto SubZeroScene = NewLevelSelectLayer::create(0);
+		auto SubZeroScene = SubZeroSelectLayer::create(0);
 		auto MeltdownScene = MeltdownSelectLevelLayer::create(0);
 		auto dashlandScene = ownWorldSelectLayer::create();
 		
@@ -628,7 +628,7 @@ class $modify(EndLevelLayer) {
 		auto scene = CCScene::create();
 
 		auto isSubzero = Mod::get()->getSavedValue<int>("onsubzero");
-		auto SubZeroScene = NewLevelSelectLayer::create(0);
+		auto SubZeroScene = SubZeroSelectLayer::create(0);
 		auto MeltdownScene = MeltdownSelectLevelLayer::create(0);
 
 		
