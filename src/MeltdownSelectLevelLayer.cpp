@@ -192,7 +192,7 @@ bool MeltdownSelectLevelLayer::init(int page) {
     backMenu->setPosition(ccp(director->getScreenLeft() + 25.f, director->getScreenTop() - 22.f));
     setKeyboardEnabled(true);
     setKeypadEnabled(true);
-    log::info("screen top: {}", director->getScreenTop());
+    /*log::info("screen top: {}", director->getScreenTop());*/
     //scrollLayerMoved({0, 0});
 
     cocos2d::CCMenu* infoMenu = cocos2d::CCMenu::create();
@@ -371,7 +371,7 @@ void MeltdownSelectLevelLayer::onInfo(CCObject* sender) {
         levellol = 2;
     }
 
-    std::cout << levellol << std::endl;
+    /*std::cout << levellol << std::endl;*/
     auto levelObject = m_mainLevels->objectAtIndex(levellol);
     // Verificar si el objeto es de tipo GJGameLevel
     if (auto gameLevel = dynamic_cast<GJGameLevel*>(levelObject)) {

@@ -2308,7 +2308,7 @@ void ownWorldSelectLayer::onPlay(CCObject* sender) {
     auto GLM = GameLevelManager::sharedState();
     auto playLayer = PlayLayer::create(level, false, false);
     FMODAudioEngine::sharedEngine()->playEffect("playSound_01.ogg");
-    std::cout << "level string:" << level->m_levelString.c_str() << std::endl;
+   /* std::cout << "level string:" << level->m_levelString.c_str() << std::endl;*/
     CCScene* scene = CCScene::create();
 
     scene->addChild(playLayer);
@@ -2622,7 +2622,7 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         level21->m_coins = 0;
     }
 
-    std::cout << levellol << std::endl;
+    /*std::cout << levellol << std::endl;*/
 
     sLOLwshow2(level21);
 }

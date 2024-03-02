@@ -487,7 +487,7 @@ class $modify(PauseLayer) {
 		auto BG = (CCSprite*)dashlandScene->getChildren()->objectAtIndex(0);
 		switch (subzero) {
 		case 1:
-			std::cout << "on PressStart" << std::endl;
+			/*std::cout << "on PressStart" << std::endl;*/
 			page = 0;
 			if (isSubzero == 1)
 			{
@@ -503,7 +503,7 @@ class $modify(PauseLayer) {
 			}
 			break;
 		case 2:
-			std::cout << "on Nock Em" << std::endl;
+			/*std::cout << "on Nock Em" << std::endl;*/
 			page = 1;
 			if (isSubzero == 1)
 			{
@@ -519,7 +519,7 @@ class $modify(PauseLayer) {
 			}
 			break;
 		case 3:
-			std::cout << "on Power Trip" << std::endl;
+			/*std::cout << "on Power Trip" << std::endl;*/
 			page = 2;
 			if (isSubzero == 1)
 			{
@@ -553,7 +553,7 @@ class $modify(PauseLayer) {
 			}
 			break;
 		case 5:
-			std::cout << "on FrontLines" << std::endl;
+			/*std::cout << "on FrontLines" << std::endl;*/
 			page = 4;
 			/*MeltdownScene->instantPage(sender, 2);*/
 			if (isSubzero == 1)
@@ -598,7 +598,7 @@ class $modify(PauseLayer) {
 			dashlandScene->instantPage(sender, 2);
 			break;
 		default:
-			std::cout << "on a common level" << std::endl;
+			/*std::cout << "on a common level" << std::endl;*/
 			page = 10;
 			break;
 		}
@@ -652,7 +652,7 @@ class $modify(EndLevelLayer) {
 
 		switch (subzero) {
 		case 1:
-			std::cout << "on PressStart" << std::endl;
+			/*std::cout << "on PressStart" << std::endl;*/
 			page = 0;
 			if (isSubzero == 1)
 			{
@@ -668,7 +668,7 @@ class $modify(EndLevelLayer) {
 			}
 			break;
 		case 2:
-			std::cout << "on Nock Em" << std::endl;
+			/*std::cout << "on Nock Em" << std::endl;*/
 			page = 1;
 			if (isSubzero == 1)
 			{
@@ -684,7 +684,7 @@ class $modify(EndLevelLayer) {
 			}
 			break;
 		case 3:
-			std::cout << "on Power Trip" << std::endl;
+			/*std::cout << "on Power Trip" << std::endl;*/
 			page = 2;
 			if (isSubzero == 1)
 			{
@@ -716,7 +716,7 @@ class $modify(EndLevelLayer) {
 			}
 			break;
 		case 5:
-			std::cout << "on FrontLines" << std::endl;
+			/*std::cout << "on FrontLines" << std::endl;*/
 			page = 4;
 			/*MeltdownScene->instantPage(sender, 2);*/
 			if (isSubzero == 1)
@@ -762,7 +762,7 @@ class $modify(EndLevelLayer) {
 			dashlandScene->instantPage(sender, 2);
 			break;
 		default:
-			std::cout << "on a common level" << std::endl;
+			/*std::cout << "on a common level" << std::endl;*/
 			page = 10;
 			break;
 		}
@@ -783,9 +783,9 @@ class $modify(EndLevelLayer) {
 class $modify(PlayLayer) {
 	bool init(GJGameLevel * level, bool useReplay, bool dontCreateObjects){
 
-		std::cout << level->m_levelID << std::endl;
+		/*std::cout << level->m_levelID << std::endl;*/
 
-		std::cout << level->m_levelString.c_str() << std::endl;
+		/*std::cout << level->m_levelString.c_str() << std::endl;*/
 		auto isSubzero = Mod::get()->getSavedValue<int>("onsubzero");
 		int subzero = 0;
 
