@@ -11,6 +11,7 @@
 #include <Geode/modify/GJGarageLayer.hpp>
 #include <Geode/modify/LoadingLayer.hpp>
 #include <Geode/modify/SecretLayer4.hpp>
+#include <Geode/modify/LevelSelectLayer.hpp>
 #include <Geode/Enums.hpp>
 #include "SubZeroSelectLayer.h"
 #include "SubZeroSelectLayer.cpp"
@@ -330,6 +331,19 @@ class $modify(LoadingLayer)
 
 	
 	
+};
+class $modify(LevelSelectLayer) {
+	bool init(int a1) {
+
+
+		auto back = Mod::get()->getSavedValue<int>("onsubzero");
+		back = 10;
+		Mod::get()->setSavedValue("onsubzero", back);
+		return LevelSelectLayer::init(a1);
+	}
+
+
+
 };
 class $modify(MenuLayer) {
 	void onMoreGames(CCObject*) {

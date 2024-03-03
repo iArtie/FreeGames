@@ -2305,6 +2305,9 @@ void ownWorldSelectLayer::instantPage(CCObject* sender, int a1) {
  /*   scrollLayerMoved({ 0, 0 });*/
 }
 void ownWorldSelectLayer::onPlay(CCObject* sender) {
+
+    CCMenuItemSpriteExtra* button = (CCMenuItemSpriteExtra*)sender;
+    button->setEnabled(false);
     auto GLM = GameLevelManager::sharedState();
     auto playLayer = PlayLayer::create(level, false, false);
     FMODAudioEngine::sharedEngine()->playEffect("playSound_01.ogg");
