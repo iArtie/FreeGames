@@ -866,6 +866,64 @@ class $modify(PlayLayer) {
 		return PlayLayer::init(level, useReplay, dontCreateObjects);
 		
 	}
+
+	// ultimate achievements - hello from iris
+	void levelComplete() {
+		PlayLayer::levelComplete();
+		auto GSValues = GameStatsManager::sharedState()->m_playerStats;
+		int coinsCollected = 0;
+		int setPercentage;
+		switch (m_level->m_levelID) {
+		case 1001:
+			// the seven seas
+			if (GSValues->objectForKey("unique_1001_1") != nullptr) ++coinsCollected;
+			if (GSValues->objectForKey("unique_1001_2") != nullptr) ++coinsCollected;
+			if (GSValues->objectForKey("unique_1001_3") != nullptr) ++coinsCollected;
+			setPercentage = coinsCollected * 100 / 3;
+			AchievementManager::sharedState()->reportAchievementWithID("geometry.ach.mdcoin01", setPercentage, false);
+			break;
+		case 1002:
+			// viking arena 
+			if (GSValues->objectForKey("unique_1002_1") != nullptr) ++coinsCollected;
+			if (GSValues->objectForKey("unique_1002_2") != nullptr) ++coinsCollected;
+			if (GSValues->objectForKey("unique_1002_3") != nullptr) ++coinsCollected;
+			setPercentage = coinsCollected * 100 / 3;
+			AchievementManager::sharedState()->reportAchievementWithID("geometry.ach.mdcoin02", setPercentage, false);
+			break;
+		case 1003:
+			// airborne robots
+			if (GSValues->objectForKey("unique_1003_1") != nullptr) ++coinsCollected;
+			if (GSValues->objectForKey("unique_1003_2") != nullptr) ++coinsCollected;
+			if (GSValues->objectForKey("unique_1003_3") != nullptr) ++coinsCollected;
+			setPercentage = coinsCollected * 100 / 3;
+			AchievementManager::sharedState()->reportAchievementWithID("geometry.ach.mdcoin03", setPercentage, false);
+			break;
+		case 4001:
+			// press start
+			if (GSValues->objectForKey("unique_4001_1") != nullptr) ++coinsCollected;
+			if (GSValues->objectForKey("unique_4001_2") != nullptr) ++coinsCollected;
+			if (GSValues->objectForKey("unique_4001_3") != nullptr) ++coinsCollected;
+			setPercentage = coinsCollected * 100 / 3;
+			AchievementManager::sharedState()->reportAchievementWithID("geometry.ach.subzero.coins001", setPercentage, false);
+			break;
+		case 4002:
+			// nock em
+			if (GSValues->objectForKey("unique_4002_1") != nullptr) ++coinsCollected;
+			if (GSValues->objectForKey("unique_4002_2") != nullptr) ++coinsCollected;
+			if (GSValues->objectForKey("unique_4002_3") != nullptr) ++coinsCollected;
+			setPercentage = coinsCollected * 100 / 3;
+			AchievementManager::sharedState()->reportAchievementWithID("geometry.ach.subzero.coins002", setPercentage, false);
+			break;
+		case 4003:
+			// power trip
+			if (GSValues->objectForKey("unique_4003_1") != nullptr) ++coinsCollected;
+			if (GSValues->objectForKey("unique_4003_2") != nullptr) ++coinsCollected;
+			if (GSValues->objectForKey("unique_4003_3") != nullptr) ++coinsCollected;
+			setPercentage = coinsCollected * 100 / 3;
+			AchievementManager::sharedState()->reportAchievementWithID("geometry.ach.subzero.coins003", setPercentage, false);
+			break;
+		}
+	}
 //
 //	int getCurrentPercentInt()
 //	{
