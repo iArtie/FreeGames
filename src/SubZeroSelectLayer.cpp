@@ -91,6 +91,7 @@ bool SubZeroSelectLayer::init(int page) {
     GJGameLevel* level3 = GLM->getMainLevel(4003, true);
     level3->m_levelName = "Power Trip";
     level3->m_levelID = 4003;
+    level3->m_levelType = GJLevelType::Local;
     level3->m_stars = 8;
     level3->m_coins = 3;
     level3->m_audioTrack = 39;
@@ -102,6 +103,7 @@ bool SubZeroSelectLayer::init(int page) {
     //std::string text2((std::istreambuf_iterator<char>(t2)), std::istreambuf_iterator<char>());
     GJGameLevel* level2 = GLM->getMainLevel(4002, true);
     level2->m_levelName = "Nock Em";
+    level2->m_levelType = GJLevelType::Local;
     level2->m_stars = 6;
     level2->m_coins = 3;
     level2->m_audioTrack = 38;

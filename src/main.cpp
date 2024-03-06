@@ -336,9 +336,9 @@ class $modify(LevelSelectLayer) {
 	bool init(int a1) {
 
 
-		auto back = Mod::get()->getSavedValue<int>("onsubzero");
+		/*auto back = Mod::get()->getSavedValue<int>("onsubzero");
 		back = 10;
-		Mod::get()->setSavedValue("onsubzero", back);
+		Mod::get()->setSavedValue("onsubzero", back);*/
 		return LevelSelectLayer::init(a1);
 	}
 
@@ -370,7 +370,13 @@ class $modify(MenuLayer) {
 		//CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, NewLevelSelectLayer::scene(0)));
 		
         }
+	void onPlay(CCObject* sender) {
+		auto back = Mod::get()->getSavedValue<int>("onsubzero");
+		back = 10;
+		Mod::get()->setSavedValue("onsubzero", back);
 
+		MenuLayer::onPlay(sender);
+	}
 
 	
 };
@@ -515,6 +521,7 @@ class $modify(PauseLayer) {
 			{
 				dashlandScene->instantPage(sender, 1);
 			}
+			
 			break;
 		case 2:
 			/*std::cout << "on Nock Em" << std::endl;*/
@@ -531,6 +538,7 @@ class $modify(PauseLayer) {
 			{
 				dashlandScene->instantPage(sender, 1);
 			}
+			
 			break;
 		case 3:
 			/*std::cout << "on Power Trip" << std::endl;*/
@@ -548,7 +556,6 @@ class $modify(PauseLayer) {
 				dashlandScene->instantPage(sender, 1);
 			}
 			
-			
 			break;
 		case 4:
 			
@@ -565,6 +572,7 @@ class $modify(PauseLayer) {
 			{
 				dashlandScene->instantPage(sender, 1);
 			}
+			
 			break;
 		case 5:
 			/*std::cout << "on FrontLines" << std::endl;*/
@@ -590,38 +598,47 @@ class $modify(PauseLayer) {
 		
 			page = 5;
 			dashlandScene->instantPage(sender, 2);
+			
 			break;
 		case 7:
 	
 			page = 6;
 			dashlandScene->instantPage(sender, 2);
+			
 			break;
 		case 8:
 	
 			page = 7;
 			dashlandScene->instantPage(sender, 2);
+			
 			break;
 		case 9:
 	
 			page = 8;
 			dashlandScene->instantPage(sender, 2);
+			
 			break;
 		case 10:
 		
 			page = 9;
 			dashlandScene->instantPage(sender, 2);
+			
 			break;
 		default:
 			/*std::cout << "on a common level" << std::endl;*/
 			page = 10;
+		
 			break;
 		}
 
 		if (page != 10) {
+			
 			CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene));
 			PauseLayer::onQuit(sender);
+			
 		}
 		else {
+			Mod::get()->setSavedValue("onsubzero", 10);
 			PauseLayer::onQuit(sender);
 		}
 
@@ -680,6 +697,7 @@ class $modify(EndLevelLayer) {
 			{
 				dashlandScene->instantPage(sender, 1);
 			}
+			
 			break;
 		case 2:
 			/*std::cout << "on Nock Em" << std::endl;*/
@@ -696,6 +714,7 @@ class $modify(EndLevelLayer) {
 			{
 				dashlandScene->instantPage(sender, 1);
 			}
+			
 			break;
 		case 3:
 			/*std::cout << "on Power Trip" << std::endl;*/
@@ -712,6 +731,7 @@ class $modify(EndLevelLayer) {
 			{
 				dashlandScene->instantPage(sender, 1);
 			}
+
 			break;
 		case 4:
 
@@ -728,6 +748,7 @@ class $modify(EndLevelLayer) {
 			{
 				dashlandScene->instantPage(sender, 1);
 			}
+			
 			break;
 		case 5:
 			/*std::cout << "on FrontLines" << std::endl;*/
@@ -746,34 +767,39 @@ class $modify(EndLevelLayer) {
 				dashlandScene->instantPage(sender, 1);
 			}
 
-
+		
 
 		/*	BG->setColor({ 125, 0, 255 });*/
 			break;
 		case 6:
 
 			page = 5;
+			
 			dashlandScene->instantPage(sender, 2);
 			break;
 		case 7:
 
 			page = 6;
 			dashlandScene->instantPage(sender, 2);
+		
 			break;
 		case 8:
 
 			page = 7;
 			dashlandScene->instantPage(sender, 2);
+		
 			break;
 		case 9:
 
 			page = 8;
 			dashlandScene->instantPage(sender, 2);
+		
 			break;
 		case 10:
 
 			page = 9;
 			dashlandScene->instantPage(sender, 2);
+			
 			break;
 		default:
 			/*std::cout << "on a common level" << std::endl;*/
@@ -782,10 +808,13 @@ class $modify(EndLevelLayer) {
 		}
 
 		if (page != 10) {
+			
 			CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene));
 			EndLevelLayer::onMenu(sender);
+
 		}
 		else {
+			Mod::get()->setSavedValue("onsubzero", 10);
 			EndLevelLayer::onMenu(sender);
 		}
 

@@ -2468,6 +2468,7 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
         level21 = GLM->getMainLevel(2001, false);
         level21->m_levelName = "Payload";
+        level21->m_levelType = GJLevelType::Local;
         level21->m_stars = 2;
         level21->m_levelString = mtext;
         level21->m_audioTrack = 27;
@@ -2486,6 +2487,7 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         level21 = GLM->getMainLevel(2002, false);
         level21->m_levelName = "Beast Mode";
         level21->m_stars = 2;
+        level21->m_levelType = GJLevelType::Local;
         level21->m_levelString = mtext;
         level21->m_audioTrack = 28;
         level21->m_difficulty = GJDifficulty::Normal;
@@ -2503,6 +2505,7 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         level21 = GLM->getMainLevel(2003, false);
         level21->m_levelName = "Machina";
         level21->m_stars = 3;
+        level21->m_levelType = GJLevelType::Local;
         level21->m_levelString = mtext;
         level21->m_audioTrack = 29;
         level21->m_difficulty = GJDifficulty::Normal;
@@ -2520,6 +2523,7 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         level21 = GLM->getMainLevel(2004, false);
         level21->m_levelName = "Years";
         level21->m_stars = 3;
+        level21->m_levelType = GJLevelType::Local;
         level21->m_levelString = mtext;
         level21->m_audioTrack = 30;
         level21->m_difficulty = GJDifficulty::Normal;
@@ -2537,6 +2541,7 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         level21 = GLM->getMainLevel(2005, false);
         level21->m_levelName = "Frontlines";
         level21->m_stars = 3;
+        level21->m_levelType = GJLevelType::Local;
         level21->m_levelString = mtext;
         level21->m_audioTrack = 31;
         level21->m_difficulty = GJDifficulty::Normal;
@@ -2553,6 +2558,7 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         level21 = GLM->getMainLevel(2006, false);
         level21->m_levelName = "Space Pirates";
         level21->m_stars = 3;
+        level21->m_levelType = GJLevelType::Local;
         level21->m_levelString = mtext;
         level21->m_audioTrack = 32;
         level21->m_difficulty = GJDifficulty::Normal;
@@ -2569,6 +2575,7 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         level21 = GLM->getMainLevel(2007, false);
         level21->m_levelName = "Striker";
         level21->m_stars = 3;
+        level21->m_levelType = GJLevelType::Local;
         level21->m_levelString = mtext;
         level21->m_audioTrack = 33;
         level21->m_difficulty = GJDifficulty::Normal;
@@ -2585,6 +2592,7 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         level21 = GLM->getMainLevel(2008, false);
         level21->m_levelName = "Embers";
         level21->m_stars = 3;
+        level21->m_levelType = GJLevelType::Local;
         level21->m_levelString = mtext;
         level21->m_audioTrack = 34;
         level21->m_difficulty = GJDifficulty::Normal;
@@ -2601,6 +2609,7 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         level21 = GLM->getMainLevel(2009, false);
         level21->m_levelName = "Round 1";
         level21->m_stars = 3;
+        level21->m_levelType = GJLevelType::Local;
         level21->m_levelString = mtext;
         level21->m_audioTrack = 35;
         level21->m_difficulty = GJDifficulty::Normal;
@@ -2617,6 +2626,7 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         level21 = GLM->getMainLevel(2010, false);
         level21->m_levelName = "Monster Dance Off";
         level21->m_stars = 3;
+        level21->m_levelType = GJLevelType::Local;
         level21->m_levelString = mtext;
         level21->m_audioTrack = 36;
         level21->m_difficulty = GJDifficulty::Normal;

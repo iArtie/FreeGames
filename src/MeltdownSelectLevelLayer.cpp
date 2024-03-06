@@ -95,6 +95,7 @@ bool MeltdownSelectLevelLayer::init(int page) {
     mlevel3->m_levelName = "Airborne Robots";
     mlevel3->m_stars = 3;
     mlevel3->m_coins = 3;
+    mlevel3->m_levelType = GJLevelType::Local;
     mlevel3->m_audioTrack = 25;
     mlevel3->m_difficulty = GJDifficulty::Hard;
     mlevel3->m_creatorName = "RobTopGames";
@@ -106,6 +107,7 @@ bool MeltdownSelectLevelLayer::init(int page) {
     mlevel2->m_levelName = "Viking Arena";
     mlevel2->m_stars = 2;
     mlevel2->m_coins = 3;
+    mlevel2->m_levelType = GJLevelType::Local;
     mlevel2->m_audioTrack = 24;
     mlevel2->m_difficulty = GJDifficulty::Normal;
     mlevel2->m_creatorName = "RobTopGames";
@@ -118,6 +120,7 @@ bool MeltdownSelectLevelLayer::init(int page) {
     mlevel1->m_levelName = "The Seven Seas";
     mlevel1->m_stars = 1;
     mlevel1->m_coins = 3;
+    mlevel1->m_levelType = GJLevelType::Local;
     mlevel1->m_audioTrack = 23;
     mlevel1->m_difficulty = GJDifficulty::Easy;
     mlevel1->m_creatorName = "RobTopGames";
