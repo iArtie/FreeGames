@@ -25,7 +25,7 @@ public:
 	void onPlay(cocos2d::CCObject*);
 	void onBack(cocos2d::CCObject*);
 	void keyBackClicked();
-	void scollLayerMoved(cocos2d::CCPoint);
+	void scrollLayerMoved(cocos2d::CCPoint) override;
 	void keyDown(int);
 	void updateColors();
 	void instantPage(cocos2d::CCObject*,int);

@@ -347,7 +347,7 @@ void SubZeroSelectLayer::updateColors() {
     m_ground->updateGround01Color(color);
     m_ground->updateGround02Color(color);
 }
-void SubZeroSelectLayer::scollLayerMoved(CCPoint point) {
+void SubZeroSelectLayer::scrollLayerMoved(CCPoint point) {
     log::info("scrollLayerMoved");
 
     std::cout << "Works!" << std::endl;

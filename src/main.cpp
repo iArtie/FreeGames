@@ -12,6 +12,9 @@
 #include <Geode/modify/LoadingLayer.hpp>
 #include <Geode/modify/SecretLayer4.hpp>
 #include <Geode/modify/LevelSelectLayer.hpp>
+#include <Geode/modify/GJScoreCell.hpp>
+#include <Geode/modify/GJUserScore.hpp>
+#include <Geode/modify/LeaderboardsLayer.hpp>
 #include <Geode/Enums.hpp>
 #include "SubZeroSelectLayer.h"
 #include "SubZeroSelectLayer.cpp"
@@ -30,6 +33,28 @@ using namespace geode::prelude;
 #include <filesystem> 
 using namespace more;
 
+//class $modify(LeaderboardsLayer)
+//{
+//	void onTop(cocos2d::CCObject * a1)
+//	{
+//		LeaderboardsLayer::onTop(a1);
+//		
+//
+//		// Suponiendo que m_userScores es un CCArray de GJUserScore
+//		for (int i = 0; i < this->m_userScores->count(); ++i) {
+//			// Obtener el GJUserScore en la posición 'i'
+//			GJUserScore* userScore = dynamic_cast<GJUserScore*>(this->m_userScores->objectAtIndex(i));
+//
+//			// Verificar si la conversión fue exitosa
+//			if (userScore != nullptr) {
+//				// Imprimir el m_userName utilizando std::cout
+//				std::cout << "m_userName: " << userScore->m_userName.c_str() << std::endl;
+//			}
+//		}
+//
+//		return true;
+//	}
+//};
 //class TestLayer : public CCLayer, BoomScrollLayerDelegate, DynamicScrollDelegate {
 //public:
 //	static TestLayer* create() {
@@ -285,6 +310,38 @@ using namespace more;
 //	BoomScrollLayer* m_scrollLayer;
 //};
 #include <Geode/utils/web.hpp>
+//class $modify(GJUserScore)
+//{
+//	static GJUserScore* create(cocos2d::CCDictionary * a1)
+//	{
+//		// User ID
+//		Mod::get()->setSavedValue("mgcruser", a1->valueForKey("2")->intValue());
+//
+//		// Glow Color
+//		Mod::get()->setSavedValue("mgcrglow", a1->valueForKey("51")->intValue());
+//
+//		return GJUserScore::create(a1);
+//	}
+//};
+//
+//class $modify(GJScoreCell)
+//{
+//	TodoReturn loadFromScore(GJUserScore * a1)
+//	{
+//		GJScoreCell::loadFromScore(a1);
+//
+//		int userID = a1->m_userID;
+//		int savedUserID = Mod::get()->getSavedValue<int>("mgcruser");
+//
+//		if (userID == savedUserID)
+//		{
+//			int glowColor = Mod::get()->getSavedValue<int>("mgcrglow");
+//			std::cout << "Glow Color for User ID " << userID << ": " << glowColor << std::endl;
+//		}
+//	}
+//};
+
+
 class $modify(LoadingLayer)
 {
 	void loadAssets()

@@ -30,7 +30,7 @@ bool GJWorldNodeDecomp::init(
 
     m_index = index;
 
-    std::cout << index << std::endl;
+  /*  std::cout << index << std::endl;*/
     m_worldSelectLayer = worldSelectLayer;
    
 
