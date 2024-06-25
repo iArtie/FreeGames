@@ -51,27 +51,4 @@
 
 # clangd
 .cache/
-/.vs/FreeGames/v17/Browse.VC.opendb
-/.vs/FreeGames/v17/Browse.VC.db-wal
-/.vs/FreeGames/v17/Browse.VC.db-shm
-/.vs/FreeGames/v17/Browse.VC.db
-/.vs/VSWorkspaceState.json
-/.vs/slnx.sqlite
-/.vs/ProjectSettings.json
-/.vs/CMake Overview
-/.vs/FreeGames/FileContentIndex/read.lock
-/.vs/FreeGames/FileContentIndex/dbb45968-13c9-41fb-9afb-73ac75ecdf4d.vsidx
-/.vs/FreeGames/FileContentIndex/c9b63964-1273-4397-92e8-8c14ac35f446.vsidx
-/.vs/FreeGames/FileContentIndex/c8fedb21-68f3-4cc1-87e4-7d9971353fbb.vsidx
-/.vs/FreeGames/FileContentIndex/41b66b04-3353-4f8f-9e7d-744921fe622f.vsidx
-/.vs/FreeGames/FileContentIndex/4202a854-a844-449a-a860-520bdf07a30c.vsidx
-/.vs/FreeGames/FileContentIndex/61590af2-5430-4715-a85c-faa68d6cffae.vsidx
-/.vs/FreeGames/FileContentIndex/aa5aa310-3c3a-460f-b625-8ad42e96884f.vsidx
-/.vs/FreeGames/FileContentIndex/merges
-/.vs/FreeGames/FileContentIndex/33e3e486-7055-4351-b72e-f18d84e7432a.vsidx
-/.vs/FreeGames/v17
-/.vs/FreeGames/FileContentIndex/1325ed72-3f13-4810-9612-a992af835d77.vsidx
-/.vs/FreeGames/FileContentIndex/7d2f6929-0d92-4ff3-a466-00683abb901a.vsidx
-/.vs/FreeGames/FileContentIndex/8a01156f-fd10-41b0-aead-7a22b0a5bd19.vsidx
-/.vs/FreeGames/FileContentIndex
 /.vs
