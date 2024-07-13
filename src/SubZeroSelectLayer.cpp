@@ -391,6 +391,7 @@ void SubZeroSelectLayer::updateColors() {
         }
     }
 }
+
 void SubZeroSelectLayer::scrollLayerMoved(CCPoint point) {
     log::info("scrollLayerMoved");
 

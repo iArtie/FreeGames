@@ -11,8 +11,9 @@ public:
     cocos2d::CCSprite* m_pBackground;
     GJGroundLayer* m_pGround;
     BoomScrollLayer* m_pBoomScrollLayer;
-    cocos2d::CCArray* mainLevels;
-    int m_nLevel;
+    cocos2d::CCArray* mainLevels = nullptr;
+    cocos2d::CCArray* levelPages = nullptr;
+    int m_nLevel = 0;
     bool m_bSecretMenuCoin;
 
 public:
@@ -25,12 +26,13 @@ public:
     void onDownload(cocos2d::CCObject*);
     void onInfo(cocos2d::CCObject*);
     void onBack(cocos2d::CCObject*);
+    void updatePageWithObject(CCObject*, CCObject*) override;
     void keyBackClicked();
-    void scollLayerMoved(cocos2d::CCPoint);
+    void scrollLayerMoved(cocos2d::CCPoint) override;
     void keyDown(int);
     static ownLevelSelectLayer* create(int);
     static cocos2d::CCScene* scene(int);
-    void updatePageWithObject(CCObject*, CCObject*) override;
+    
 };
 
 #endif // OWN_LEVEL_SELECT_LAYER_H

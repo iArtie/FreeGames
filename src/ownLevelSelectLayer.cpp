@@ -1,5 +1,7 @@
 #include <Geode/Geode.hpp>
 #include "ownLevelSelectLayer.h"
+#include "ownLevelPage.h"
+#include "ownLevelPage.cpp"
 using namespace geode::prelude;
 
 
@@ -20,161 +22,129 @@ CCScene* ownLevelSelectLayer::scene(int page) {
 	return scene;
 }
 
+bool ownLevelSelectLayer::init(int page)
+{
+	if (!CCLayer::init()) return false;
+
+	auto director = CCDirector::sharedDirector();
+	auto winSize = director->getWinSize();
+	auto GM = GameManager::sharedState();
+	auto GLM = GameLevelManager::sharedState();
+
+	m_pBackground = CCSprite::create("GJ_gradientBG.png");
+	m_pBackground->setAnchorPoint({ 0.f, 0.f });
+	addChild(m_pBackground, -2);
+
+	m_pBackground->setScaleX((winSize.width + 10.f) / m_pBackground->getTextureRect().size.width);
+	m_pBackground->setScaleY((winSize.height + 10.f) / m_pBackground->getTextureRect().size.height);
+	m_pBackground->setPosition(ccp(-5, -5));
+	m_pBackground->setColor({ 40, 125, 255 });
+
+	m_pGround = GJGroundLayer::create(GM->m_loadedGroundID, -1);
+	m_pGround->setPositionY(std::min(128.f, (winSize.height / 2) - 110.f));
+	addChild(m_pGround, -1);
+
+	CCSprite* topBar = CCSprite::createWithSpriteFrameName("GJ_topBar_001.png");
+	topBar->setAnchorPoint({ 0.5f, 1.f });
+	topBar->setPosition(ccp(winSize.width / 2, director->getScreenTop() + 1.f));
+	addChild(topBar, 1);
+
+	CCSprite* rightArt = CCSprite::createWithSpriteFrameName("GJ_sideArt_001.png");
+	rightArt->setAnchorPoint({ 1.f, 0.f });
+	rightArt->setPosition(ccp(director->getScreenRight() + 1.f, director->getScreenBottom() - 1.f));
+	rightArt->setFlipX(true);
+	addChild(rightArt, 1);
+
+	CCSprite* leftArt = CCSprite::createWithSpriteFrameName("GJ_sideArt_001.png");
+	leftArt->setAnchorPoint({ 0.f, 0.f });
+	leftArt->setPosition(ccp(director->getScreenLeft() - 1.f, director->getScreenBottom() - 1.f));
+	addChild(leftArt, 1);
+
+	mainLevels = CCArray::create();
+	levelPages = CCArray::create();
+
+	m_nLevel = 0;
+	for (int i = 1; i < 4; i++)
+		mainLevels->addObject(GLM->getMainLevel(i, true));
+
+	/*for (size_t i = 4; i > 0; i--)*/
+
+		levelPages->addObject(LevelPage::create(nullptr));
+		levelPages->addObject(LevelPage::create(nullptr));
+		levelPages->addObject(LevelPage::create(nullptr));
+	//GJGameLevel* theTower = GJGameLevel::create();
+	//theTower->m_levelID = -2;
+	//m_mainLevels->addObject(theTower);
+
+	//GJGameLevel* defaultLevel = GJGameLevel::create();
+	//defaultLevel->m_levelID = -1;
+	//mainLevels->addObject(defaultLevel);
+
+	m_pBoomScrollLayer = BoomScrollLayer::create(levelPages, 0, true, mainLevels, this);
+	//if (page)
+	//{
+	//	if (page == 21)
+	//		m_pBoomScrollLayer->instantMoveToPage(20);
+	//	m_pBoomScrollLayer->instantMoveToPage(page);
+	//}
+	//else
+	//{
+	//	scrollLayerMoved(m_pBoomScrollLayer->getPosition()); //
+	//}
+
+	addChild(m_pBoomScrollLayer);
+
+	CCLabelBMFont* downloadLabel = CCLabelBMFont::create("Download the soundtracks", "bigFont.fnt");
+	downloadLabel->setScale(0.5);
+
+	CCMenuItemSpriteExtra* downloadBtn = CCMenuItemSpriteExtra::create(downloadLabel, this, menu_selector(ownLevelSelectLayer::onDownload));
+
+	CCMenu* downloadMenu = CCMenu::create();
+	downloadMenu->addChild(downloadBtn);
+	addChild(downloadMenu);
+
+	downloadMenu->setPosition(ccp(winSize.width / 2, director->getScreenBottom() + 35.f));
+
+	CCMenu* btnMenu = CCMenu::create();
+	addChild(btnMenu, 5);
+
+	CCSprite* leftSpr = CCSprite::createWithSpriteFrameName("navArrowBtn_001.png");
+	leftSpr->setFlipX(true);
+
+	CCMenuItemSpriteExtra* leftBtn = CCMenuItemSpriteExtra::create(leftSpr, this, menu_selector(ownLevelSelectLayer::onPrev));
+	btnMenu->addChild(leftBtn);
+
+	leftBtn->setPosition(btnMenu->convertToNodeSpace(ccp(director->getScreenLeft() + 25.f, winSize.height / 2)));
+
+	CCSprite* rightSpr = CCSprite::createWithSpriteFrameName("navArrowBtn_001.png");
+
+	CCMenuItemSpriteExtra* rightBtn = CCMenuItemSpriteExtra::create(rightSpr, this, menu_selector(ownLevelSelectLayer::onNext));
+	btnMenu->addChild(rightBtn);
+
+	rightBtn->setPosition(btnMenu->convertToNodeSpace(ccp(director->getScreenRight() - 25.f, winSize.height / 2)));
+
+	CCSprite* backSpr = CCSprite::createWithSpriteFrameName("GJ_arrow_01_001.png");
+	CCMenuItemSpriteExtra* backBtn = CCMenuItemSpriteExtra::create(backSpr, this, menu_selector(ownLevelSelectLayer::onBack));
+
+	CCMenu* backMenu = CCMenu::create();
+	backMenu->addChild(backBtn);
+	addChild(backMenu, 1);
+
+	backMenu->setPosition(ccp(director->getScreenLeft() + 25.f, director->getScreenTop() - 22.f));
+	setKeyboardEnabled(true);
+	setKeypadEnabled(true);
+	log::info("screen top: {}", director->getScreenTop());
+	//scrollLayerMoved({0, 0});
+
+	return true;
+}
+
 cocos2d::ccColor3B ownLevelSelectLayer::colorForPage(int page)
 {
 	GameManager* GM = GameManager::sharedState();
 	int colIDs[9] = { 5 ,7, 8, 9, 10, 11, 1, 3, 4 }; // GD uses switch statement but this is easier to write
 
 	return GM->colorForIdx(colIDs[page % 9]);
-}
-
-bool ownLevelSelectLayer::init(int page)
-{
-	bool init = cocos2d::CCLayer::init();
-	if (init)
-	{
-		GameManager* GM = GameManager::sharedState();
-		GameLevelManager* GLM = GameLevelManager::sharedState();
-
-
-		setKeypadEnabled(true);
-		setKeyboardEnabled(true);
-
-		m_bSecretMenuCoin = AchievementManager::sharedState()->isAchievementEarned("geometry.ach.secret04");
-		cocos2d::CCDirector* director = cocos2d::CCDirector::sharedDirector();
-		cocos2d::CCSize winSize = director->getWinSize();
-
-		m_pBackground = cocos2d::CCSprite::create("GJ_gradientBG.png");
-		m_pBackground->setAnchorPoint({ 0.0f, 0.0f });
-		addChild(m_pBackground, -2);
-
-		m_pBackground->setScaleX((winSize.width + 10.f) / m_pBackground->getTextureRect().size.width);
-		m_pBackground->setScaleY((winSize.height + 10.f) / m_pBackground->getTextureRect().size.height);
-		m_pBackground->setPosition(ccp(-5, -5));
-		m_pBackground->setColor({ 0, 0, 255 });
-
-		m_pGround = GJGroundLayer::create(GM->m_loadedGroundID, 1);
-		m_pGround->setPositionY(std::min(128.f, (winSize.height / 2) - 110.f));
-		addChild(m_pGround, -1);
-
-		CCSprite* topBar = CCSprite::createWithSpriteFrameName("GJ_topBar_001.png");
-		topBar->setAnchorPoint({ 0.5f, 1.f });
-		topBar->setPosition(ccp(winSize.width / 2, director->getScreenTop() + 1.f));
-		addChild(topBar, 1);
-
-		cocos2d::CCSprite* leftArt = cocos2d::CCSprite::createWithSpriteFrameName("GJ_sideArt_001.png");
-		leftArt->setAnchorPoint({ 0.0f, 0.0f });
-		leftArt->setPosition({ director->getScreenLeft() - 1.0f, director->getScreenBottom() - 1.0f });
-		addChild(leftArt, 1);
-
-		cocos2d::CCSprite* rightArt = cocos2d::CCSprite::createWithSpriteFrameName("GJ_sideArt_001.png");
-		rightArt->setAnchorPoint({ 1.0f, 0.0f });
-		rightArt->setPosition({ director->getScreenRight() + 1.0f, director->getScreenBottom() - 1.0f });
-		rightArt->isFlipX();
-		addChild(rightArt, 1);
-
-		mainLevels = cocos2d::CCArray::create();
-		cocos2d::CCArray* levelPages = cocos2d::CCArray::create();
-		for (size_t i = 1; i < 22; i++)
-		{
-			mainLevels->addObject(GLM->getMainLevel(i, true));
-		}
-		
-
-		for (size_t i = 1; i < 22; i++)
-		{
-			levelPages->addObject(LevelPage::create(nullptr));
-		}
-			
-
-		/*GJGameLevel* defaultLevel = GJGameLevel::create();
-		defaultLevel->m_levelID = -1;
-		mainLevels->addObject(defaultLevel);*/
-	/*	mainLevels->addObject(GLM->getMainLevel(1, true));
-		levelPages->addObject(LevelPage::create(nullptr));*/
-		m_pBoomScrollLayer = BoomScrollLayer::create(levelPages, 0, true, mainLevels, static_cast<DynamicScrollDelegate*>(this));
-		
-
-		//m_pBoomScrollLayer->setPagesIndicatorPosition({ winSize / 2, director->getScreenBottom() + 15.0f });
-
-		//m_fWindowWidth = winSize.width;
-
-		m_pBoomScrollLayer->m_extendedLayer->m_delegate = static_cast<BoomScrollLayerDelegate*>(this);
-
-		if (page)
-		{
-			if (page == 21)
-				m_pBoomScrollLayer->instantMoveToPage(20);
-			m_pBoomScrollLayer->instantMoveToPage(page);
-		}
-		else
-		{
-			scrollLayerMoved(m_pBoomScrollLayer->getPosition()); //
-		}
-
-		addChild(m_pBoomScrollLayer);
-		cocos2d::CCLabelBMFont* download = cocos2d::CCLabelBMFont::create("Download the soundtracks", "bigFont.fnt");
-		download->setScale(0.5f);
-
-		CCMenuItemSpriteExtra* downloadBtn = CCMenuItemSpriteExtra::create(download, this, menu_selector(ownLevelSelectLayer::onDownload));
-		downloadBtn->setSizeMult(2.0f);
-
-		cocos2d::CCMenu* DLMenu = cocos2d::CCMenu::create();
-		addChild(DLMenu);
-
-		DLMenu->setPosition(ccp(winSize.width / 2, director->getScreenBottom() + 35.f));
-		cocos2d::CCMenu* btnMenu = cocos2d::CCMenu::create();
-		addChild(btnMenu, 5);
-
-		bool controller = PlatformToolbox::isControllerConnected();
-
-		cocos2d::CCSprite* left = cocos2d::CCSprite::createWithSpriteFrameName(controller ? "controllerBtn_DPad_Left_001.png" : "navArrowBtn_001.png");
-		if (!controller)
-			left->isFlipX();
-
-		CCMenuItemSpriteExtra* leftBtn = CCMenuItemSpriteExtra::create(left, this, menu_selector(ownLevelSelectLayer::onPrev));
-		btnMenu->addChild(leftBtn);
-
-		leftBtn->setSizeMult(2.0f);
-		leftBtn->setPosition(btnMenu->convertToNodeSpace( { director->getScreenLeft() + 25.0f, winSize.height / 2 }));
-
-
-		cocos2d::CCSprite* right = cocos2d::CCSprite::createWithSpriteFrameName(controller ? "controllerBtn_DPad_Right_001.png" : "navArrowBtn_001.png");
-
-		CCMenuItemSpriteExtra* rightBtn = CCMenuItemSpriteExtra::create(right, this, menu_selector(ownLevelSelectLayer::onNext));
-		btnMenu->addChild(rightBtn);
-
-		leftBtn->setSizeMult(2.0f);
-		leftBtn->setPosition(btnMenu->convertToNodeSpace(ccp(director->getScreenLeft() + 25.f, winSize.height / 2)));
-
-
-		cocos2d::CCSprite* back = cocos2d::CCSprite::createWithSpriteFrameName("GJ_arrow_01_001.png");
-		CCMenuItemSpriteExtra* backBtn = CCMenuItemSpriteExtra::create(back, this, menu_selector(ownLevelSelectLayer::onBack));
-		backBtn->setSizeMult(1.6f);
-
-		cocos2d::CCMenu* backMenu = cocos2d::CCMenu::create();
-		addChild(backMenu, 1);
-
-		backMenu->addChild(backBtn);
-
-		backMenu->setPosition({ director->getScreenLeft() + 25.0f, director->getScreenTop() - 22.0f });
-
-		//GM->0x298 = 0;
-
-		cocos2d::CCMenu* infoMenu = cocos2d::CCMenu::create();
-		addChild(infoMenu);
-
-		cocos2d::CCSprite* info = cocos2d::CCSprite::createWithSpriteFrameName("GJ_infoIcon_001.png");
-		CCMenuItemSpriteExtra* infoBtn = CCMenuItemSpriteExtra::create(info, this, menu_selector(ownLevelSelectLayer::onInfo));
-		infoMenu->addChild(infoBtn);
-
-		infoMenu->setPosition({ director->getScreenRight() - 20.0f, director->getScreenTop() - 20.0f });
-
-		if (controller)
-			GameToolbox::addBackButton(this, backBtn);
-
-	}	
-	return init;
 }
 
 cocos2d::ccColor3B ownLevelSelectLayer::getColorValue(int level, int level2, float a3)
@@ -201,12 +171,30 @@ cocos2d::ccColor3B ownLevelSelectLayer::getColorValue(int level, int level2, flo
 }
 
 
-void ownLevelSelectLayer::updatePageWithObject(CCObject* page, CCObject*object)
-{
+void ownLevelSelectLayer::updatePageWithObject(CCObject* page, CCObject* object) {
+	if (!page || !object) {
+		// Maneja el caso de punteros nulos
+		std::cerr << "Error: puntero nulo en 'updatePageWithObject'." << std::endl;
+		return;
+	}
+
 	GJGameLevel* level = static_cast<GJGameLevel*>(object);
-     static_cast<LevelPage*>(page)->updateDynamicPage(level);
-	 log::info("{}", level->m_levelID.value());
+	std::cout << "LEVELID BEFORE CASTING: " << level->m_levelID << std::endl;
+
+	LevelPage* levelPage = dynamic_cast<LevelPage*>(page); // Usar dynamic_cast para mayor seguridad
+
+	if (!levelPage) {
+		// Maneja el caso de un tipo incorrecto
+		std::cerr << "Error: 'page' no es de tipo 'LevelPage'." << std::endl;
+		return;
+	}
+
+	// Llama al método si todo está bien
+	levelPage->updateDynamicPage(level);
+
+	std::cout << "LEVELID IN UPDATEPAGEWITHOBJECT: " << level->m_levelID << std::endl;
 }
+
 
 void ownLevelSelectLayer::onNext(CCObject*) {
 	m_nLevel++;
@@ -218,6 +206,25 @@ void ownLevelSelectLayer::onPrev(CCObject*) {
 	m_pBoomScrollLayer->moveToPage(m_nLevel);
 	//updateColors();
 	//scrollLayerMoved({0, 0});
+}
+
+void ownLevelSelectLayer::scrollLayerMoved(CCPoint point) {
+	log::info("scrollLayerMoved");
+
+	std::cout << "Works!" << std::endl;
+	ccColor3B color = getColorValue(m_nLevel, m_nLevel - 1, 12);
+	m_pBackground->setColor(color);
+	ccColor3B Color1 = color;
+	Color1.r = color.r * 0.8;
+	Color1.g = color.g * 0.8;
+	Color1.b = color.b * 0.8;
+
+
+	ccColor3B Color2 = color;
+	Color2.r = color.r * 0.9;
+	Color2.g = color.g * 0.9;
+	Color2.b = color.b * 0.9;
+
 }
 
 void ownLevelSelectLayer::keyBackClicked() {
@@ -282,9 +289,4 @@ void ownLevelSelectLayer::onInfo(CCObject* sender) {
 	if (auto gameLevel = dynamic_cast<GJGameLevel*>(levelObject)) {
 		ownShow(gameLevel);
 	}
-}
-bool ownLevelSelectLayer::tryShowAd()
-{
-	return true;
-	/*return GameManager::sharedState()->showInterstitial();*/
 }

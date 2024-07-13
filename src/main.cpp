@@ -402,19 +402,19 @@ class $modify(LoadingLayer)
 	
 	
 };
-class $modify(LevelSelectLayer) {
-	bool init(int a1) {
-
-
-		/*auto back = Mod::get()->getSavedValue<int>("onsubzero");
-		back = 10;
-		Mod::get()->setSavedValue("onsubzero", back);*/
-		return LevelSelectLayer::init(a1);
-	}
-
-
-
-};
+//class $modify(LevelSelectLayer) {
+//	bool init(int a1) {
+//
+//
+//		/*auto back = Mod::get()->getSavedValue<int>("onsubzero");
+//		back = 10;
+//		Mod::get()->setSavedValue("onsubzero", back);*/
+//		return LevelSelectLayer::init(a1);
+//	}
+//
+//
+//
+//};
 class $modify(MenuLayer) {
 	void onMoreGames(CCObject*) {
 
