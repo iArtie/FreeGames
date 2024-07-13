@@ -21,6 +21,19 @@ ccColor3B colors[] = {
 int numColors = sizeof(colors) / sizeof(colors[0]);
 int currentColorIndex = 0;
 
+void updateGroundColorSubZero(CCSpriteBatchNode* batch, const cocos2d::ccColor3B& color)
+{
+
+    for (int i = 0; i < batch->getChildren()->count(); ++i) {
+        auto sprite = (CCSprite*)batch->getChildren()->objectAtIndex(i);
+        sprite->setColor(color);
+        for (int o = 0; o < sprite->getChildren()->count(); ++o) {
+            auto spriteChild = (CCSprite*)sprite->getChildren()->objectAtIndex(o);
+            spriteChild->setColor(color);
+        }
+    }
+
+}
 SubZeroSelectLayer* SubZeroSelectLayer::create(int page) {
     auto ret = new SubZeroSelectLayer();
     if (ret && ret->init(page)) {
@@ -59,8 +72,21 @@ bool SubZeroSelectLayer::init(int page) {
     m_ground = GJGroundLayer::create(GM->m_loadedGroundID, -1);
     m_ground->setPositionY(std::min(128.f, (winSize.height / 2) - 110.f));
     addChild(m_ground ,-1);
-    m_ground->updateGround01Color({ 0, 0, 255 });
-    m_ground->updateGround02Color({ 0, 0, 255 });
+
+    auto m_pGround01Sprite = static_cast<CCSpriteBatchNode*>(m_ground->getChildByID("ground-sprites"));
+    auto m_pGround02Sprite = static_cast<CCSpriteBatchNode*>(m_ground->getChildByID("ground-sprites-2"));
+
+
+    CCArray* children = nullptr;  // Inicializamos children a nullptr
+
+    for (int i = 0; i < m_pGround01Sprite->getChildren()->count(); ++i) {
+        if (m_pGround01Sprite != nullptr) {
+            updateGroundColorSubZero(m_pGround01Sprite, { 0, 0, 255 });
+        }
+        if (m_pGround02Sprite != nullptr) {
+            updateGroundColorSubZero(m_pGround02Sprite, { 0, 0, 255 });
+        }
+    }
     CCSprite* topBar = CCSprite::createWithSpriteFrameName("GJ_topBar_001.png");
     topBar->setAnchorPoint({ 0.5f, 1.f });
     topBar->setPosition(ccp(winSize.width / 2, director->getScreenTop() + 1.f));
@@ -115,21 +141,23 @@ bool SubZeroSelectLayer::init(int page) {
     std::string text((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());*/
 
 
-    GJGameLevel* level1 = GLM->getMainLevel(4001, true);
+    GJGameLevel* level1 = GLM->getMainLevel(1, true);
+    /*GJGameLevel* level1 = GLM->getMainLevel(4001, true);*/
+    /*auto level1 = GJGameLevel::create();*/
    /* level1->m_levelName = "Press Start";
     level1->m_stars = 1;
     level1->m_coins = 3;
     level1->m_audioTrack = 23;
     level1->m_difficulty = GJDifficulty::Easy;
     level1->m_creatorName = "RobTopGames";*/
-    level1->m_levelName = "Press Start";
+   /* level1->m_levelName = "Press Start";
     level1->m_levelID = 4001;
     level1->m_levelType = GJLevelType::Local;
     level1->m_stars = 4;
     level1->m_coins = 3;
     level1->m_audioTrack = 37;
     level1->m_difficulty = GJDifficulty::Normal;
-    level1->m_creatorName = "RobTopGames";
+    level1->m_creatorName = "RobTopGames";*/
     
   
 
@@ -157,7 +185,7 @@ bool SubZeroSelectLayer::init(int page) {
     defaultLevel->m_levelID = -1;
     m_mainLevels->addObject(defaultLevel);
 
-    m_scrollLayer = BoomScrollLayer::create(m_levelPages, 0, true, m_mainLevels, static_cast<DynamicScrollDelegate*>(this));
+    m_scrollLayer = BoomScrollLayer::create(m_levelPages, 1, true, m_mainLevels, static_cast<DynamicScrollDelegate*>(this));
    
     auto pointer = (CCSpriteBatchNode*)m_scrollLayer->getChildren()->objectAtIndex(1);
     /*pointer->setVisible(false);*/
@@ -265,34 +293,38 @@ ccColor3B SubZeroSelectLayer::getColorValue(int level1, int level2, float a3)
     };
     return col3;
 }
-
-void SubZeroSelectLayer::updatePageWithObject(CCObject* page, CCObject* object) {
-    GJGameLevel* level = static_cast<GJGameLevel*>(object);
-    static_cast<LevelPage*>(page)->updateDynamicPage(level);
-    auto lol = Mod::get()->getSavedValue<int>("subzerolevellol");
-    if (level->m_levelID == 4001)
-    {
-        lol = 1;
-    }
-
-    if (level->m_levelID == 4002)
-    {
-        lol = 2;
-    }
-
-    if (level->m_levelID == 4003)
-    {
-        lol = 3;
-    }
-    if (level->m_levelID == -1)
-    {
-        lol = 4;
-    }
-
-    Mod::get()->setSavedValue("subzerolevellol", lol);
-    currentColorIndex = (currentColorIndex + 1) % numColors;
-  /*  updateColors();*/
+void SubZeroSelectLayer::updatePageWithObject(LevelPage* page, GJGameLevel* level)
+{
+    page->updateDynamicPage(level);
+    
 }
+//void SubZeroSelectLayer::updatePageWithObject(CCObject* page, CCObject* object) {
+//    GJGameLevel* level = static_cast<GJGameLevel*>(object);
+//    static_cast<LevelPage*>(page)->updateDynamicPage(level);
+//    auto lol = Mod::get()->getSavedValue<int>("subzerolevellol");
+//    if (level->m_levelID == 4001)
+//    {
+//        lol = 1;
+//    }
+//
+//    if (level->m_levelID == 4002)
+//    {
+//        lol = 2;
+//    }
+//
+//    if (level->m_levelID == 4003)
+//    {
+//        lol = 3;
+//    }
+//    if (level->m_levelID == -1)
+//    {
+//        lol = 4;
+//    }
+//
+//    Mod::get()->setSavedValue("subzerolevellol", lol);
+//    currentColorIndex = (currentColorIndex + 1) % numColors;
+//  /*  updateColors();*/
+//}
 
 void SubZeroSelectLayer::onNext(CCObject*) {
     m_level++;
@@ -344,8 +376,20 @@ void SubZeroSelectLayer::instantPage(CCObject* sender, int a1) {
 void SubZeroSelectLayer::updateColors() {
     ccColor3B color = colors[currentColorIndex];
     m_background->setColor(color);
-    m_ground->updateGround01Color(color);
-    m_ground->updateGround02Color(color);
+    auto m_pGround01Sprite = static_cast<CCSpriteBatchNode*>(m_ground->getChildByID("ground-sprites"));
+    auto m_pGround02Sprite = static_cast<CCSpriteBatchNode*>(m_ground->getChildByID("ground-sprites-2"));
+
+
+    CCArray* children = nullptr;  // Inicializamos children a nullptr
+
+    for (int i = 0; i < m_pGround01Sprite->getChildren()->count(); ++i) {
+        if (m_pGround01Sprite != nullptr) {
+            updateGroundColorSubZero(m_pGround01Sprite, color);
+        }
+        if (m_pGround02Sprite != nullptr) {
+            updateGroundColorSubZero(m_pGround02Sprite, color);
+        }
+    }
 }
 void SubZeroSelectLayer::scrollLayerMoved(CCPoint point) {
     log::info("scrollLayerMoved");
@@ -357,13 +401,27 @@ void SubZeroSelectLayer::scrollLayerMoved(CCPoint point) {
     Color1.r = color.r * 0.8;
     Color1.g = color.g * 0.8;
     Color1.b = color.b * 0.8;
-    m_ground->updateGround01Color(Color1);
+    
 
     ccColor3B Color2 = color;
     Color2.r = color.r * 0.9;
     Color2.g = color.g * 0.9;
     Color2.b = color.b * 0.9;
-    m_ground->updateGround02Color(Color2);
+
+    auto m_pGround01Sprite = static_cast<CCSpriteBatchNode*>(m_ground->getChildByID("ground-sprites"));
+    auto m_pGround02Sprite = static_cast<CCSpriteBatchNode*>(m_ground->getChildByID("ground-sprites-2"));
+
+
+    CCArray* children = nullptr;  // Inicializamos children a nullptr
+
+    for (int i = 0; i < m_pGround01Sprite->getChildren()->count(); ++i) {
+        if (m_pGround01Sprite != nullptr) {
+            updateGroundColorSubZero(m_pGround01Sprite, Color1);
+        }
+        if (m_pGround02Sprite != nullptr) {
+            updateGroundColorSubZero(m_pGround02Sprite, Color2);
+        }
+    }
 }
 
 

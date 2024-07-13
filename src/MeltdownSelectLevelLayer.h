@@ -10,6 +10,7 @@ protected:
     cocos2d::CCArray* m_mainLevels;
     cocos2d::CCArray* m_levelPages;
     BoomScrollLayer* m_scrollLayer;
+	bool m_bSecretMenuCoin;
     int m_level;
 public:
 	cocos2d::ccColor3B colorForPage(int);
@@ -17,6 +18,7 @@ public:
 	bool init(int);
 	bool tryShowAd();
 	void onClose(CCObject*);
+	void scrollLayerMoved(cocos2d::CCPoint) override;
 	void onPrev(cocos2d::CCObject*);
 	void onNext(cocos2d::CCObject*);
 	void onDownload(cocos2d::CCObject*);
@@ -32,7 +34,7 @@ public:
 	void instantPage(cocos2d::CCObject*,int);
 	static MeltdownSelectLevelLayer* create(int);
 	static cocos2d::CCScene* scene(int);
-	void updatePageWithObject(CCObject* page, CCObject* object);
+	void updatePageWithObject(LevelPage* page, GJGameLevel* level);
 	
 }; 
 

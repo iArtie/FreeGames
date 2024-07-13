@@ -21,6 +21,20 @@ ccColor3B colors2[] = {
 int numColors2 = sizeof(colors2) / sizeof(colors2[0]);
 int currentColorIndex2 = 0;
 
+void updateGroundColorMeltdown(CCSpriteBatchNode* batch, const cocos2d::ccColor3B& color)
+{
+
+    for (int i = 0; i < batch->getChildren()->count(); ++i) {
+        auto sprite = (CCSprite*)batch->getChildren()->objectAtIndex(i);
+        sprite->setColor(color);
+        for (int o = 0; o < sprite->getChildren()->count(); ++o) {
+            auto spriteChild = (CCSprite*)sprite->getChildren()->objectAtIndex(o);
+            spriteChild->setColor(color);
+        }
+    }
+
+}
+
 MeltdownSelectLevelLayer* MeltdownSelectLevelLayer::create(int page) {
     auto ret = new MeltdownSelectLevelLayer();
     if (ret && ret->init(page)) {
@@ -60,8 +74,20 @@ bool MeltdownSelectLevelLayer::init(int page) {
     m_ground->setPositionY(std::min(128.f, (winSize.height / 2) - 110.f));
 
 
-    m_ground->updateGround01Color(GM->colorForIdx(5));
-    m_ground->updateGround02Color(GM->colorForIdx(5));
+    //auto m_pGround01Sprite = static_cast<CCSpriteBatchNode*>(m_ground->getChildByID("ground-sprites"));
+    //auto m_pGround02Sprite = static_cast<CCSpriteBatchNode*>(m_ground->getChildByID("ground-sprites-2"));
+
+
+    //CCArray* children = nullptr;  // Inicializamos children a nullptr
+
+    //for (int i = 0; i < m_pGround01Sprite->getChildren()->count(); ++i) {
+    //    if (m_pGround01Sprite != nullptr) {
+    //        updateGroundColorMeltdown(m_pGround01Sprite, GM->colorForIdx(5));
+    //    }
+    //    if (m_pGround02Sprite != nullptr) {
+    //        updateGroundColorMeltdown(m_pGround02Sprite, GM->colorForIdx(5));
+    //    }
+    //}
     addChild(m_ground ,-1);
 
     CCSprite* topBar = CCSprite::createWithSpriteFrameName("GJ_topBar_001.png");
@@ -148,8 +174,9 @@ bool MeltdownSelectLevelLayer::init(int page) {
     GJGameLevel* defaultLevel = GJGameLevel::create();
     defaultLevel->m_levelID = -1;
     m_mainLevels->addObject(defaultLevel);
+    
 
-    m_scrollLayer = BoomScrollLayer::create(m_levelPages, 0, true, m_mainLevels, static_cast<DynamicScrollDelegate*>(this));
+    m_scrollLayer = BoomScrollLayer::create(m_levelPages, 0, true, m_mainLevels,this);
    
     auto pointer = (CCSpriteBatchNode*)m_scrollLayer->getChildren()->objectAtIndex(1);
     /*pointer->setVisible(false);*/
@@ -215,6 +242,12 @@ void MeltdownSelectLevelLayer::keyBackClicked() {
     onClose(nullptr);
 }
 
+void MeltdownSelectLevelLayer::scrollLayerMoved(cocos2d::CCPoint a1)
+{
+    FLAlertLayer::create("Test", "works!", "yay!")->show();
+}
+
+
 void MeltdownSelectLevelLayer::onClose(CCObject*) {
     auto back = Mod::get()->getSavedValue<int>("onsubzero");
     back = 10;
@@ -258,34 +291,43 @@ ccColor3B MeltdownSelectLevelLayer::getColorValue(int level1, int level2, float 
     return col3;
 }
 
-void MeltdownSelectLevelLayer::updatePageWithObject(CCObject* page, CCObject* object) {
-    GJGameLevel* level = static_cast<GJGameLevel*>(object);
-    static_cast<LevelPage*>(page)->updateDynamicPage(level);
-    auto lol = Mod::get()->getSavedValue<int>("meltdownlevel");
-
-    if (level->m_levelID == 1001)
+//void MeltdownSelectLevelLayer::updatePageWithObject(CCObject* page, CCObject* object) {
+//    GJGameLevel* level = static_cast<GJGameLevel*>(object);
+//    static_cast<LevelPage*>(page)->updateDynamicPage(level);
+//    auto lol = Mod::get()->getSavedValue<int>("meltdownlevel");
+//
+//    if (level->m_levelID == 1001)
+//    {
+//        lol = 1;
+//    }
+// 
+//    if (level->m_levelID == 1002)
+//    {
+//        lol = 2;
+//    }
+//   
+//    if (level->m_levelID == 1003)
+//    {
+//        lol = 3;
+//    }
+//    if (level->m_levelID == -1)
+//    {
+//        lol = 4;
+//    }
+//
+//    Mod::get()->setSavedValue("meltdownlevel", lol);
+//
+//    /*currentColorIndex2 = (currentColorIndex2 + 1) % numColors2;*/
+//   /* updateColors();*/
+//}
+void MeltdownSelectLevelLayer::updatePageWithObject(LevelPage* page, GJGameLevel* level)
+{
+    page->updateDynamicPage(level);
+    if (!m_bSecretMenuCoin && m_level > 55 && level->m_levelID == -1)
     {
-        lol = 1;
+        m_bSecretMenuCoin = true;
+        page->addSecretCoin();
     }
- 
-    if (level->m_levelID == 1002)
-    {
-        lol = 2;
-    }
-   
-    if (level->m_levelID == 1003)
-    {
-        lol = 3;
-    }
-    if (level->m_levelID == -1)
-    {
-        lol = 4;
-    }
-
-    Mod::get()->setSavedValue("meltdownlevel", lol);
-
-    currentColorIndex2 = (currentColorIndex2 + 1) % numColors2;
-   /* updateColors();*/
 }
 
 void MeltdownSelectLevelLayer::onNext(CCObject*) {
@@ -308,7 +350,7 @@ void MeltdownSelectLevelLayer::onPrev(CCObject*) {
 void MeltdownSelectLevelLayer::instantPage(CCObject* sender, int a1) {
     
     m_scrollLayer->instantMoveToPage(a1);
-    currentColorIndex2 = (currentColorIndex2 - 1 + numColors2) % numColors2;
+   
    /* updateColors();*/
     //scrollLayerMoved({0, 0});
 }

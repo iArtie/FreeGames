@@ -9,7 +9,8 @@
 #include "WorldSelectLayerDecomp.cpp"
 #include "MeltdownSelectLevelLayer.h"
 #include "SubZeroSelectLayer.h"
-
+#include "ownLevelSelectLayer.h"
+#include "ownLevelSelectLayer.cpp"
 
 
 using namespace geode::prelude;
@@ -141,7 +142,7 @@ void MoreGamesLayer::onCallback(CCObject* sender) {
 
 
 void MoreGamesLayer::onMeltdown(CCObject* sender) {
-    CCScene* scene = MeltdownSelectLevelLayer::scene(0);
+    CCScene* scene = ownLevelSelectLayer::scene(0);
     Mod::get()->setSavedValue("onsubzero", 2);
     CCTransitionFade* fade = CCTransitionFade::create(0.5f, scene);
 

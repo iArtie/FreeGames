@@ -1,13 +1,13 @@
 {
-	"geode": "2.0.0-beta.12",
+	"geode": "3.2.0",
 	"version": "v1.0.4",
 	"id": "bitz.moregames",
 	"name": "MoreGames",
 	"developer": "BitZ",
 	"description": "All free Geometry Dash games within a single mod!",
 	"gd": {
-		"android": "2.205",
-		"win": "2.204"
+		"android": "2.206",
+		"win": "2.206"
 	},
 	"repository": "https://github.com/iArtie/FreeGames",
 	"issues": {

@@ -31,7 +31,7 @@ public:
 	void instantPage(cocos2d::CCObject*,int);
 	static SubZeroSelectLayer* create(int);
 	static cocos2d::CCScene* scene(int);
-	void updatePageWithObject(CCObject* page, CCObject* object);
+	void updatePageWithObject(LevelPage* page, GJGameLevel* object);
 }; 
 
 //static NewLevelSelectLayer* create(int page);

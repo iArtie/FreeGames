@@ -1640,7 +1640,7 @@ addChild(m_scrollLayer);
     myButton3->setSizeMult(1);
     myButton3->m_animationType = MenuAnimationType{ 1 };
     myButton3->m_startPosition = btn3->getPosition();
-    myButton3->m_destPosition = CCPoint{ 0, -5.f };
+    myButton3->m_offset = CCPoint{ 0, -5.f };
    /* myButton3->m_animationType = MenuAnimationType::Move;*/
     menu3->addChild(myButton3);
     addChild(menu3,2);
@@ -2309,7 +2309,7 @@ void ownWorldSelectLayer::onPlay(CCObject* sender) {
     CCMenuItemSpriteExtra* button = (CCMenuItemSpriteExtra*)sender;
     button->setEnabled(false);
     auto GLM = GameLevelManager::sharedState();
-    auto playLayer = PlayLayer::create(level, false, false);
+    auto playLayer = PlayLayer::scene(level, false, false);
     FMODAudioEngine::sharedEngine()->playEffect("playSound_01.ogg");
    /* std::cout << "level string:" << level->m_levelString.c_str() << std::endl;*/
     CCScene* scene = CCScene::create();
