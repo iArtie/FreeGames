@@ -4,6 +4,19 @@
 #include "ownLevelPage.cpp"
 using namespace geode::prelude;
 
+void updateGroundColorMeltdown2(CCSpriteBatchNode* batch, const cocos2d::ccColor3B& color)
+{
+
+	for (int i = 0; i < batch->getChildren()->count(); ++i) {
+		auto sprite = (CCSprite*)batch->getChildren()->objectAtIndex(i);
+		sprite->setColor(color);
+		for (int o = 0; o < sprite->getChildren()->count(); ++o) {
+			auto spriteChild = (CCSprite*)sprite->getChildren()->objectAtIndex(o);
+			spriteChild->setColor(color);
+		}
+	}
+
+}
 
 ownLevelSelectLayer* ownLevelSelectLayer::create(int page) {
 	auto ret = new ownLevelSelectLayer();
@@ -38,12 +51,26 @@ bool ownLevelSelectLayer::init(int page)
 	m_pBackground->setScaleX((winSize.width + 10.f) / m_pBackground->getTextureRect().size.width);
 	m_pBackground->setScaleY((winSize.height + 10.f) / m_pBackground->getTextureRect().size.height);
 	m_pBackground->setPosition(ccp(-5, -5));
-	m_pBackground->setColor({ 40, 125, 255 });
+	m_pBackground->setColor({ 0, 0, 255 });
 
 	m_pGround = GJGroundLayer::create(GM->m_loadedGroundID, -1);
 	m_pGround->setPositionY(std::min(128.f, (winSize.height / 2) - 110.f));
 	addChild(m_pGround, -1);
 
+	auto m_pGround01Sprite = static_cast<CCSpriteBatchNode*>(m_pGround->getChildren()->objectAtIndex(3));
+   auto m_pGround02Sprite = static_cast<CCSpriteBatchNode*>(m_pGround->getChildren()->objectAtIndex(4));
+
+
+   CCArray* children = nullptr;  // Inicializamos children a nullptr
+
+   for (int i = 0; i < m_pGround01Sprite->getChildren()->count(); ++i) {
+       if (m_pGround01Sprite != nullptr) {
+           updateGroundColorMeltdown2(m_pGround01Sprite, GM->colorForIdx(5));
+       }
+       if (m_pGround02Sprite != nullptr) {
+           updateGroundColorMeltdown2(m_pGround02Sprite, GM->colorForIdx(5));
+       }
+   }
 	CCSprite* topBar = CCSprite::createWithSpriteFrameName("GJ_topBar_001.png");
 	topBar->setAnchorPoint({ 0.5f, 1.f });
 	topBar->setPosition(ccp(winSize.width / 2, director->getScreenTop() + 1.f));
@@ -64,10 +91,44 @@ bool ownLevelSelectLayer::init(int page)
 	levelPages = CCArray::create();
 
 	m_nLevel = 0;
-	for (int i = 1; i < 4; i++)
-		mainLevels->addObject(GLM->getMainLevel(i, true));
+	/*for (int i = 1; i < 4; i++)
+		mainLevels->addObject(GLM->getMainLevel(i, true));*/
 
 	/*for (size_t i = 4; i > 0; i--)*/
+	
+
+	GJGameLevel* mlevel1 = GLM->getMainLevel(1001, true);
+	GJGameLevel* mlevel2 = GLM->getMainLevel(1002, true);
+	GJGameLevel* mlevel3 = GLM->getMainLevel(1003, true);
+	mlevel1->m_levelName = "The Seven Seas";
+	mlevel1->m_stars = 1;
+	mlevel1->m_coins = 3;
+	mlevel1->m_levelType = GJLevelType::Local;
+	mlevel1->m_audioTrack = 23;
+	mlevel1->m_difficulty = GJDifficulty::Easy;
+	mlevel1->m_creatorName = "RobTopGames";
+
+
+	mlevel2->m_levelName = "Viking Arena";
+	mlevel2->m_stars = 2;
+	mlevel2->m_coins = 3;
+	mlevel2->m_levelType = GJLevelType::Local;
+	mlevel2->m_audioTrack = 24;
+	mlevel2->m_difficulty = GJDifficulty::Normal;
+	mlevel2->m_creatorName = "RobTopGames";
+
+	mlevel3->m_levelName = "Airborne Robots";
+	mlevel3->m_stars = 3;
+	mlevel3->m_coins = 3;
+	mlevel3->m_levelType = GJLevelType::Local;
+	mlevel3->m_audioTrack = 25;
+	mlevel3->m_difficulty = GJDifficulty::Hard;
+	mlevel3->m_creatorName = "RobTopGames";
+
+	mainLevels->addObject(mlevel1);
+	mainLevels->addObject(mlevel2);
+	mainLevels->addObject(mlevel3);
+
 
 		levelPages->addObject(LevelPage::create(nullptr));
 		levelPages->addObject(LevelPage::create(nullptr));
@@ -76,21 +137,28 @@ bool ownLevelSelectLayer::init(int page)
 	//theTower->m_levelID = -2;
 	//m_mainLevels->addObject(theTower);
 
-	//GJGameLevel* defaultLevel = GJGameLevel::create();
-	//defaultLevel->m_levelID = -1;
-	//mainLevels->addObject(defaultLevel);
+	GJGameLevel* defaultLevel = GJGameLevel::create();
+	defaultLevel->m_levelID = -1;
+	mainLevels->addObject(defaultLevel);
 
 	m_pBoomScrollLayer = BoomScrollLayer::create(levelPages, 0, true, mainLevels, this);
-	//if (page)
-	//{
-	//	if (page == 21)
-	//		m_pBoomScrollLayer->instantMoveToPage(20);
-	//	m_pBoomScrollLayer->instantMoveToPage(page);
-	//}
-	//else
-	//{
-	//	scrollLayerMoved(m_pBoomScrollLayer->getPosition()); //
-	//}
+
+	auto pointer = (CCSpriteBatchNode*)m_pBoomScrollLayer->getChildren()->objectAtIndex(1);
+	/*pointer->setVisible(false);*/
+	pointer->setPositionY(director->getScreenBottom() - 45);
+	m_fWindowWidth = winSize.width;
+	m_pBoomScrollLayer->m_extendedLayer->m_delegate = static_cast<BoomScrollLayerDelegate*>(this);
+
+	if (page)
+	{
+		if (page == 21)
+			m_pBoomScrollLayer->instantMoveToPage(20);
+		m_pBoomScrollLayer->instantMoveToPage(page);
+	}
+	else
+	{
+		scrollLayerMoved(m_pBoomScrollLayer->m_extendedLayer->getPosition()); //
+	}
 
 	addChild(m_pBoomScrollLayer);
 
@@ -133,7 +201,18 @@ bool ownLevelSelectLayer::init(int page)
 	backMenu->setPosition(ccp(director->getScreenLeft() + 25.f, director->getScreenTop() - 22.f));
 	setKeyboardEnabled(true);
 	setKeypadEnabled(true);
-	log::info("screen top: {}", director->getScreenTop());
+
+	cocos2d::CCMenu* infoMenu = cocos2d::CCMenu::create();
+	addChild(infoMenu);
+
+	cocos2d::CCSprite* info = cocos2d::CCSprite::createWithSpriteFrameName("GJ_infoIcon_001.png");
+	CCMenuItemSpriteExtra* infoBtn = CCMenuItemSpriteExtra::create(info, this, menu_selector(ownLevelSelectLayer::onInfo));
+	infoMenu->addChild(infoBtn);
+
+	infoMenu->setPosition({ director->getScreenRight() - 20.0f, director->getScreenTop() - 20.0f });
+
+
+	/*log::info("screen top: {}", director->getScreenTop());*/
 	//scrollLayerMoved({0, 0});
 
 	return true;
@@ -142,9 +221,13 @@ bool ownLevelSelectLayer::init(int page)
 cocos2d::ccColor3B ownLevelSelectLayer::colorForPage(int page)
 {
 	GameManager* GM = GameManager::sharedState();
-	int colIDs[9] = { 5 ,7, 8, 9, 10, 11, 1, 3, 4 }; // GD uses switch statement but this is easier to write
+	int colIDs[9] = { 9 ,1, 3, 5, 4, 11, 1, 3, 0 }; // GD uses switch statement but this is easier to write
 
-	return GM->colorForIdx(colIDs[page % 9]);
+	//1 is green
+	//5 is blue
+	//3 is lightblue
+
+	return GM->colorForIdx(colIDs[page % 5]);
 }
 
 cocos2d::ccColor3B ownLevelSelectLayer::getColorValue(int level, int level2, float a3)
@@ -174,22 +257,21 @@ cocos2d::ccColor3B ownLevelSelectLayer::getColorValue(int level, int level2, flo
 void ownLevelSelectLayer::updatePageWithObject(CCObject* page, CCObject* object) {
 	if (!page || !object) {
 		// Maneja el caso de punteros nulos
-		std::cerr << "Error: puntero nulo en 'updatePageWithObject'." << std::endl;
+		std::cerr << "Error: 'updatePageWithObject' is null." << std::endl;
 		return;
 	}
 
 	GJGameLevel* level = static_cast<GJGameLevel*>(object);
 	std::cout << "LEVELID BEFORE CASTING: " << level->m_levelID << std::endl;
 
-	LevelPage* levelPage = dynamic_cast<LevelPage*>(page); // Usar dynamic_cast para mayor seguridad
+	LevelPage* levelPage = dynamic_cast<LevelPage*>(page); 
 
 	if (!levelPage) {
-		// Maneja el caso de un tipo incorrecto
-		std::cerr << "Error: 'page' no es de tipo 'LevelPage'." << std::endl;
+	
+		std::cerr << "Error: 'page' is not 'LevelPage' type." << std::endl;
 		return;
 	}
 
-	// Llama al método si todo está bien
 	levelPage->updateDynamicPage(level);
 
 	std::cout << "LEVELID IN UPDATEPAGEWITHOBJECT: " << level->m_levelID << std::endl;
@@ -197,35 +279,79 @@ void ownLevelSelectLayer::updatePageWithObject(CCObject* page, CCObject* object)
 
 
 void ownLevelSelectLayer::onNext(CCObject*) {
-	m_nLevel++;
-	m_pBoomScrollLayer->moveToPage(m_nLevel);
+	/*	m_nLevel++;*/
+	 m_pBoomScrollLayer->quickUpdate();
+	m_pBoomScrollLayer->moveToPage(m_nLevel +1);
 }
 
 void ownLevelSelectLayer::onPrev(CCObject*) {
-	m_nLevel--;
-	m_pBoomScrollLayer->moveToPage(m_nLevel);
-	//updateColors();
-	//scrollLayerMoved({0, 0});
+	
+	m_pBoomScrollLayer->quickUpdate();
+	m_pBoomScrollLayer->moveToPage(m_nLevel - 1);
 }
-
 void ownLevelSelectLayer::scrollLayerMoved(CCPoint point) {
-	log::info("scrollLayerMoved");
+	const int pageCount = 4; // Obtener el número de páginas dinámicamente
+	const float threshold = 0.7f; // Umbral para determinar cambios significativos de página
 
-	std::cout << "Works!" << std::endl;
-	ccColor3B color = getColorValue(m_nLevel, m_nLevel - 1, 12);
-	m_pBackground->setColor(color);
-	ccColor3B Color1 = color;
-	Color1.r = color.r * 0.8;
-	Color1.g = color.g * 0.8;
-	Color1.b = color.b * 0.8;
+	float x = -point.x / this->m_fWindowWidth;
+	while (x < 0.0f) {
+		x += pageCount;
+	}
 
+	int ix = std::floor(x);
 
-	ccColor3B Color2 = color;
-	Color2.r = color.r * 0.9;
-	Color2.g = color.g * 0.9;
-	Color2.b = color.b * 0.9;
+	// Calcular el desplazamiento relativo dentro de la página actual
+	float offset = x - ix;
 
+	int firstPage = ix % pageCount;
+
+	int lmao = firstPage + 1;
+	int secondPage = lmao % pageCount;
+
+	m_nLevel = firstPage;
+	// Solo actualizar si el desplazamiento es significativo
+	if (std::abs(offset) > threshold) {
+		/*auto color = getColorValue(firstPage, secondPage, x - ix);*/
+		log::info("{}", x - ix);
+
+		std::cout << "firstPage: " << firstPage << std::endl;
+		std::cout << "secondPage: " << secondPage << std::endl;
+
+		ccColor3B color = getColorValue(firstPage, secondPage - 1, 12);
+		/*m_background->setColor(color);*/
+		ccColor3B Color1 = color;
+		Color1.r = color.r * 0.8;
+		Color1.g = color.g * 0.8;
+		Color1.b = color.b * 0.8;
+
+		ccColor3B Color2 = color;
+		Color2.r = color.r * 0.9;
+		Color2.g = color.g * 0.9;
+		Color2.b = color.b * 0.9;
+
+		m_pBackground->setColor(Color1); // Actualizar ambos colores
+
+		auto m_pGround01Sprite = static_cast<CCSpriteBatchNode*>(m_pGround->getChildren()->objectAtIndex(0));
+		auto m_pGround02Sprite = static_cast<CCSpriteBatchNode*>(m_pGround->getChildren()->objectAtIndex(1));
+
+		/*m_pGround01Sprite->setVisible(false);*/
+		CCArray* children = nullptr;  // Inicializamos children a nullptr
+
+		for (int i = 0; i < m_pGround01Sprite->getChildren()->count(); ++i) {
+			if (m_pGround01Sprite != nullptr) {
+				updateGroundColorMeltdown2(m_pGround01Sprite, Color1);
+			}
+			if (m_pGround02Sprite->getChildrenCount() == m_pGround01Sprite->getChildrenCount())
+			{
+				if (m_pGround02Sprite != nullptr) {
+					updateGroundColorMeltdown2(m_pGround02Sprite, Color2);
+				}
+			}
+			
+		}
+	}
 }
+
 
 void ownLevelSelectLayer::keyBackClicked() {
 	onBack(nullptr);

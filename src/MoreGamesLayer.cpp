@@ -142,7 +142,7 @@ void MoreGamesLayer::onCallback(CCObject* sender) {
 
 
 void MoreGamesLayer::onMeltdown(CCObject* sender) {
-    CCScene* scene = ownLevelSelectLayer::scene(1);
+    CCScene* scene = ownLevelSelectLayer::scene(0);
     Mod::get()->setSavedValue("onsubzero", 2);
     CCTransitionFade* fade = CCTransitionFade::create(0.5f, scene);
 

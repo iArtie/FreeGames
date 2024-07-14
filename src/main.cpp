@@ -549,343 +549,286 @@ class $modify(GJGarageLayer) {
 
 };
 //
-//class $modify(PauseLayer) {
-//	void onQuit(CCObject* sender) {
-//
-//		auto scene = CCScene::create();
-//
-//		auto isSubzero = Mod::get()->getSavedValue<int>("onsubzero");
-//		auto SubZeroScene = SubZeroSelectLayer::create(0);
-//		auto MeltdownScene = MeltdownSelectLevelLayer::create(0);
-//		auto dashlandScene = ownWorldSelectLayer::create();
-//		
-//		if (isSubzero == 1)
-//		{
-//			scene->addChild(SubZeroScene);
-//		}
-//		
-//		if (isSubzero == 2)
-//		{
-//			scene->addChild(MeltdownScene);
-//		}
-//
-//		if (isSubzero == 3)
-//		{
-//			scene->addChild(dashlandScene);
-//		}
-//		int page = 0;
-//		auto subzero = Mod::get()->getSavedValue<int>("subzerolevels");
-//		auto BG = (CCSprite*)dashlandScene->getChildren()->objectAtIndex(0);
-//		switch (subzero) {
-//		case 1:
-//			/*std::cout << "on PressStart" << std::endl;*/
-//			page = 0;
-//			if (isSubzero == 1)
-//			{
-//				SubZeroScene->instantPage(sender, 0);
-//			}
-//			if (isSubzero == 2)
-//			{
-//				MeltdownScene->instantPage(sender, 0);
-//			}
-//			if (isSubzero == 3)
-//			{
-//				dashlandScene->instantPage(sender, 1);
-//			}
-//			
-//			break;
-//		case 2:
-//			/*std::cout << "on Nock Em" << std::endl;*/
-//			page = 1;
-//			if (isSubzero == 1)
-//			{
-//				SubZeroScene->instantPage(sender, 1);
-//			}
-//			if (isSubzero == 2)
-//			{
-//				MeltdownScene->instantPage(sender, 1);
-//			}
-//			if (isSubzero == 3)
-//			{
-//				dashlandScene->instantPage(sender, 1);
-//			}
-//			
-//			break;
-//		case 3:
-//			/*std::cout << "on Power Trip" << std::endl;*/
-//			page = 2;
-//			if (isSubzero == 1)
-//			{
-//				SubZeroScene->instantPage(sender, 2);
-//			}
-//			if (isSubzero == 2)
-//			{
-//				MeltdownScene->instantPage(sender, 2);
-//			}
-//			if (isSubzero == 3)
-//			{
-//				dashlandScene->instantPage(sender, 1);
-//			}
-//			
-//			break;
-//		case 4:
-//			
-//			page = 3;
-//			if (isSubzero == 1)
-//			{
-//				SubZeroScene->instantPage(sender, 2);
-//			}
-//			if (isSubzero == 2)
-//			{
-//				MeltdownScene->instantPage(sender, 2);
-//			}
-//			if (isSubzero == 3)
-//			{
-//				dashlandScene->instantPage(sender, 1);
-//			}
-//			
-//			break;
-//		case 5:
-//			/*std::cout << "on FrontLines" << std::endl;*/
-//			page = 4;
-//			/*MeltdownScene->instantPage(sender, 2);*/
-//			if (isSubzero == 1)
-//			{
-//				SubZeroScene->instantPage(sender, 2);
-//			}
-//			if (isSubzero == 2)
-//			{
-//				MeltdownScene->instantPage(sender, 2);
-//			}
-//			if (isSubzero == 3)
-//			{
-//				dashlandScene->instantPage(sender, 1);
-//			}
-//			
-//			
-//		/*	BG->setColor({ 125, 0, 255 });*/
-//			break;
-//		case 6:
-//		
-//			page = 5;
-//			dashlandScene->instantPage(sender, 2);
-//			
-//			break;
-//		case 7:
-//	
-//			page = 6;
-//			dashlandScene->instantPage(sender, 2);
-//			
-//			break;
-//		case 8:
-//	
-//			page = 7;
-//			dashlandScene->instantPage(sender, 2);
-//			
-//			break;
-//		case 9:
-//	
-//			page = 8;
-//			dashlandScene->instantPage(sender, 2);
-//			
-//			break;
-//		case 10:
-//		
-//			page = 9;
-//			dashlandScene->instantPage(sender, 2);
-//			
-//			break;
-//		default:
-//			/*std::cout << "on a common level" << std::endl;*/
-//			page = 10;
-//		
-//			break;
-//		}
-//
-//		if (page != 10) {
-//			
-//			CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene));
-//			PauseLayer::onQuit(sender);
-//			
-//		}
-//		else {
-//			Mod::get()->setSavedValue("onsubzero", 10);
-//			PauseLayer::onQuit(sender);
-//		}
-//
-//	}
-//
-//	void onEdit(cocos2d::CCObject* sender)
-//	{
-//		Mod::get()->setSavedValue("onsubzero", 25);
-//		PauseLayer::onEdit(sender);
-//	}
-//
-//};
-//
+class $modify(PauseLayer) {
+	void onQuit(CCObject* sender) {
+
+		auto scene = CCScene::create();
+
+		/*auto isSubzero = Mod::get()->getSavedValue<int>("onsubzero");*/
+		/*auto SubZeroScene = SubZeroSelectLayer::create(0);*/
+		auto MeltdownScene = ownLevelSelectLayer::create(0);
+		auto dashlandScene = ownWorldSelectLayer::create();
+		auto levelID = Mod::get()->getSavedValue<int>("levelID");
+		int colorID = 0;
+		if (levelID > 1000 && levelID < 1004)
+		{
+			if (levelID == 1001)
+			{
+				MeltdownScene->m_pBoomScrollLayer->instantMoveToPage(0);
+				colorID = 5;
+			}
+
+			if (levelID == 1002)
+			{
+				MeltdownScene->m_pBoomScrollLayer->instantMoveToPage(1);
+				colorID = 9;
+			}
+			if (levelID == 1003)
+			{
+				MeltdownScene->m_pBoomScrollLayer->instantMoveToPage(2);
+				colorID = 1;
+			}
+			MeltdownScene->m_pBackground->setColor(GameManager::sharedState()->colorForIdx(colorID));
+			auto m_pGround01Sprite = static_cast<CCSpriteBatchNode*>(MeltdownScene->m_pGround->getChildren()->objectAtIndex(3));
+			auto m_pGround02Sprite = static_cast<CCSpriteBatchNode*>(MeltdownScene->m_pGround->getChildren()->objectAtIndex(4));
+
+			/*m_pGround01Sprite->setVisible(false);*/
+			CCArray* children = nullptr;  // Inicializamos children a nullptr
+
+			for (int i = 0; i < m_pGround01Sprite->getChildren()->count(); ++i) {
+				if (m_pGround01Sprite != nullptr) {
+					updateGroundColorMeltdown2(m_pGround01Sprite, GameManager::sharedState()->colorForIdx(colorID));
+				}
+				if (m_pGround02Sprite->getChildrenCount() == m_pGround01Sprite->getChildrenCount())
+				{
+					if (m_pGround02Sprite != nullptr) {
+						updateGroundColorMeltdown2(m_pGround02Sprite, GameManager::sharedState()->colorForIdx(colorID));
+					}
+				}
+
+			}
+			
+			
+			scene->addChild(MeltdownScene);
+			CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene));
+			PauseLayer::onQuit(sender);
+		}
+	    else
+		{
+			PauseLayer::onQuit(sender);
+		}
+		
+		/*if (isSubzero == 1)
+		{
+			scene->addChild(SubZeroScene);
+		}
+		*/
+		//if (isSubzero == 2)
+		//{
+		//	scene->addChild(MeltdownScene);
+		//}
+
+		//if (isSubzero == 3)
+		//{
+		//	scene->addChild(dashlandScene);
+		//}
+		//int page = 0;
+		//auto subzero = Mod::get()->getSavedValue<int>("subzerolevels");
+		//auto BG = (CCSprite*)dashlandScene->getChildren()->objectAtIndex(0);
+		//switch (subzero) {
+		//case 1:
+		//	/*std::cout << "on PressStart" << std::endl;*/
+		//	page = 0;
+		//	if (isSubzero == 1)
+		//	{
+		//		SubZeroScene->instantPage(sender, 0);
+		//	}
+		//	if (isSubzero == 2)
+		//	{
+		//		MeltdownScene->m_pBoomScrollLayer->instantMoveToPage(0);
+		//	}
+		//	if (isSubzero == 3)
+		//	{
+		//		dashlandScene->instantPage(sender, 1);
+		//	}
+		//	
+		//	break;
+		//case 2:
+		//	/*std::cout << "on Nock Em" << std::endl;*/
+		//	page = 1;
+		//	if (isSubzero == 1)
+		//	{
+		//		SubZeroScene->instantPage(sender, 1);
+		//	}
+		//	if (isSubzero == 2)
+		//	{
+		//		MeltdownScene->m_pBoomScrollLayer->instantMoveToPage(1);
+		//	}
+		//	if (isSubzero == 3)
+		//	{
+		//		dashlandScene->instantPage(sender, 1);
+		//	}
+		//	
+		//	break;
+		//case 3:
+		//	/*std::cout << "on Power Trip" << std::endl;*/
+		//	page = 2;
+		//	if (isSubzero == 1)
+		//	{
+		//		SubZeroScene->instantPage(sender, 2);
+		//	}
+		//	if (isSubzero == 2)
+		//	{
+		//		MeltdownScene->m_pBoomScrollLayer->instantMoveToPage(2);
+		//	}
+		//	if (isSubzero == 3)
+		//	{
+		//		dashlandScene->instantPage(sender, 1);
+		//	}
+		//	
+		//	break;
+		//case 4:
+		//	
+		//	page = 3;
+		//	if (isSubzero == 1)
+		//	{
+		//		SubZeroScene->instantPage(sender, 2);
+		//	}
+		//	if (isSubzero == 2)
+		//	{
+		//		MeltdownScene->m_pBoomScrollLayer->instantMoveToPage(2);
+		//	}
+		//	if (isSubzero == 3)
+		//	{
+		//		dashlandScene->instantPage(sender, 1);
+		//	}
+		//	
+		//	break;
+		//case 5:
+		//	/*std::cout << "on FrontLines" << std::endl;*/
+		//	page = 4;
+		//	/*MeltdownScene->instantPage(sender, 2);*/
+		//	if (isSubzero == 1)
+		//	{
+		//		SubZeroScene->instantPage(sender, 2);
+		//	}
+		//	if (isSubzero == 2)
+		//	{
+		//		MeltdownScene->m_pBoomScrollLayer->instantMoveToPage(2);
+		//	}
+		//	if (isSubzero == 3)
+		//	{
+		//		dashlandScene->instantPage(sender, 1);
+		//	}
+		//	
+		//	
+		///*	BG->setColor({ 125, 0, 255 });*/
+		//	break;
+		//case 6:
+		//
+		//	page = 5;
+		//	dashlandScene->instantPage(sender, 2);
+		//	
+		//	break;
+		//case 7:
+	
+		//	page = 6;
+		//	dashlandScene->instantPage(sender, 2);
+		//	
+		//	break;
+		//case 8:
+	
+		//	page = 7;
+		//	dashlandScene->instantPage(sender, 2);
+		//	
+		//	break;
+		//case 9:
+	
+		//	page = 8;
+		//	dashlandScene->instantPage(sender, 2);
+		//	
+		//	break;
+		//case 10:
+		//
+		//	page = 9;
+		//	dashlandScene->instantPage(sender, 2);
+		//	
+		//	break;
+		//default:
+		//	/*std::cout << "on a common level" << std::endl;*/
+		//	page = 10;
+		//
+		//	break;
+		//}
+
+		//if (page != 10) {
+		//	
+		//	CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene));
+		//	PauseLayer::onQuit(sender);
+		//	
+		//}
+		//else {
+		//	Mod::get()->setSavedValue("onsubzero", 10);
+		//	PauseLayer::onQuit(sender);
+		//}
+
+	}
+
+	void onEdit(cocos2d::CCObject* sender)
+	{
+		Mod::get()->setSavedValue("onsubzero", 25);
+		PauseLayer::onEdit(sender);
+	}
+
+};
+
 
 class $modify(EndLevelLayer) {
 	void onMenu(CCObject * sender) {
 	
 		auto scene = CCScene::create();
 
-		auto isSubzero = Mod::get()->getSavedValue<int>("onsubzero");
-		auto SubZeroScene = SubZeroSelectLayer::create(0);
-		auto MeltdownScene = MeltdownSelectLevelLayer::create(0);
-
-		
+		/*auto isSubzero = Mod::get()->getSavedValue<int>("onsubzero");*/
+		/*auto SubZeroScene = SubZeroSelectLayer::create(0);*/
+		auto MeltdownScene = ownLevelSelectLayer::create(0);
 		auto dashlandScene = ownWorldSelectLayer::create();
-		if (isSubzero == 1)
+		auto levelID = Mod::get()->getSavedValue<int>("levelID");
+		int colorID = 0;
+		if (levelID > 1000 && levelID < 1004)
 		{
-			scene->addChild(SubZeroScene);
-		}
+			if (levelID == 1001)
+			{
+				MeltdownScene->m_pBoomScrollLayer->instantMoveToPage(0);
+				colorID = 5;
+			}
 
-		if (isSubzero == 2)
-		{
+			if (levelID == 1002)
+			{
+				MeltdownScene->m_pBoomScrollLayer->instantMoveToPage(1);
+				colorID = 9;
+			}
+			if (levelID == 1003)
+			{
+				MeltdownScene->m_pBoomScrollLayer->instantMoveToPage(2);
+				colorID = 1;
+			}
+			MeltdownScene->m_pBackground->setColor(GameManager::sharedState()->colorForIdx(colorID));
+			auto m_pGround01Sprite = static_cast<CCSpriteBatchNode*>(MeltdownScene->m_pGround->getChildren()->objectAtIndex(3));
+			auto m_pGround02Sprite = static_cast<CCSpriteBatchNode*>(MeltdownScene->m_pGround->getChildren()->objectAtIndex(4));
+
+			/*m_pGround01Sprite->setVisible(false);*/
+			CCArray* children = nullptr;  // Inicializamos children a nullptr
+
+			for (int i = 0; i < m_pGround01Sprite->getChildren()->count(); ++i) {
+				if (m_pGround01Sprite != nullptr) {
+					updateGroundColorMeltdown2(m_pGround01Sprite, GameManager::sharedState()->colorForIdx(colorID));
+				}
+				if (m_pGround02Sprite->getChildrenCount() == m_pGround01Sprite->getChildrenCount())
+				{
+					if (m_pGround02Sprite != nullptr) {
+						updateGroundColorMeltdown2(m_pGround02Sprite, GameManager::sharedState()->colorForIdx(colorID));
+					}
+				}
+
+			}
+
+
 			scene->addChild(MeltdownScene);
-		}
-
-		if (isSubzero == 3)
-		{
-			scene->addChild(dashlandScene);
-		}
-		int page = 0;
-		auto subzero = Mod::get()->getSavedValue<int>("subzerolevels");
-
-		switch (subzero) {
-		case 1:
-			/*std::cout << "on PressStart" << std::endl;*/
-			page = 0;
-			if (isSubzero == 1)
-			{
-				SubZeroScene->instantPage(sender, 0);
-			}
-			if (isSubzero == 2)
-			{
-				MeltdownScene->instantPage(sender, 0);
-			}
-			if (isSubzero == 3)
-			{
-				dashlandScene->instantPage(sender, 1);
-			}
-			
-			break;
-		case 2:
-			/*std::cout << "on Nock Em" << std::endl;*/
-			page = 1;
-			if (isSubzero == 1)
-			{
-				SubZeroScene->instantPage(sender, 1);
-			}
-			if (isSubzero == 2)
-			{
-				MeltdownScene->instantPage(sender, 1);
-			}
-			if (isSubzero == 3)
-			{
-				dashlandScene->instantPage(sender, 1);
-			}
-			
-			break;
-		case 3:
-			/*std::cout << "on Power Trip" << std::endl;*/
-			page = 2;
-			if (isSubzero == 1)
-			{
-				SubZeroScene->instantPage(sender, 2);
-			}
-			if (isSubzero == 2)
-			{
-				MeltdownScene->instantPage(sender, 2);
-			}
-			if (isSubzero == 3)
-			{
-				dashlandScene->instantPage(sender, 1);
-			}
-
-			break;
-		case 4:
-
-			page = 3;
-			if (isSubzero == 1)
-			{
-				SubZeroScene->instantPage(sender, 2);
-			}
-			if (isSubzero == 2)
-			{
-				MeltdownScene->instantPage(sender, 2);
-			}
-			if (isSubzero == 3)
-			{
-				dashlandScene->instantPage(sender, 1);
-			}
-			
-			break;
-		case 5:
-			/*std::cout << "on FrontLines" << std::endl;*/
-			page = 4;
-			/*MeltdownScene->instantPage(sender, 2);*/
-			if (isSubzero == 1)
-			{
-				SubZeroScene->instantPage(sender, 2);
-			}
-			if (isSubzero == 2)
-			{
-				MeltdownScene->instantPage(sender, 2);
-			}
-			if (isSubzero == 3)
-			{
-				dashlandScene->instantPage(sender, 1);
-			}
-
-		
-
-		/*	BG->setColor({ 125, 0, 255 });*/
-			break;
-		case 6:
-
-			page = 5;
-			
-			dashlandScene->instantPage(sender, 2);
-			break;
-		case 7:
-
-			page = 6;
-			dashlandScene->instantPage(sender, 2);
-		
-			break;
-		case 8:
-
-			page = 7;
-			dashlandScene->instantPage(sender, 2);
-		
-			break;
-		case 9:
-
-			page = 8;
-			dashlandScene->instantPage(sender, 2);
-		
-			break;
-		case 10:
-
-			page = 9;
-			dashlandScene->instantPage(sender, 2);
-			
-			break;
-		default:
-			/*std::cout << "on a common level" << std::endl;*/
-			page = 10;
-			break;
-		}
-
-		if (page != 10) {
-			
 			CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene));
 			EndLevelLayer::onMenu(sender);
-
 		}
-		else {
-			Mod::get()->setSavedValue("onsubzero", 10);
+		else
+		{
 			EndLevelLayer::onMenu(sender);
 		}
 
@@ -902,7 +845,9 @@ class $modify(PlayLayer) {
 		/*std::cout << level->m_levelString.c_str() << std::endl;*/
 		auto isSubzero = Mod::get()->getSavedValue<int>("onsubzero");
 		int subzero = 0;
+		int lID = level->m_levelID;
 
+		Mod::get()->setSavedValue("levelID", lID);
 		if (isSubzero == 1)
 		{
 			if (level->m_levelID == 4001) {
