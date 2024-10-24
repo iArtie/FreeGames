@@ -1,0 +1,4 @@
+// Los archivos de sugerencia ayudan al IDE de Visual Studio a interpretar los identificadores de Visual C++
+// por ejemplo, los nombres de funciones y macros.
+// Para obtener más información, consulte https://go.microsoft.com/fwlink/?linkid=865984
+#define CCARRAY_FOREACH(__array__, __object__) if ((__array__) && (__array__)->data->num > 0) for(CCObject** __arr__ = (__array__)->data->arr, **__end__ = (__array__)->data->arr + (__array__)->data->num-1; __arr__ <= __end__ && (((__object__) = *__arr__) != NULL ); __arr__++)
