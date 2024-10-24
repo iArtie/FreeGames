@@ -1,0 +1,39 @@
+[33m90fffef[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m HEAD@{0}: reset: moving to 90fffef1a1f23313bfb51397cd28e0562094af20
+[33m4797ce0[m HEAD@{1}: commit: WE ARE BACK
+[33ma7768f4[m HEAD@{2}: commit: added own bindings to build system
+[33m2d2bb73[m HEAD@{3}: commit: new build system
+[33m542835f[m HEAD@{4}: commit: Android test
+[33mf8af727[m HEAD@{5}: commit: Lmao commit
+[33m218a2ef[m HEAD@{6}: commit: Commit for test
+[33m3a7cfdb[m[33m ([m[1;33mtag: v1.0.4[m[33m)[m HEAD@{7}: commit: final
+[33m871339e[m HEAD@{8}: commit: bruh moment
+[33mb78152a[m[33m ([m[1;33mtag: v1.0.3[m[33m)[m HEAD@{9}: commit: Some fixes and ultimate achievements merge
+[33m9bb14cc[m HEAD@{10}: pull --progress --no-edit --no-stat --recurse-submodules=no origin: Fast-forward
+[33m754cef0[m[33m ([m[1;33mtag: v1.0.2[m[33m)[m HEAD@{11}: commit: another update
+[33m405e4b8[m HEAD@{12}: commit: play button on gd world fix and LevelSelectLayer issue fix
+[33m59ea3bf[m[33m ([m[1;33mtag: v1.0.1[m[33m)[m HEAD@{13}: commit: Remove the stdcout
+[33mb71cd68[m[33m ([m[1;33mtag: v1.0.0[m[33m)[m HEAD@{14}: pull --progress --no-edit --no-stat --recurse-submodules=no origin: Fast-forward
+[33m782b44f[m HEAD@{15}: commit: okay now FINISHED
+[33m745f4b5[m HEAD@{16}: commit: FINISHED
+[33mc7caa28[m HEAD@{17}: commit: world level popup fix
+[33m8f1e17c[m HEAD@{18}: commit: idk fix
+[33ma58df62[m HEAD@{19}: commit: asas
+[33m9096c45[m HEAD@{20}: commit: lol commit
+[33ma355d42[m HEAD@{21}: commit: commit lol
+[33mdff954b[m HEAD@{22}: commit: lol
+[33md7baf02[m HEAD@{23}: commit: fdf
+[33m58aaa1a[m HEAD@{24}: pull --progress --no-edit --no-stat --recurse-submodules=no origin: Merge made by the 'ort' strategy.
+[33me81b4a1[m HEAD@{25}: commit: all
+[33m94339a6[m HEAD@{26}: pull --progress --no-edit --no-stat --recurse-submodules=no origin: Fast-forward
+[33m33c8222[m HEAD@{27}: commit: ye
+[33m7a2530e[m HEAD@{28}: commit: pre-finish commit
+[33m7754e16[m HEAD@{29}: commit: Pre-final prog
+[33md53c7d3[m HEAD@{30}: commit: very big commit
+[33mdc1c0ac[m HEAD@{31}: commit: very big commit
+[33m834014e[m HEAD@{32}: commit: done
+[33m0956086[m HEAD@{33}: commit: omg
+[33mb3f8090[m HEAD@{34}: commit: update
+[33m41d92b1[m HEAD@{35}: commit: update
+[33ma268ef3[m HEAD@{36}: commit: first commit
+[33m5742814[m HEAD@{37}: commit: first commit
+[33m3ed8fa7[m HEAD@{38}: commit (initial): Agregar .gitattributes.
