@@ -1,14 +1,18 @@
 {
-	"geode": "3.8.1",
+	"geode": "4.0.1",
 	"version": "v1.0.5",
 	"id": "bitz.moregames",
 	"name": "MoreGames",
 	"developer": "BitZ",
 	"description": "All free Geometry Dash games within a single mod!",
 	"gd": {
-		"win": "2.206"
+		"win": "2.2074",
+		"android": "2.2074"
 	},
-	"repository": "https://github.com/iArtie/FreeGames",
+	"links": {
+		"source": "https://github.com/iArtie/FreeGames",
+		"community": "https://discord.gg/gXg8w4xJDA"
+	},
 	"issues": {
 		"info": "Post your issues on the <cp>Issue tracking repository</c>.",
 		"url": "https://github.com/iArtie/FreeGames/issues/new/choose"

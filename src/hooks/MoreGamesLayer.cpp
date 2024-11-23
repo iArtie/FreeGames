@@ -9,6 +9,8 @@
 #include "../SubZero/SubZeroSelectLayer.h"
 #include "../Meltdown/MeltdownSelectLayer.h"
 #include "../Meltdown/MeltdownSelectLayer.cpp"
+#include "../extras/BetterMDPopup.hpp"
+#include "../extras/BetterMDPopup.cpp"
 //#include "SubZeroSelectLayer.cpp"
 
 using namespace geode::prelude;
@@ -34,10 +36,45 @@ void MoreGamesLayer::customSetup() {
 
 
     auto discv = Mod::get()->getSavedValue<int>("disclaimervalue");
+   /* BetterMDPopup::create(nullptr, "DISCLAIMER", "1. If you have 164 coins or approximately, I recommend <cr>NOT COMPLETING THE LEVELS WITH THE COINS</c> since it probably <cy>won't let you save your data</c> later because you exceed <cl>the coins limit</c>.\n \n 2. If you have already passed the levels in the spinoffs games, <cg>your data should load without any problem</c>, only that the coins <cl>will not be reflected in the levels</c>.\n \n3. Is <cr>HIGHLY RECOMMENDED</c> after passing all the levels to <cy>save your data and reload your account</c>, since this way you do not keep the coins that <cl>the game does not want you to have</c>.", "OK", nullptr, 350, true,nullptr, 1.0f)->show();*/
+    auto testPopup = BetterMDPopup::create(
+        "DISCLAIMER",
+        "1. If you have 164 coins or approximately, I recommend <cr>NOT COMPLETING THE LEVELS WITH THE COINS</c> since it probably <cy>won't let you save your data</c> later because you exceed <cl>the coins limit</c>.\n \n 2. If you have already passed the levels in the spinoffs games, <cg>your data should load without any problem</c>, only that the coins <cl>will not be reflected in the levels</c>.\n \n3. Is <cr>HIGHLY RECOMMENDED</c> after passing all the levels to <cy>save your data and reload your account</c>, since this way you do not keep the coins that <cl>the game does not want you to have</c>.",
+        "OK",
+        nullptr
+    );
 
+    testPopup->show();
+   /* auto newDisclaimer = FLAlertLayer::create(
+        nullptr,
+        "DISCLAIMER",
+        "1. If you have 164 coins or approximately, I recommend <cr>NOT COMPLETING THE LEVELS WITH THE COINS</c> since it probably <cy>won't let you save your data</c> later because you exceed <cl>the coins limit</c>.\n \n 2. If you have already passed the levels in the spinoffs games, <cg>your data should load without any problem</c>, only that the coins <cl>will not be reflected in the levels</c>.\n \n3. Is <cr>HIGHLY RECOMMENDED</c> after passing all the levels to <cy>save your data and reload your account</c>, since this way you do not keep the coins that <cl>the game does not want you to have</c>.",
+        "OK",
+        nullptr,
+        410.f,
+        true,
+        400.f,
+        1.0f
+    );
 
+    newDisclaimer->show();*/
     if (discv != 2)
     {
+
+      /*  if (Loader::get()->isModLoaded("raydeeux.alertlayertweaks") && Loader::get()->getLoadedMod("raydeeux.alertlayertweaks")->getSettingValue<bool>("enabled")) {
+            FLAlertLayer::create(
+                nullptr,
+                "DISCLAIMER",
+                "<your essay here>",
+                "OK",
+                nullptr,
+                420.f,
+                true,
+                320.f,
+                1.0f
+            )->show();
+        }*/
+       
         auto disclaimer = FLAlertLayer::create("DISCLAIMER!!", "1. If you have 164 coins or approximately, I recommend <cr>NOT COMPLETING THE LEVELS WITH THE COINS</c> since it probably <cy>won't let you save your data</c> later because you exceed <cl>the coins limit</c>.\n \n 2. If you have already passed the levels in the spinoffs games, <cg>your data should load without any problem</c>, only that the coins <cl>will not be reflected in the levels</c>.\n \n3. Is <cr>HIGHLY RECOMMENDED</c> after passing all the levels to <cy>save your data and reload your account</c>, since this way you do not keep the coins that <cl>the game does not want you to have</c>.", "OK");
 
         auto Layer = (CCLayer*)disclaimer->getChildren()->objectAtIndex(0);
