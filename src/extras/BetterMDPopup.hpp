@@ -2,7 +2,7 @@
 
 #include <Geode/Geode.hpp>
 
-
+//Thanks doggo for the popup
 using namespace geode::prelude;
 
 class BetterMDPopup : public FLAlertLayer

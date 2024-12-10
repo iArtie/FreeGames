@@ -1,4 +1,7 @@
 # MoreGames Changelog
+## v1.0.6 (2024-12-10)
+- Geometry Dash 2.2074 support
+- New Disclaimer popup
 
 ## v1.0.5 (2024-10-24)
 - Geometry Dash Update 2.206!

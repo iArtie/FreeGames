@@ -15,7 +15,7 @@ public:
     cocos2d::CCArray* levelPages = nullptr;
     int m_nLevel = 0;
     bool m_bSecretMenuCoin;
-
+    cocos2d::CCSprite* m_secretDoor;
 public:
     cocos2d::ccColor3B colorForPage(int);
     cocos2d::ccColor3B getColorValue(int, int, float);
