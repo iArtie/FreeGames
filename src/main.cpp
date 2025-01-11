@@ -26,10 +26,6 @@ using namespace geode::prelude;
 using namespace more;
 
 
-template<typename Base, typename T>
-inline bool instanceof(const T* ptr) {
-	return dynamic_cast<const Base*>(ptr) != nullptr;
-}
 
 #include <Geode/utils/web.hpp>
 

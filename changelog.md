@@ -1,4 +1,8 @@
 # MoreGames Changelog
+## v1.0.7 (2025-01-10)
+- Null checks on updateGround methods
+- Fix crash when you press the meltdown and subzero buttons for some devices
+
 ## v1.0.6 (2024-12-10)
 - Geometry Dash 2.2074 support
 - New Disclaimer popup

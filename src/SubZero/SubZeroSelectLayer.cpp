@@ -1,20 +1,32 @@
 #include <Geode/Geode.hpp>
 #include "../SubZero/SubZeroSelectLayer.h"
+#include "../extras/BetterMDPopup.hpp"
 
 using namespace geode::prelude;
 
 void updateGroundColorSubZero(CCSpriteBatchNode* batch, const cocos2d::ccColor3B& color)
 {
+	if (!batch) return;
 
-	for (int i = 0; i < batch->getChildren()->count(); ++i) {
-		auto sprite = (CCSprite*)batch->getChildren()->objectAtIndex(i);
+	auto children = batch->getChildren();
+	if (!children) return;
+
+	for (int i = 0; i < children->count(); ++i) {
+		auto sprite = dynamic_cast<CCSprite*>(children->objectAtIndex(i));
+		if (!sprite) continue;
+
 		sprite->setColor(color);
-		for (int o = 0; o < sprite->getChildren()->count(); ++o) {
-			auto spriteChild = (CCSprite*)sprite->getChildren()->objectAtIndex(o);
+
+		auto spriteChildren = sprite->getChildren();
+		if (!spriteChildren) continue;
+
+		for (int o = 0; o < spriteChildren->count(); ++o) {
+			auto spriteChild = dynamic_cast<CCSprite*>(spriteChildren->objectAtIndex(o));
+			if (!spriteChild) continue;
+
 			spriteChild->setColor(color);
 		}
 	}
-
 }
 
 SubZeroSelectLayer* SubZeroSelectLayer::create(int page) {
@@ -64,25 +76,28 @@ bool SubZeroSelectLayer::init(int page)
    CCArray* children = nullptr;  // Inicializamos children a nullptr
 
 
+   CCObject* pObj = nullptr;
    if (Loader::get()->getLoadedMod("bitz.darkmode_v4"))
    {
-	   for (int i = 0; i < m_pGround01Sprite->getChildren()->count(); ++i) {
-		   if (m_pGround01Sprite != nullptr) {
-			   updateGroundColorSubZero(m_pGround01Sprite, { 40,40,40 });
-		   }
-		   if (m_pGround02Sprite != nullptr) {
-			   updateGroundColorSubZero(m_pGround02Sprite, { 40,40,40 });
+	   CCARRAY_FOREACH(m_pGround->getChildren(), pObj)
+	   {
+		   if (instanceof<CCSpriteBatchNode>(pObj)) {
+			   auto spriteBatchNode = dynamic_cast<CCSpriteBatchNode*>(pObj);
+			   if (spriteBatchNode) {
+				   updateGroundColorSubZero(spriteBatchNode, { 40, 40, 40 });
+			   }
 		   }
 	   }
    }
    else
    {
-	   for (int i = 0; i < m_pGround01Sprite->getChildren()->count(); ++i) {
-		   if (m_pGround01Sprite != nullptr) {
-			   updateGroundColorSubZero(m_pGround01Sprite, GM->colorForIdx(5));
-		   }
-		   if (m_pGround02Sprite != nullptr) {
-			   updateGroundColorSubZero(m_pGround02Sprite, GM->colorForIdx(5));
+	   CCARRAY_FOREACH(m_pGround->getChildren(), pObj)
+	   {
+		   if (instanceof<CCSpriteBatchNode>(pObj)) {
+			   auto spriteBatchNode = dynamic_cast<CCSpriteBatchNode*>(pObj);
+			   if (spriteBatchNode) {
+				   updateGroundColorSubZero(spriteBatchNode, GM->colorForIdx(5));
+			   }
 		   }
 	   }
    }

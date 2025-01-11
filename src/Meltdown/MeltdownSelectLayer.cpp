@@ -1,21 +1,35 @@
 #include <Geode/Geode.hpp>
 #include "../Meltdown/MeltdownSelectLayer.h"
+#include "../extras/BetterMDPopup.hpp"
 
 using namespace geode::prelude;
 
+
 void updateGroundColorMeltdown2(CCSpriteBatchNode* batch, const cocos2d::ccColor3B& color)
 {
+	if (!batch) return; 
 
-	for (int i = 0; i < batch->getChildren()->count(); ++i) {
-		auto sprite = (CCSprite*)batch->getChildren()->objectAtIndex(i);
+	auto children = batch->getChildren();
+	if (!children) return; 
+
+	for (int i = 0; i < children->count(); ++i) {
+		auto sprite = dynamic_cast<CCSprite*>(children->objectAtIndex(i));
+		if (!sprite) continue;
+
 		sprite->setColor(color);
-		for (int o = 0; o < sprite->getChildren()->count(); ++o) {
-			auto spriteChild = (CCSprite*)sprite->getChildren()->objectAtIndex(o);
+
+		auto spriteChildren = sprite->getChildren();
+		if (!spriteChildren) continue; 
+
+		for (int o = 0; o < spriteChildren->count(); ++o) {
+			auto spriteChild = dynamic_cast<CCSprite*>(spriteChildren->objectAtIndex(o));
+			if (!spriteChild) continue;
+
 			spriteChild->setColor(color);
 		}
 	}
-
 }
+
 
 MeltdownSelectLayer* MeltdownSelectLayer::create(int page) {
 	auto ret = new MeltdownSelectLayer();
@@ -57,33 +71,34 @@ bool MeltdownSelectLayer::init(int page)
 	m_pGround->setPositionY(std::min(128.f, (winSize.height / 2) - 110.f));
 	addChild(m_pGround, -1);
 
-	auto m_pGround01Sprite = static_cast<CCSpriteBatchNode*>(m_pGround->getChildren()->objectAtIndex(3));
-   auto m_pGround02Sprite = static_cast<CCSpriteBatchNode*>(m_pGround->getChildren()->objectAtIndex(4));
+	//auto m_pGround01Sprite = m_pGround->getChildByType<CCSpriteBatchNode>(3); // Obtén el hijo por tipo e índice
+	//auto m_pGround02Sprite = m_pGround->getChildByType<CCSpriteBatchNode>(4);
 
-
-   CCArray* children = nullptr;  // Inicializamos children a nullptr
-   if (Loader::get()->getLoadedMod("bitz.darkmode_v4"))
-   {
-	   for (int i = 0; i < m_pGround01Sprite->getChildren()->count(); ++i) {
-		   if (m_pGround01Sprite != nullptr) {
-			   updateGroundColorMeltdown2(m_pGround01Sprite, { 40,40,40 });
-		   }
-		   if (m_pGround02Sprite != nullptr) {
-			   updateGroundColorMeltdown2(m_pGround02Sprite, { 40,40,40 });
-		   }
-	   }
-   }
-   else
-   {
-	   for (int i = 0; i < m_pGround01Sprite->getChildren()->count(); ++i) {
-		   if (m_pGround01Sprite != nullptr) {
-			   updateGroundColorMeltdown2(m_pGround01Sprite, GM->colorForIdx(5));
-		   }
-		   if (m_pGround02Sprite != nullptr) {
-			   updateGroundColorMeltdown2(m_pGround02Sprite, GM->colorForIdx(5));
-		   }
-	   }
-   }
+	CCObject* pObj = nullptr;
+	if (Loader::get()->getLoadedMod("bitz.darkmode_v4"))
+	{
+		CCARRAY_FOREACH(m_pGround->getChildren(), pObj)
+		{
+			if (instanceof<CCSpriteBatchNode>(pObj)) {
+				auto spriteBatchNode = dynamic_cast<CCSpriteBatchNode*>(pObj);
+				if (spriteBatchNode) {
+					updateGroundColorMeltdown2(spriteBatchNode, { 40, 40, 40 });
+				}
+			}
+		}
+	}
+	else
+	{
+		CCARRAY_FOREACH(m_pGround->getChildren(), pObj)
+		{
+			if (instanceof<CCSpriteBatchNode>(pObj)) {
+				auto spriteBatchNode = dynamic_cast<CCSpriteBatchNode*>(pObj);
+				if (spriteBatchNode) {
+					updateGroundColorMeltdown2(spriteBatchNode, GM->colorForIdx(5));
+				}
+			}
+		}
+	}
 	CCSprite* topBar = CCSprite::createWithSpriteFrameName("GJ_topBar_001.png");
 	topBar->setAnchorPoint({ 0.5f, 1.f });
 	topBar->setPosition(ccp(winSize.width / 2, director->getScreenTop() + 1.f));
