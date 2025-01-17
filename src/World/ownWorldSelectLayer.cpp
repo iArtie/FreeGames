@@ -1958,13 +1958,13 @@ void ownWorldSelectLayer::onWorldLevel(CCObject* sender) {
    
     if (button->getTag() == 30)
     {
-        std::string dir = geode::Mod::get()->getResourcesDir().string();
+     /*   std::string dir = geode::Mod::get()->getResourcesDir().string();
         std::ifstream mt(dir + "/2001.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
-        level = GLM->getMainLevel(2001, false);
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
+        level = GLM->getMainLevel(2001, true);
         level->m_levelName = "Payload";
         level->m_stars = 2;
-        level->m_levelString = mtext;
+        level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(2001);
         level->m_audioTrack = 27;
         level->m_difficulty = GJDifficulty::Easy;
         level->m_creatorName = "RobTopGames";
@@ -1973,13 +1973,13 @@ void ownWorldSelectLayer::onWorldLevel(CCObject* sender) {
     }
     if (button->getTag() == 31)
     {
-        std::string dir = geode::Mod::get()->getResourcesDir().string();
+    /*    std::string dir = geode::Mod::get()->getResourcesDir().string();
         std::ifstream mt(dir + "/2002.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
         level = GLM->getMainLevel(2002, false);
         level->m_levelName = "Beast Mode";
         level->m_stars = 2;
-        level->m_levelString = mtext;
+        level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(2002);
         level->m_audioTrack = 28;
         level->m_difficulty = GJDifficulty::Easy;
         level->m_creatorName = "RobTopGames";
@@ -1988,13 +1988,13 @@ void ownWorldSelectLayer::onWorldLevel(CCObject* sender) {
     }
     if (button->getTag() == 32)
     {
-        std::string dir = geode::Mod::get()->getResourcesDir().string();
+     /*   std::string dir = geode::Mod::get()->getResourcesDir().string();
         std::ifstream mt(dir + "/2003.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
         level = GLM->getMainLevel(2003, false);
         level->m_levelName = "Machina";
         level->m_stars = 3;
-        level->m_levelString = mtext;
+        level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(2003);
         level->m_audioTrack = 29;
         level->m_difficulty = GJDifficulty::Normal;
         level->m_creatorName = "RobTopGames";
@@ -2003,14 +2003,14 @@ void ownWorldSelectLayer::onWorldLevel(CCObject* sender) {
     }
     if (button->getTag() == 33)
     {
-        std::string dir = geode::Mod::get()->getResourcesDir().string();
+      /*  std::string dir = geode::Mod::get()->getResourcesDir().string();
         std::ifstream mt(dir + "/2004.txt");
 
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
         level = GLM->getMainLevel(2004, false);
         level->m_levelName = "Years";
         level->m_stars = 3;
-        level->m_levelString = mtext;
+        level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(2004);
         level->m_audioTrack = 30;
         level->m_difficulty = GJDifficulty::Normal;
         level->m_creatorName = "RobTopGames";
@@ -2019,14 +2019,14 @@ void ownWorldSelectLayer::onWorldLevel(CCObject* sender) {
     }
     if (button->getTag() == 34)
     {
-        std::string dir = geode::Mod::get()->getResourcesDir().string();
+        /*std::string dir = geode::Mod::get()->getResourcesDir().string();
         std::ifstream mt(dir + "/2005.txt");
 
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
         level = GLM->getMainLevel(2005, false);
         level->m_levelName = "Frontlines";
         level->m_stars = 3;
-        level->m_levelString = mtext;
+        level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(2005);
         level->m_audioTrack = 31;
         level->m_difficulty = GJDifficulty::Normal;
         level->m_creatorName = "RobTopGames";
@@ -2035,13 +2035,13 @@ void ownWorldSelectLayer::onWorldLevel(CCObject* sender) {
     }
     if (button->getTag() == 35)
     {
-        std::string dir = geode::Mod::get()->getResourcesDir().string();
+     /*   std::string dir = geode::Mod::get()->getResourcesDir().string();
         std::ifstream mt(dir + "/2006.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
         level = GLM->getMainLevel(2006, false);
         level->m_levelName = "Space Pirates";
         level->m_stars = 3;
-        level->m_levelString = mtext;
+        level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(2006);
         level->m_audioTrack = 32;
         level->m_difficulty = GJDifficulty::Normal;
         level->m_creatorName = "RobTopGames";
@@ -2050,13 +2050,13 @@ void ownWorldSelectLayer::onWorldLevel(CCObject* sender) {
     }
     if (button->getTag() == 36)
     {
-        std::string dir = geode::Mod::get()->getResourcesDir().string();
+       /* std::string dir = geode::Mod::get()->getResourcesDir().string();
         std::ifstream mt(dir + "/2007.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
         level = GLM->getMainLevel(2007, false);
         level->m_levelName = "Striker";
         level->m_stars = 3;
-        level->m_levelString = mtext;
+        level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(2007);
         level->m_audioTrack = 33;
         level->m_difficulty = GJDifficulty::Normal;
         level->m_creatorName = "RobTopGames";
@@ -2065,13 +2065,13 @@ void ownWorldSelectLayer::onWorldLevel(CCObject* sender) {
     }
     if (button->getTag() == 37)
     {
-        std::string dir = geode::Mod::get()->getResourcesDir().string();
+     /*   std::string dir = geode::Mod::get()->getResourcesDir().string();
         std::ifstream mt(dir + "/2008.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
         level = GLM->getMainLevel(2008, false);
         level->m_levelName = "Embers";
         level->m_stars = 3;
-        level->m_levelString = mtext;
+        level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(2008);
         level->m_audioTrack = 34;
         level->m_difficulty = GJDifficulty::Normal;
         level->m_creatorName = "RobTopGames";
@@ -2080,13 +2080,13 @@ void ownWorldSelectLayer::onWorldLevel(CCObject* sender) {
     }
     if (button->getTag() == 38)
     {
-        std::string dir = geode::Mod::get()->getResourcesDir().string();
+       /* std::string dir = geode::Mod::get()->getResourcesDir().string();
         std::ifstream mt(dir + "/2009.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
         level = GLM->getMainLevel(2009, false);
         level->m_levelName = "Round 1";
         level->m_stars = 3;
-        level->m_levelString = mtext;
+        level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(2009);
         level->m_audioTrack = 35;
         level->m_difficulty = GJDifficulty::Normal;
         level->m_creatorName = "RobTopGames";
@@ -2095,13 +2095,13 @@ void ownWorldSelectLayer::onWorldLevel(CCObject* sender) {
     }
     if (button->getTag() == 39)
     {
-        std::string dir = geode::Mod::get()->getResourcesDir().string();
-        std::ifstream mt(dir + "/2010.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+        //std::string dir = geode::Mod::get()->getResourcesDir().string();
+        //std::ifstream mt(dir + "/2010.txt");
+        //std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
         level = GLM->getMainLevel(2010, false);
         level->m_levelName = "Monster Dance Off";
         level->m_stars = 3;
-        level->m_levelString = mtext;
+        level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(2010);
         level->m_audioTrack = 36;
         level->m_difficulty = GJDifficulty::Normal;
         level->m_creatorName = "RobTopGames";
@@ -2304,6 +2304,7 @@ void ownWorldSelectLayer::onWorldLevel(CCObject* sender) {
 // /*   scrollLayerMoved({ 0, 0 });*/
 //}
 void ownWorldSelectLayer::onPlay(CCObject* sender) {
+	auto currentScene = CCDirector::sharedDirector()->getRunningScene();
 
     CCMenuItemSpriteExtra* button = (CCMenuItemSpriteExtra*)sender;
     button->setEnabled(false);
@@ -2311,14 +2312,10 @@ void ownWorldSelectLayer::onPlay(CCObject* sender) {
     auto playLayer = PlayLayer::scene(level, false, false);
     FMODAudioEngine::sharedEngine()->playEffect("playSound_01.ogg");
    /* std::cout << "level string:" << level->m_levelString.c_str() << std::endl;*/
-    CCScene* scene = CCScene::create();
+    
 
-    scene->addChild(playLayer);
+    CCDirector::get()->replaceScene(CCTransitionFade::create(0.5f, playLayer));
 
-    CCTransitionFade* fade = CCTransitionFade::create(0.5f, scene);
-
-    /*playLayer->startGameDelayed();*/
-    CCDirector::sharedDirector()->pushScene(fade);
 }
 
 

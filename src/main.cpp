@@ -5,6 +5,8 @@
 #include <Geode/modify/LoadingLayer.hpp>
 #include <Geode/modify/EndLevelLayer.hpp>
 #include <Geode/modify/GJGarageLayer.hpp>
+
+#include <Geode/modify/SongsLayer.hpp>
 #include <Geode/Enums.hpp>
 
 #include "hooks/MoreGamesLayer.hpp"
@@ -42,6 +44,8 @@ void updateGroundColorM(CCSpriteBatchNode* batch, const cocos2d::ccColor3B& colo
 	}
 
 }
+
+
 class $modify(LoadingLayer)
 {
 	void loadAssets()
@@ -187,21 +191,24 @@ class $modify(PauseLayer) {
 			auto scene = CCScene::create();
 			if (levelID == 1001)
 			{
-				MeltdownScene->m_pBoomScrollLayer->instantMoveToPage(0);
-				colorID = 5;
+				MeltdownScene = MeltdownSelectLayer::create(0);
+				/*MeltdownScene->m_pBoomScrollLayer->instantMoveToPage(0);
+				colorID = 5;*/
 			}
 
 			if (levelID == 1002)
 			{
-				MeltdownScene->m_pBoomScrollLayer->instantMoveToPage(1);
-				colorID = 9;
+				MeltdownScene = MeltdownSelectLayer::create(1);
+				/*MeltdownScene->m_pBoomScrollLayer->instantMoveToPage(1);
+				colorID = 9;*/
 			}
 			if (levelID == 1003)
 			{
-				MeltdownScene->m_pBoomScrollLayer->instantMoveToPage(2);
-				colorID = 1;
+				MeltdownScene = MeltdownSelectLayer::create(2);
+				/*MeltdownScene->m_pBoomScrollLayer->instantMoveToPage(2);
+				colorID = 1;*/
 			}
-			MeltdownScene->m_pBackground->setColor(GameManager::sharedState()->colorForIdx(colorID));
+		/*	MeltdownScene->m_pBackground->setColor(GameManager::sharedState()->colorForIdx(colorID));
 			auto m_pGround01Sprite = static_cast<CCSpriteBatchNode*>(MeltdownScene->m_pGround->getChildren()->objectAtIndex(3));
 			auto m_pGround02Sprite = static_cast<CCSpriteBatchNode*>(MeltdownScene->m_pGround->getChildren()->objectAtIndex(4));
 
@@ -235,7 +242,7 @@ class $modify(PauseLayer) {
 				}
 			}
 			
-			
+			*/
 			/*PauseLayer::onQuit(sender);*/
 			scene->addChild(MeltdownScene);
 			CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene));
@@ -348,7 +355,7 @@ class $modify(PauseLayer) {
 
 };
 
-
+//
 class $modify(EndLevelLayer) {
 	void onMenu(CCObject * sender) {
 	

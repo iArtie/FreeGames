@@ -3,8 +3,10 @@
 
 #include "cocos2d.h"
 
+//
+//class MeltdownSelectLayer : public cocos2d::CCLayer, public BoomScrollLayerDelegate, public DynamicScrollDelegate
 
-class MeltdownSelectLayer : public cocos2d::CCLayer, public BoomScrollLayerDelegate, public DynamicScrollDelegate
+class MeltdownSelectLayer : public LevelSelectLayer
 {
 public:
     float m_fWindowWidth;
@@ -17,10 +19,10 @@ public:
     bool m_bSecretMenuCoin;
     cocos2d::CCSprite* m_secretDoor;
 public:
-    cocos2d::ccColor3B colorForPage(int);
+    cocos2d::ccColor3B colorForPage(int page);
     cocos2d::ccColor3B getColorValue(int, int, float);
     bool init(int);
-    bool tryShowAd();
+   /* bool tryShowAd();
     void onPrev(cocos2d::CCObject*);
     void onNext(cocos2d::CCObject*);
     void onDownload(cocos2d::CCObject*);
@@ -29,7 +31,7 @@ public:
     void updatePageWithObject(CCObject*, CCObject*) override;
     void keyBackClicked();
     void scrollLayerMoved(cocos2d::CCPoint) override;
-    void keyDown(int);
+    void keyDown(int);*/
     static MeltdownSelectLayer* create(int);
     static cocos2d::CCScene* scene(int);
     
