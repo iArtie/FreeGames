@@ -19,19 +19,7 @@ public:
     bool m_bSecretMenuCoin;
     cocos2d::CCSprite* m_secretDoor;
 public:
-    cocos2d::ccColor3B colorForPage(int page);
-    cocos2d::ccColor3B getColorValue(int, int, float);
     bool init(int);
-   /* bool tryShowAd();
-    void onPrev(cocos2d::CCObject*);
-    void onNext(cocos2d::CCObject*);
-    void onDownload(cocos2d::CCObject*);
-    void onInfo(cocos2d::CCObject*);
-    void onBack(cocos2d::CCObject*);
-    void updatePageWithObject(CCObject*, CCObject*) override;
-    void keyBackClicked();
-    void scrollLayerMoved(cocos2d::CCPoint) override;
-    void keyDown(int);*/
     static MeltdownSelectLayer* create(int);
     static cocos2d::CCScene* scene(int);
     

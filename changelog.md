@@ -1,4 +1,14 @@
 # MoreGames Changelog
+## v1.0.8 (2025-01-17)
+- Big code optimization!
+- SpinOffs levels added on leveltools! (this fix the android crash)
+- ANDROID SUPPORT!
+- SubZeroSelectLayer and MeltdownSelectLayer reworked! now it takes LevelSelectLayer as a base
+- WorldSelectLayer taked for Android!
+- Keyboard not working on world levels fix
+- World levels freeze fix
+- Rework idea taked from GD lunar! very thanks to [Capeling](https://github.com/Capeling)!
+
 ## v1.0.7 (2025-01-10)
 - Null checks on updateGround methods
 - Fix crash when you press the meltdown and subzero buttons for some devices

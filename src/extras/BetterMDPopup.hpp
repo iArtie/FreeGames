@@ -5,16 +5,6 @@
 //Thanks doggo for the popup
 using namespace geode::prelude;
 
-template<typename Base, typename T>
-inline bool instanceof(const T* ptr) {
-    return dynamic_cast<const Base*>(ptr) != nullptr;
-}
-
-
-
-
-	
-
 class BetterMDPopup : public FLAlertLayer
 {
     public:

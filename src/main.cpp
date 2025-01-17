@@ -5,24 +5,13 @@
 #include <Geode/modify/LoadingLayer.hpp>
 #include <Geode/modify/EndLevelLayer.hpp>
 #include <Geode/modify/GJGarageLayer.hpp>
-
-
 #include <Geode/modify/LevelTools.hpp>
-
-#include <Geode/modify/SongsLayer.hpp>
 #include <Geode/Enums.hpp>
-
 #include "hooks/MoreGamesLayer.hpp"
 #include "hooks/MoreGamesLayer.cpp"
-
-
 #include "Meltdown/MeltdownSelectLayer.h"
 #include "SubZero/SubZeroSelectLayer.h"
 #include "World/ownWorldSelectLayer.h"
-
-//#include "WorldSelectLayerDecomp.cpp"
-
-//#include "ownWorldLevelPage.cpp"
 
 using namespace geode::prelude;
 
@@ -107,7 +96,7 @@ class $modify(LevelTools)
 
 
 		switch (levelID) {
-		case 1001:
+		case 1001: //World
 			level->m_levelName = getAudioTitle(23);
 			level->m_audioTrack = 23;
 			level->m_coins = 3;
@@ -128,7 +117,7 @@ class $modify(LevelTools)
 			level->m_stars = 3;
 			level->m_difficulty = GJDifficulty::Hard;
 			break;
-		case 2001:
+		case 2001: //World
 			level->m_levelName = getAudioTitle(27);
 			level->m_audioTrack = 27;
 			level->m_coins = 0;
@@ -207,6 +196,27 @@ class $modify(LevelTools)
 			level->m_requiredCoins = 0;
 			level->m_stars = 3;
 			level->m_difficulty = GJDifficulty::Normal;
+			break;
+		case 4001: //SubZero
+			level->m_levelName = getAudioTitle(37);
+			level->m_audioTrack = 37;
+			level->m_coins = 3;
+			level->m_stars = 4;
+			level->m_difficulty = GJDifficulty::Normal;
+			break;
+		case 4002:
+			level->m_levelName = getAudioTitle(38);
+			level->m_audioTrack = 38;
+			level->m_coins = 3;
+			level->m_stars = 6;
+			level->m_difficulty = GJDifficulty::Hard;
+			break;
+		case 4003:
+			level->m_levelName = getAudioTitle(39);
+			level->m_audioTrack = 39;
+			level->m_coins = 3;
+			level->m_stars = 8;
+			level->m_difficulty = GJDifficulty::Harder;
 			break;
 		default:
 		
@@ -298,9 +308,9 @@ class $modify(GJGarageLayer) {
 		
 		
 	}
-	//L
+	
 };
-//
+
 class $modify(PauseLayer) {
 	void onQuit(CCObject* sender) {
 
@@ -333,42 +343,7 @@ class $modify(PauseLayer) {
 				/*MeltdownScene->m_pBoomScrollLayer->instantMoveToPage(2);
 				colorID = 1;*/
 			}
-		/*	MeltdownScene->m_pBackground->setColor(GameManager::sharedState()->colorForIdx(colorID));
-			auto m_pGround01Sprite = static_cast<CCSpriteBatchNode*>(MeltdownScene->m_pGround->getChildren()->objectAtIndex(3));
-			auto m_pGround02Sprite = static_cast<CCSpriteBatchNode*>(MeltdownScene->m_pGround->getChildren()->objectAtIndex(4));
-
 		
-			CCArray* children = nullptr; 
-
-			if (Loader::get()->getLoadedMod("bitz.darkmode_v4"))
-			{
-				for (int i = 0; i < m_pGround01Sprite->getChildren()->count(); ++i) {
-					if (m_pGround01Sprite != nullptr) {
-						updateGroundColorMeltdown2(m_pGround01Sprite, { 40,40,40 });
-					}
-					if (m_pGround02Sprite != nullptr) {
-						updateGroundColorMeltdown2(m_pGround02Sprite, { 40,40,40 });
-					}
-				}
-			}
-			else
-			{
-				for (int i = 0; i < m_pGround01Sprite->getChildren()->count(); ++i) {
-					if (m_pGround01Sprite != nullptr) {
-						updateGroundColorMeltdown2(m_pGround01Sprite, GameManager::sharedState()->colorForIdx(colorID));
-					}
-					if (m_pGround02Sprite->getChildrenCount() == m_pGround01Sprite->getChildrenCount())
-					{
-						if (m_pGround02Sprite != nullptr) {
-							updateGroundColorMeltdown2(m_pGround02Sprite, GameManager::sharedState()->colorForIdx(colorID));
-						}
-					}
-
-				}
-			}
-			
-			*/
-			/*PauseLayer::onQuit(sender);*/
 			scene->addChild(MeltdownScene);
 			CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene));
 			PauseLayer::onQuit(sender);
@@ -381,13 +356,13 @@ class $modify(PauseLayer) {
 		{
 		
 			auto levelID = GM->m_playLayer->m_level->m_levelID;
-		/*	auto worldScene = ownWorldSelectLayer::create(0);*/
+		
 			auto specificWorldScene = ownWorldSelectLayer::create(0);
 			auto scene = CCScene::create();
 #ifdef GEODE_IS_WINDOWS
 
 			int colorID = 0;
-	// Crear la escena para Windows usando ownWorldSelectLayer
+
 			
 			if (levelID > 2000 && levelID < 2006) {
 				specificWorldScene->m_scrollLayer->instantMoveToPage(0);
@@ -407,7 +382,7 @@ class $modify(PauseLayer) {
 
 			int colorID = 0;
 			auto worldScene = WorldSelectLayer::create(0);
-			// Crear la escena para Android directamente con el índice correspondiente
+			
 			if (levelID > 2000 && levelID < 2006) {
 				worldScene = WorldSelectLayer::create(0);
 				colorID = 4;
@@ -440,68 +415,33 @@ class $modify(PauseLayer) {
 			auto scene = CCScene::create();
 			if (levelID == 4001)
 			{
-				SubZeroScene->m_pBoomScrollLayer->instantMoveToPage(0);
+				SubZeroScene = SubZeroSelectLayer::create(0);
 				colorID = 5;
 			}
 
 			if (levelID == 4002)
 			{
-				SubZeroScene->m_pBoomScrollLayer->instantMoveToPage(1);
+
+				SubZeroScene = SubZeroSelectLayer::create(1);
 				colorID = 9;
 			}
 			if (levelID == 4003)
 			{
-				SubZeroScene->m_pBoomScrollLayer->instantMoveToPage(2);
+
+				SubZeroScene = SubZeroSelectLayer::create(2);
 				colorID = 1;
 			}
-			SubZeroScene->m_pBackground->setColor(GameManager::sharedState()->colorForIdx(colorID));
-			auto m_pGround01Sprite = static_cast<CCSpriteBatchNode*>(SubZeroScene->m_pGround->getChildren()->objectAtIndex(3));
-			auto m_pGround02Sprite = static_cast<CCSpriteBatchNode*>(SubZeroScene->m_pGround->getChildren()->objectAtIndex(4));
-
-			CCArray* children = nullptr; 
-
-			if (Loader::get()->getLoadedMod("bitz.darkmode_v4"))
-			{
-				for (int i = 0; i < m_pGround01Sprite->getChildren()->count(); ++i) {
-					if (m_pGround01Sprite != nullptr) {
-						updateGroundColorMeltdown2(m_pGround01Sprite, { 40,40,40 });
-					}
-					if (m_pGround02Sprite != nullptr) {
-						updateGroundColorMeltdown2(m_pGround02Sprite, { 40,40,40 });
-					}
-				}
-			}
-			else
-			{
-				for (int i = 0; i < m_pGround01Sprite->getChildren()->count(); ++i) {
-					if (m_pGround01Sprite != nullptr) {
-						updateGroundColorMeltdown2(m_pGround01Sprite, GameManager::sharedState()->colorForIdx(colorID));
-					}
-					if (m_pGround02Sprite->getChildrenCount() == m_pGround01Sprite->getChildrenCount())
-					{
-						if (m_pGround02Sprite != nullptr) {
-							updateGroundColorMeltdown2(m_pGround02Sprite, GameManager::sharedState()->colorForIdx(colorID));
-						}
-					}
-
-				}
-			}
-
-			/*PauseLayer::onQuit(sender);*/
+			
 			scene->addChild(SubZeroScene);
 			CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene));
 			PauseLayer::onQuit(sender);
-			/*	PauseLayer::onQuit(sender);*/
+			
 		}
 
 		PauseLayer::onQuit(sender);
 	}
 
-	/*void onEdit(cocos2d::CCObject* sender)
-	{
-		Mod::get()->setSavedValue("onsubzero", 25);
-		PauseLayer::onEdit(sender);
-	}*/
+	
 
 };
 
@@ -521,55 +461,21 @@ class $modify(EndLevelLayer) {
 			auto scene = CCScene::create();
 			if (levelID == 1001)
 			{
-				MeltdownScene->m_pBoomScrollLayer->instantMoveToPage(0);
-				colorID = 5;
+				MeltdownScene = MeltdownSelectLayer::create(0);
+				
 			}
 
 			if (levelID == 1002)
 			{
-				MeltdownScene->m_pBoomScrollLayer->instantMoveToPage(1);
-				colorID = 9;
+				MeltdownScene = MeltdownSelectLayer::create(1);
+			
 			}
 			if (levelID == 1003)
 			{
-				MeltdownScene->m_pBoomScrollLayer->instantMoveToPage(2);
-				colorID = 1;
-			}
-			MeltdownScene->m_pBackground->setColor(GameManager::sharedState()->colorForIdx(colorID));
-			auto m_pGround01Sprite = static_cast<CCSpriteBatchNode*>(MeltdownScene->m_pGround->getChildren()->objectAtIndex(3));
-			auto m_pGround02Sprite = static_cast<CCSpriteBatchNode*>(MeltdownScene->m_pGround->getChildren()->objectAtIndex(4));
-
-			
-			CCArray* children = nullptr; 
-
-			if (Loader::get()->getLoadedMod("bitz.darkmode_v4"))
-			{
-				for (int i = 0; i < m_pGround01Sprite->getChildren()->count(); ++i) {
-					if (m_pGround01Sprite != nullptr) {
-						updateGroundColorMeltdown2(m_pGround01Sprite, { 40,40,40 });
-					}
-					if (m_pGround02Sprite != nullptr) {
-						updateGroundColorMeltdown2(m_pGround02Sprite, { 40,40,40 });
-					}
-				}
-			}
-			else
-			{
-				for (int i = 0; i < m_pGround01Sprite->getChildren()->count(); ++i) {
-					if (m_pGround01Sprite != nullptr) {
-						updateGroundColorMeltdown2(m_pGround01Sprite, GameManager::sharedState()->colorForIdx(colorID));
-					}
-					if (m_pGround02Sprite->getChildrenCount() == m_pGround01Sprite->getChildrenCount())
-					{
-						if (m_pGround02Sprite != nullptr) {
-							updateGroundColorMeltdown2(m_pGround02Sprite, GameManager::sharedState()->colorForIdx(colorID));
-						}
-					}
-
-				}
+				MeltdownScene = MeltdownSelectLayer::create(2);
+				
 			}
 
-			
 			scene->addChild(MeltdownScene);
 			CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene));
 			EndLevelLayer::onMenu(sender);
@@ -631,62 +537,29 @@ class $modify(EndLevelLayer) {
 
 		if (GM->m_playLayer->m_level->m_levelID > 4000 && GM->m_playLayer->m_level->m_levelID < 4004)
 		{
-			
 			auto levelID = GM->m_playLayer->m_level->m_levelID;
 			auto SubZeroScene = SubZeroSelectLayer::create(0);
 			int colorID = 0;
 			auto scene = CCScene::create();
 			if (levelID == 4001)
 			{
-				SubZeroScene->m_pBoomScrollLayer->instantMoveToPage(0);
+				SubZeroScene = SubZeroSelectLayer::create(0);
 				colorID = 5;
 			}
 
 			if (levelID == 4002)
 			{
-				SubZeroScene->m_pBoomScrollLayer->instantMoveToPage(1);
+
+				SubZeroScene = SubZeroSelectLayer::create(1);
 				colorID = 9;
 			}
 			if (levelID == 4003)
 			{
-				SubZeroScene->m_pBoomScrollLayer->instantMoveToPage(2);
+
+				SubZeroScene = SubZeroSelectLayer::create(2);
 				colorID = 1;
 			}
-			SubZeroScene->m_pBackground->setColor(GameManager::sharedState()->colorForIdx(colorID));
-			auto m_pGround01Sprite = static_cast<CCSpriteBatchNode*>(SubZeroScene->m_pGround->getChildren()->objectAtIndex(3));
-			auto m_pGround02Sprite = static_cast<CCSpriteBatchNode*>(SubZeroScene->m_pGround->getChildren()->objectAtIndex(4));
 
-			
-			CCArray* children = nullptr; 
-
-			if (Loader::get()->getLoadedMod("bitz.darkmode_v4"))
-			{
-				for (int i = 0; i < m_pGround01Sprite->getChildren()->count(); ++i) {
-					if (m_pGround01Sprite != nullptr) {
-						updateGroundColorMeltdown2(m_pGround01Sprite, { 40,40,40 });
-					}
-					if (m_pGround02Sprite != nullptr) {
-						updateGroundColorMeltdown2(m_pGround02Sprite, { 40,40,40 });
-					}
-				}
-			}
-			else
-			{
-				for (int i = 0; i < m_pGround01Sprite->getChildren()->count(); ++i) {
-					if (m_pGround01Sprite != nullptr) {
-						updateGroundColorMeltdown2(m_pGround01Sprite, GameManager::sharedState()->colorForIdx(colorID));
-					}
-					if (m_pGround02Sprite->getChildrenCount() == m_pGround01Sprite->getChildrenCount())
-					{
-						if (m_pGround02Sprite != nullptr) {
-							updateGroundColorMeltdown2(m_pGround02Sprite, GameManager::sharedState()->colorForIdx(colorID));
-						}
-					}
-
-				}
-			}
-
-			
 			scene->addChild(SubZeroScene);
 			CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene));
 			EndLevelLayer::onMenu(sender);

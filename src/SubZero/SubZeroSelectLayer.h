@@ -3,8 +3,11 @@
 
 #include "cocos2d.h"
 
+//
+//class SubZeroSelectLayer : public cocos2d::CCLayer, public BoomScrollLayerDelegate, public DynamicScrollDelegate
 
-class SubZeroSelectLayer : public cocos2d::CCLayer, public BoomScrollLayerDelegate, public DynamicScrollDelegate
+class SubZeroSelectLayer : public LevelSelectLayer
+
 {
 public:
     float m_fWindowWidth;
@@ -17,19 +20,7 @@ public:
     bool m_bSecretMenuCoin;
 
 public:
-    cocos2d::ccColor3B colorForPage(int);
-    cocos2d::ccColor3B getColorValue(int, int, float);
     bool init(int);
-    bool tryShowAd();
-    void onPrev(cocos2d::CCObject*);
-    void onNext(cocos2d::CCObject*);
-    void onDownload(cocos2d::CCObject*);
-    void onInfo(cocos2d::CCObject*);
-    void onBack(cocos2d::CCObject*);
-    void updatePageWithObject(CCObject*, CCObject*) override;
-    void keyBackClicked();
-    void scrollLayerMoved(cocos2d::CCPoint) override;
-    void keyDown(int);
     static SubZeroSelectLayer* create(int);
     static cocos2d::CCScene* scene(int);
     
