@@ -6,7 +6,8 @@
 	"developer": "BitZ",
 	"description": "All free Geometry Dash games within a single mod!",
 	"gd": {
-		"win": "2.2074"
+		"win": "2.2074",
+		"android": "2.2074"
 	},
 	"links": {
 		"source": "https://github.com/iArtie/FreeGames",
