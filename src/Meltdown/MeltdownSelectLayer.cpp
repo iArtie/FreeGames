@@ -48,7 +48,7 @@ bool MeltdownSelectLayer::init(int page)
 	auto GLM = GameLevelManager::sharedState();
 	for (auto [id, name] : levels) {
 		auto level = GLM->getMainLevel(id, true);
-		
+		level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(id);
 		m_scrollLayer->m_dynamicObjects->addObject(level);
 	}
 

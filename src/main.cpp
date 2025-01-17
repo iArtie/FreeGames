@@ -100,7 +100,6 @@ class $modify(LevelTools)
 			level->m_levelName = getAudioTitle(23);
 			level->m_audioTrack = 23;
 			level->m_coins = 3;
-			level->m_requiredCoins = 3;
 			level->m_stars = 1;
 			level->m_difficulty = GJDifficulty::Easy;
 			level->m_levelType = GJLevelType::Local;
@@ -109,7 +108,6 @@ class $modify(LevelTools)
 			level->m_levelName = getAudioTitle(24);
 			level->m_audioTrack = 24;
 			level->m_coins = 3;
-			level->m_requiredCoins = 3;
 			level->m_stars = 2;
 			level->m_difficulty = GJDifficulty::Normal;
 			level->m_levelType = GJLevelType::Local;
@@ -118,7 +116,6 @@ class $modify(LevelTools)
 			level->m_levelName = getAudioTitle(25);
 			level->m_audioTrack = 25;
 			level->m_coins = 3;
-			level->m_requiredCoins = 3;
 			level->m_stars = 3;
 			level->m_difficulty = GJDifficulty::Hard;
 			level->m_levelType = GJLevelType::Local;
@@ -217,7 +214,6 @@ class $modify(LevelTools)
 			level->m_levelName = getAudioTitle(37);
 			level->m_audioTrack = 37;
 			level->m_coins = 3;
-			level->m_requiredCoins = 3;
 			level->m_stars = 4;
 			level->m_difficulty = GJDifficulty::Normal;
 			level->m_levelType = GJLevelType::Local;
@@ -226,7 +222,6 @@ class $modify(LevelTools)
 			level->m_levelName = getAudioTitle(38);
 			level->m_audioTrack = 38;
 			level->m_coins = 3;
-			level->m_requiredCoins = 3;
 			level->m_stars = 6;
 			level->m_difficulty = GJDifficulty::Hard;
 			level->m_levelType = GJLevelType::Local;
@@ -235,7 +230,6 @@ class $modify(LevelTools)
 			level->m_levelName = getAudioTitle(39);
 			level->m_audioTrack = 39;
 			level->m_coins = 3;
-			level->m_requiredCoins = 3;
 			level->m_stars = 8;
 			level->m_difficulty = GJDifficulty::Harder;
 			level->m_levelType = GJLevelType::Local;
