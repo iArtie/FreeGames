@@ -2534,7 +2534,7 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
        /* std::string dir = geode::Mod::get()->getResourcesDir().string();
         std::ifstream mt(dir + "/2001.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
-        level21 = GLM->getMainLevel(2001, false);
+        level21 = GLM->getMainLevel(2001, true);
      /*   level21->m_levelName = "Payload";
         level21->m_levelType = GJLevelType::Local;
         level21->m_stars = 2;
@@ -2552,7 +2552,7 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         std::ifstream mt(dir + "/2002.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
 
-        level21 = GLM->getMainLevel(2002, false);
+        level21 = GLM->getMainLevel(2002, true);
        /* level21->m_levelName = "Beast Mode";
         level21->m_stars = 2;
         level21->m_levelType = GJLevelType::Local;
@@ -2570,7 +2570,7 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         std::ifstream mt(dir + "/2003.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
 
-        level21 = GLM->getMainLevel(2003, false);
+        level21 = GLM->getMainLevel(2003, true);
      /*   level21->m_levelName = "Machina";
         level21->m_stars = 3;
         level21->m_levelType = GJLevelType::Local;
@@ -2588,7 +2588,7 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         std::ifstream mt(dir + "/2004.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
 
-        level21 = GLM->getMainLevel(2004, false);
+        level21 = GLM->getMainLevel(2004, true);
     /*    level21->m_levelName = "Years";
         level21->m_stars = 3;
         level21->m_levelType = GJLevelType::Local;
@@ -2606,7 +2606,7 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
 
 
-        level21 = GLM->getMainLevel(2005, false);
+        level21 = GLM->getMainLevel(2005, true);
       /*  level21->m_levelName = "Frontlines";
         level21->m_stars = 3;
         level21->m_levelType = GJLevelType::Local;
@@ -2623,7 +2623,7 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         std::ifstream mt(dir + "/2006.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
 
-        level21 = GLM->getMainLevel(2006, false);
+        level21 = GLM->getMainLevel(2006, true);
       /*  level21->m_levelName = "Space Pirates";
         level21->m_stars = 3;
         level21->m_levelType = GJLevelType::Local;
@@ -2640,7 +2640,7 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         std::ifstream mt(dir + "/2007.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
 
-        level21 = GLM->getMainLevel(2007, false);
+        level21 = GLM->getMainLevel(2007, true);
        /* level21->m_levelName = "Striker";
         level21->m_stars = 3;
         level21->m_levelType = GJLevelType::Local;
@@ -2657,7 +2657,7 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         std::ifstream mt(dir + "/2008.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
 
-        level21 = GLM->getMainLevel(2008, false);
+        level21 = GLM->getMainLevel(2008, true);
        /* level21->m_levelName = "Embers";
         level21->m_stars = 3;
         level21->m_levelType = GJLevelType::Local;
@@ -2674,7 +2674,7 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         std::ifstream mt(dir + "/2009.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
 
-        level21 = GLM->getMainLevel(2009, false);
+        level21 = GLM->getMainLevel(2009, true);
         //level21->m_levelName = "Round 1";
         //level21->m_stars = 3;
         //level21->m_levelType = GJLevelType::Local;
@@ -2691,7 +2691,7 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         std::ifstream mt(dir + "/2010.txt");
         std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
 
-        level21 = GLM->getMainLevel(2010, false);
+        level21 = GLM->getMainLevel(2010, true);
       /*  level21->m_levelName = "Monster Dance Off";
         level21->m_stars = 3;
         level21->m_levelType = GJLevelType::Local;

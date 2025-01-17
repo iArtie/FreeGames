@@ -214,28 +214,7 @@ class $modify(LevelTools)
 		}
 
 
-		return level;//LevelTools::getLevel(levelID, getString);
-
-		//// Configurar niveles usando un vector
-		//std::vector<std::tuple<int, const char*, int, int, int, GJDifficulty>> levels = {
-		//	{1001, "The Seven Seas", 1, 3, 23, GJDifficulty::Easy},
-		//	{1002, "Viking Arena", 2, 3, 24, GJDifficulty::Normal},
-		//	{1003, "Airborne Robots", 3, 3, 25, GJDifficulty::Hard}
-		//};
-
-		//// Buscar el nivel correspondiente en el vector
-		//for (auto [id, name, stars, coins, track, difficulty] : levels) {
-		//	if (level->m_levelID == id) {
-		//		level->m_levelName = name;
-		//		level->m_audioTrack = track;
-		//		level->m_coins = coins;
-		//		level->m_levelType = GJLevelType::Local;  // Asumiendo que el tipo es Local
-		//		level->m_creatorName = "RobTop";
-		//		break;
-		//	}
-		//}
-
-
+		return level;
 	}
 
 	
