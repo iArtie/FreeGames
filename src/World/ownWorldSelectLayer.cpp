@@ -1770,37 +1770,6 @@ void ownWorldSelectLayer::runParticle()
     particles->addChild(circlewave2, 2);
 }
 
-
-//void WorldSelectLayerDecomp::createIslands() {
-//  /*  CCString* path = CCString::createWithFormat(
-//        "worldIsland_%02d.png",
-//        m_index
-//    );
-//
-//    CCSprite* sprite = CCSprite::createWithSpriteFrameName(
-//        path->getCString()
-//    );
-//
-//    return sprite;*/
-//}
-//void WorldSelectLayerDecomp::setupWorlds() {
-//    /// @todo
-//}
-
-//void ownWorldSelectLayer::updatePageWithObject(CCObject* page, CCObject* object) {
-//    GJGameLevel* level = static_cast<GJGameLevel*>(object);
-//    static_cast<LevelPage*>(page)->updateDynamicPage(level);
-//    auto lol = Mod::get()->getSavedValue<int>("meltdownlevel");
-//
-//    /* updateColors();*/
-//}
-
-//CCSprite* ownWorldSelectLayer::createBackground() {
-//   
-//
-//    return background;
-//}
-
 CCNode* ownWorldSelectLayer::createSideArt() {
     CCNode* sideArt = CCNode::create();
 
@@ -1829,64 +1798,6 @@ CCNode* ownWorldSelectLayer::createSideArt() {
 
 
 }
-
-
-//void WorldSelectLayerDecomp::updatePageWithObject(CCObject* page, CCObject* object) {
-//    GJGameLevel* level = static_cast<GJGameLevel*>(object);
-//    static_cast<LevelPage*>(page)->updateDynamicPage(level);
-//    
-//  /*  std::cout << page << std::endl;*/
-//   /* auto lol = Mod::get()->getSavedValue<int>("subzerolevellol");*/
-//  /*  if (level->m_levelID == 4001)
-//    {
-//        lol = 1;
-//    }
-//
-//    if (level->m_levelID == 4002)
-//    {
-//        lol = 2;
-//    }
-//
-//    if (level->m_levelID == 4003)
-//    {
-//        lol = 3;
-//    }
-//    if (level->m_levelID == -1)
-//    {
-//        lol = 4;
-//    }*/
-//
-//   /* Mod::get()->setSavedValue("subzerolevellol", lol);*/
-//    /* updateColors();*/
-//}
-//
-//CCNode* WorldSelectLayerDecomp::createArrows() {
-//    CCMenu* btnMenu = CCMenu::create();
-//   
-//    auto director = CCDirector::sharedDirector();
-//    auto winSize = director->getWinSize();
-//    CCSprite* leftSpr = CCSprite::createWithSpriteFrameName("navArrowBtn_001.png");
-//    leftSpr->setFlipX(true);
-//
-//    CCMenuItemSpriteExtra* leftBtn = CCMenuItemSpriteExtra::create(leftSpr, this, menu_selector(LevelInfoLayer::onGarage));
-//    btnMenu->addChild(leftBtn);
-//
-//
-//    leftBtn->setPosition(btnMenu->convertToNodeSpace(ccp(director->getScreenLeft() + 25.f, winSize.height / 2)));
-//    leftBtn->setScale(0.7);
-//
-//
-//    CCSprite* rightSpr = CCSprite::createWithSpriteFrameName("navArrowBtn_001.png");
-//
-//    CCMenuItemSpriteExtra* rightBtn = CCMenuItemSpriteExtra::create(rightSpr, this, menu_selector(WorldSelectLayerDecomp::onNext));
-//    
-//    btnMenu->addChild(rightBtn);
-//
-//    rightBtn->setPosition(btnMenu->convertToNodeSpace(ccp(director->getScreenRight() - 25.f, winSize.height / 2)));
-//    rightBtn->setScale(0.7);
-//
-//    return btnMenu;
-//}
 
 void ownWorldSelectLayer::keyBackClicked() {
     auto back = Mod::get()->getSavedValue<int>("onsubzero");
@@ -1958,155 +1869,57 @@ void ownWorldSelectLayer::onWorldLevel(CCObject* sender) {
    
     if (button->getTag() == 30)
     {
-     /*   std::string dir = geode::Mod::get()->getResourcesDir().string();
-        std::ifstream mt(dir + "/2001.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
         level = GLM->getMainLevel(2001, true);
-        level->m_levelName = "Payload";
-        level->m_stars = 2;
-        level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(2001);
-        level->m_audioTrack = 27;
-        level->m_difficulty = GJDifficulty::Easy;
-        level->m_creatorName = "RobTopGames";
-        level->m_requiredCoins = 0;
-        level->m_coins = 0;
+		level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(2001);
     }
     if (button->getTag() == 31)
     {
-    /*    std::string dir = geode::Mod::get()->getResourcesDir().string();
-        std::ifstream mt(dir + "/2002.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
-        level = GLM->getMainLevel(2002, false);
-        level->m_levelName = "Beast Mode";
-        level->m_stars = 2;
+        level = GLM->getMainLevel(2002, true);
         level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(2002);
-        level->m_audioTrack = 28;
-        level->m_difficulty = GJDifficulty::Easy;
-        level->m_creatorName = "RobTopGames";
-        level->m_requiredCoins = 0;
-        level->m_coins = 0;
     }
     if (button->getTag() == 32)
     {
-     /*   std::string dir = geode::Mod::get()->getResourcesDir().string();
-        std::ifstream mt(dir + "/2003.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
-        level = GLM->getMainLevel(2003, false);
-        level->m_levelName = "Machina";
-        level->m_stars = 3;
+        level = GLM->getMainLevel(2003, true);
         level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(2003);
-        level->m_audioTrack = 29;
-        level->m_difficulty = GJDifficulty::Normal;
-        level->m_creatorName = "RobTopGames";
-        level->m_requiredCoins = 0;
-        level->m_coins = 0;
     }
     if (button->getTag() == 33)
     {
-      /*  std::string dir = geode::Mod::get()->getResourcesDir().string();
-        std::ifstream mt(dir + "/2004.txt");
-
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
-        level = GLM->getMainLevel(2004, false);
-        level->m_levelName = "Years";
-        level->m_stars = 3;
+        level = GLM->getMainLevel(2004, true);
         level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(2004);
-        level->m_audioTrack = 30;
-        level->m_difficulty = GJDifficulty::Normal;
-        level->m_creatorName = "RobTopGames";
-        level->m_requiredCoins = 0;
-        level->m_coins = 0;
+      
     }
     if (button->getTag() == 34)
     {
-        /*std::string dir = geode::Mod::get()->getResourcesDir().string();
-        std::ifstream mt(dir + "/2005.txt");
-
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
-        level = GLM->getMainLevel(2005, false);
-        level->m_levelName = "Frontlines";
-        level->m_stars = 3;
+        level = GLM->getMainLevel(2005, true);
         level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(2005);
-        level->m_audioTrack = 31;
-        level->m_difficulty = GJDifficulty::Normal;
-        level->m_creatorName = "RobTopGames";
-        level->m_requiredCoins = 0;
-        level->m_coins = 0;
+      
     }
     if (button->getTag() == 35)
     {
-     /*   std::string dir = geode::Mod::get()->getResourcesDir().string();
-        std::ifstream mt(dir + "/2006.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
-        level = GLM->getMainLevel(2006, false);
-        level->m_levelName = "Space Pirates";
-        level->m_stars = 3;
+        level = GLM->getMainLevel(2006, true);
         level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(2006);
-        level->m_audioTrack = 32;
-        level->m_difficulty = GJDifficulty::Normal;
-        level->m_creatorName = "RobTopGames";
-        level->m_requiredCoins = 0;
-        level->m_coins = 0;
+       
     }
     if (button->getTag() == 36)
     {
-       /* std::string dir = geode::Mod::get()->getResourcesDir().string();
-        std::ifstream mt(dir + "/2007.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
-        level = GLM->getMainLevel(2007, false);
-        level->m_levelName = "Striker";
-        level->m_stars = 3;
+        level = GLM->getMainLevel(2007, true);
         level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(2007);
-        level->m_audioTrack = 33;
-        level->m_difficulty = GJDifficulty::Normal;
-        level->m_creatorName = "RobTopGames";
-        level->m_requiredCoins = 0;
-        level->m_coins = 0;
+       
     }
     if (button->getTag() == 37)
     {
-     /*   std::string dir = geode::Mod::get()->getResourcesDir().string();
-        std::ifstream mt(dir + "/2008.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
-        level = GLM->getMainLevel(2008, false);
-        level->m_levelName = "Embers";
-        level->m_stars = 3;
+        level = GLM->getMainLevel(2008, true);
         level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(2008);
-        level->m_audioTrack = 34;
-        level->m_difficulty = GJDifficulty::Normal;
-        level->m_creatorName = "RobTopGames";
-        level->m_requiredCoins = 0;
-        level->m_coins = 0;
     }
     if (button->getTag() == 38)
     {
-       /* std::string dir = geode::Mod::get()->getResourcesDir().string();
-        std::ifstream mt(dir + "/2009.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
-        level = GLM->getMainLevel(2009, false);
-        level->m_levelName = "Round 1";
-        level->m_stars = 3;
+        level = GLM->getMainLevel(2009, true);
         level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(2009);
-        level->m_audioTrack = 35;
-        level->m_difficulty = GJDifficulty::Normal;
-        level->m_creatorName = "RobTopGames";
-        level->m_requiredCoins = 0;
-        level->m_coins = 0;
     }
     if (button->getTag() == 39)
     {
-        //std::string dir = geode::Mod::get()->getResourcesDir().string();
-        //std::ifstream mt(dir + "/2010.txt");
-        //std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
-        level = GLM->getMainLevel(2010, false);
-        level->m_levelName = "Monster Dance Off";
-        level->m_stars = 3;
+        level = GLM->getMainLevel(2010, true);
         level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(2010);
-        level->m_audioTrack = 36;
-        level->m_difficulty = GJDifficulty::Normal;
-        level->m_creatorName = "RobTopGames";
-        level->m_requiredCoins = 0;
-        level->m_coins = 0;
     }
 
     auto playBtn = CCMenuItemSpriteExtra::create(CCSprite::createWithSpriteFrameName("GJ_playBtn2_001.png"), this, menu_selector(ownWorldSelectLayer::onPlay));
@@ -2255,54 +2068,6 @@ void ownWorldSelectLayer::onWorldLevel(CCObject* sender) {
 
 }
 
-//void ownWorldSelectLayer::instantPage(CCObject* sender, int a1) {
-//
-//    if (a1 == 1)
-//    {
-//        auto GM = GameManager::sharedState();
-//        CCSprite* BG = (CCSprite*)m_background;
-//        /* BG->setColor(GM->colorForIdx(6));*/
-//        auto extendedLayer = (ExtendedLayer*)m_scrollLayer->getChildren()->objectAtIndex(0);
-//
-//        /* extendedLayer->setPositionX(-569);*/
-//        m_scrollLayer->instantMoveToPage(0);
-//    }
-//    if (a1 == 2)
-//    {
-//        auto GM = GameManager::sharedState();
-//        CCSprite* BG = (CCSprite*)m_background;
-//        BG->setColor(GM->colorForIdx(6));
-//        auto extendedLayer = (ExtendedLayer*)m_scrollLayer->getChildren()->objectAtIndex(0);
-//
-//        /* extendedLayer->setPositionX(-569);*/
-//        m_scrollLayer->instantMoveToPage(1);
-//    }
-//    if (a1 == 3)
-//    {
-//        auto GM = GameManager::sharedState();
-//        CCSprite* BG = (CCSprite*)m_background;
-//        BG->setColor(GM->colorForIdx(17));
-//        auto extendedLayer = (ExtendedLayer*)m_scrollLayer->getChildren()->objectAtIndex(0);
-//
-//        /* extendedLayer->setPositionX(-569);*/
-//        m_scrollLayer->instantMoveToPage(1);
-//    }
-//    if (a1 == 3)
-//    {
-//        auto GM = GameManager::sharedState();
-//        CCSprite* BG = (CCSprite*)m_background;
-//        /*BG->setColor(GM->colorForIdx(6));*/
-//        auto extendedLayer = (ExtendedLayer*)m_scrollLayer->getChildren()->objectAtIndex(0);
-//
-//        /* extendedLayer->setPositionX(-569);*/
-//        m_scrollLayer->instantMoveToPage(2);
-//    }
-//    /*m_sscrollLayer->instantMoveToPage(a1);*/
-//    /*m_scrollLayer->moveToPage(a1);*/
-//    /*  currentColorIndex = (currentColorIndex - 1 + numColors) % numColors;*/
-//      /*  updateColors();*/
-// /*   scrollLayerMoved({ 0, 0 });*/
-//}
 void ownWorldSelectLayer::onPlay(CCObject* sender) {
 	auto currentScene = CCDirector::sharedDirector()->getRunningScene();
 
@@ -2456,25 +2221,23 @@ void ownWorldSelectLayer::onClose(CCObject*) {
 
 void ownWorldSelectLayer::updatePageWithObject(CCObject* page, CCObject* object) {
     if (!page || !object) {
-        // Maneja el caso de punteros nulos
-        std::cerr << "Error: 'updatePageWithObject' is null." << std::endl;
+       
         return;
     }
 
     GJGameLevel* level = static_cast<GJGameLevel*>(object);
-    std::cout << "LEVELID BEFORE CASTING: " << level->m_levelID << std::endl;
+  
 
     LevelPage* levelPage = dynamic_cast<LevelPage*>(page);
 
     if (!levelPage) {
 
-        std::cerr << "Error: 'page' is not 'LevelPage' type." << std::endl;
+       
         return;
     }
 
     levelPage->updateDynamicPage(level);
 
-    std::cout << "LEVELID IN UPDATEPAGEWITHOBJECT: " << level->m_levelID << std::endl;
 }
 
 
@@ -2531,209 +2294,49 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
     int levellol = 0;
     if (lol == 30)
     {
-       /* std::string dir = geode::Mod::get()->getResourcesDir().string();
-        std::ifstream mt(dir + "/2001.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
         level21 = GLM->getMainLevel(2001, true);
-     /*   level21->m_levelName = "Payload";
-        level21->m_levelType = GJLevelType::Local;
-        level21->m_stars = 2;
-        level21->m_levelString = mtext;
-        level21->m_audioTrack = 27;
-        level21->m_difficulty = GJDifficulty::Normal;
-        level21->m_creatorName = "RobTopGames";
-        level21->m_requiredCoins = 0;
-        level21->m_coins = 0;*/
     }
 
     if (lol == 31)
     {
-       /* std::string dir = geode::Mod::get()->getResourcesDir().string();
-        std::ifstream mt(dir + "/2002.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
-
+     
         level21 = GLM->getMainLevel(2002, true);
-       /* level21->m_levelName = "Beast Mode";
-        level21->m_stars = 2;
-        level21->m_levelType = GJLevelType::Local;
-        level21->m_levelString = mtext;
-        level21->m_audioTrack = 28;
-        level21->m_difficulty = GJDifficulty::Normal;
-        level21->m_creatorName = "RobTopGames";
-        level21->m_requiredCoins = 0;
-        level21->m_coins = 0;*/
+     
     }
 
     if (lol == 32)
     {
-        /*std::string dir = geode::Mod::get()->getResourcesDir().string();
-        std::ifstream mt(dir + "/2003.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
-
         level21 = GLM->getMainLevel(2003, true);
-     /*   level21->m_levelName = "Machina";
-        level21->m_stars = 3;
-        level21->m_levelType = GJLevelType::Local;
-        level21->m_levelString = mtext;
-        level21->m_audioTrack = 29;
-        level21->m_difficulty = GJDifficulty::Normal;
-        level21->m_creatorName = "RobTopGames";
-        level21->m_requiredCoins = 0;
-        level21->m_coins = 0;*/
     }
 
     if (lol == 33)
     {
-       /* std::string dir = geode::Mod::get()->getResourcesDir().string();
-        std::ifstream mt(dir + "/2004.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
-
         level21 = GLM->getMainLevel(2004, true);
-    /*    level21->m_levelName = "Years";
-        level21->m_stars = 3;
-        level21->m_levelType = GJLevelType::Local;
-        level21->m_levelString = mtext;
-        level21->m_audioTrack = 30;
-        level21->m_difficulty = GJDifficulty::Normal;
-        level21->m_creatorName = "RobTopGames";
-        level21->m_requiredCoins = 0;
-        level21->m_coins = 0;*/
     }
     if (lol == 34)
     {
-      /*  std::string dir = geode::Mod::get()->getResourcesDir().string();
-        std::ifstream mt(dir + "/2005.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
-
-
         level21 = GLM->getMainLevel(2005, true);
-      /*  level21->m_levelName = "Frontlines";
-        level21->m_stars = 3;
-        level21->m_levelType = GJLevelType::Local;
-        level21->m_levelString = mtext;
-        level21->m_audioTrack = 31;
-        level21->m_difficulty = GJDifficulty::Normal;
-        level21->m_creatorName = "RobTopGames";
-        level21->m_requiredCoins = 0;
-        level21->m_coins = 0;*/
     }
     if (lol == 35)
     {
-       /* std::string dir = geode::Mod::get()->getResourcesDir().string();
-        std::ifstream mt(dir + "/2006.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
-
         level21 = GLM->getMainLevel(2006, true);
-      /*  level21->m_levelName = "Space Pirates";
-        level21->m_stars = 3;
-        level21->m_levelType = GJLevelType::Local;
-        level21->m_levelString = mtext;
-        level21->m_audioTrack = 32;
-        level21->m_difficulty = GJDifficulty::Normal;
-        level21->m_creatorName = "RobTopGames";
-        level21->m_requiredCoins = 0;
-        level21->m_coins = 0;*/
     }
     if (lol == 36)
     {
-      /*  std::string dir = geode::Mod::get()->getResourcesDir().string();
-        std::ifstream mt(dir + "/2007.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
-
         level21 = GLM->getMainLevel(2007, true);
-       /* level21->m_levelName = "Striker";
-        level21->m_stars = 3;
-        level21->m_levelType = GJLevelType::Local;
-        level21->m_levelString = mtext;
-        level21->m_audioTrack = 33;
-        level21->m_difficulty = GJDifficulty::Normal;
-        level21->m_creatorName = "RobTopGames";
-        level21->m_requiredCoins = 0;
-        level21->m_coins = 0;*/
     }
     if (lol == 37)
     {
-       /* std::string dir = geode::Mod::get()->getResourcesDir().string();
-        std::ifstream mt(dir + "/2008.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
-
         level21 = GLM->getMainLevel(2008, true);
-       /* level21->m_levelName = "Embers";
-        level21->m_stars = 3;
-        level21->m_levelType = GJLevelType::Local;
-        level21->m_levelString = mtext;
-        level21->m_audioTrack = 34;
-        level21->m_difficulty = GJDifficulty::Normal;
-        level21->m_creatorName = "RobTopGames";
-        level21->m_requiredCoins = 0;
-        level21->m_coins = 0;*/
     }
     if (lol == 38)
     {
-      /*  std::string dir = geode::Mod::get()->getResourcesDir().string();
-        std::ifstream mt(dir + "/2009.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
-
         level21 = GLM->getMainLevel(2009, true);
-        //level21->m_levelName = "Round 1";
-        //level21->m_stars = 3;
-        //level21->m_levelType = GJLevelType::Local;
-        //level21->m_levelString = mtext;
-        //level21->m_audioTrack = 35;
-        //level21->m_difficulty = GJDifficulty::Normal;
-        //level21->m_creatorName = "RobTopGames";
-        //level21->m_requiredCoins = 0;
-        //level21->m_coins = 0;
     }
     if (lol == 39)
     {
-     /*   std::string dir = geode::Mod::get()->getResourcesDir().string();
-        std::ifstream mt(dir + "/2010.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
-
         level21 = GLM->getMainLevel(2010, true);
-      /*  level21->m_levelName = "Monster Dance Off";
-        level21->m_stars = 3;
-        level21->m_levelType = GJLevelType::Local;
-        level21->m_levelString = mtext;
-        level21->m_audioTrack = 36;
-        level21->m_difficulty = GJDifficulty::Normal;
-        level21->m_creatorName = "RobTopGames";
-        level21->m_requiredCoins = 0;
-        level21->m_coins = 0;*/
     }
-
-    /*std::cout << levellol << std::endl;*/
 
     sLOLwshow2(level21);
 }
-
-
-
-
-
-
-//void MeltdownSelectLevelLayer::updateColors() {
-//    ccColor3B color2 = colors2[currentColorIndex2];
-//    m_background->setColor(color2);
-//    m_ground->updateGround01Color(color2);
-//    m_ground->updateGround02Color(color2);
-//}
-//void MeltdownSelectLevelLayer::pageNumberForPosition(CCPoint point) {
-//    log::info("scrollLayerMoved");
-//
-//    std::cout << "Works!" << std::endl;
-//    ccColor3B color = getColorValue(m_level, m_level - 1, 12);
-//    m_background->setColor(color);
-//    ccColor3B Color1 = color;
-//    Color1.r = color.r * 0.8;
-//    Color1.g = color.g * 0.8;
-//    Color1.b = color.b * 0.8;
-//    m_ground->updateGround01Color(Color1);
-//
-//    ccColor3B Color2 = color;
-//    Color2.r = color.r * 0.9;
-//    Color2.g = color.g * 0.9;
-//    Color2.b = color.b * 0.9;
-//    m_ground->updateGround02Color(Color2);
-//}
