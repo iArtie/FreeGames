@@ -97,6 +97,72 @@ class $modify(LoadingLayer)
 	
 };
 
+class $modify(LevelTools)
+{
+	static GJGameLevel* getLevel(int levelID, bool getString)
+	{
+		
+
+		GJGameLevel* level = GJGameLevel::create();
+
+
+		switch (levelID) {
+		case 1001:
+			
+			level->m_levelName = getAudioTitle(23);
+			level->m_audioTrack = 23;
+			level->m_coins = 3;
+			level->m_stars = 1;
+			level->m_difficulty = GJDifficulty::Easy;
+			break;
+		case 1002:
+			
+			level->m_levelName = getAudioTitle(24);
+			level->m_audioTrack = 24;
+			level->m_coins = 3;
+			level->m_stars = 2;
+			level->m_difficulty = GJDifficulty::Normal;
+			break;
+		case 1003:
+		
+			level->m_levelName = getAudioTitle(25);
+			level->m_audioTrack = 25;
+			level->m_coins = 3;
+			level->m_stars = 3;
+			level->m_difficulty = GJDifficulty::Hard;
+			break;
+		default:
+		
+			return LevelTools::getLevel(levelID, getString);
+		}
+
+
+		return level;//LevelTools::getLevel(levelID, getString);
+
+		//// Configurar niveles usando un vector
+		//std::vector<std::tuple<int, const char*, int, int, int, GJDifficulty>> levels = {
+		//	{1001, "The Seven Seas", 1, 3, 23, GJDifficulty::Easy},
+		//	{1002, "Viking Arena", 2, 3, 24, GJDifficulty::Normal},
+		//	{1003, "Airborne Robots", 3, 3, 25, GJDifficulty::Hard}
+		//};
+
+		//// Buscar el nivel correspondiente en el vector
+		//for (auto [id, name, stars, coins, track, difficulty] : levels) {
+		//	if (level->m_levelID == id) {
+		//		level->m_levelName = name;
+		//		level->m_audioTrack = track;
+		//		level->m_coins = coins;
+		//		level->m_levelType = GJLevelType::Local;  // Asumiendo que el tipo es Local
+		//		level->m_creatorName = "RobTop";
+		//		break;
+		//	}
+		//}
+
+
+	}
+
+	
+};
 class $modify(MenuLayer) {
 	void onMoreGames(CCObject*) {
 
