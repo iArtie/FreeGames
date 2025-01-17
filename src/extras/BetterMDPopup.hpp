@@ -11,6 +11,10 @@ inline bool instanceof(const T* ptr) {
 }
 
 
+
+
+	
+
 class BetterMDPopup : public FLAlertLayer
 {
     public:

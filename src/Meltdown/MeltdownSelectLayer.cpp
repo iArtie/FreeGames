@@ -73,7 +73,7 @@ bool MeltdownSelectLayer::init(int page)
 	auto GLM = GameLevelManager::sharedState();
 	for (auto [id, name, stars, coins, track, difficulty] : levels) {
 		auto level = GLM->getMainLevel(id, true);
-		level->m_levelName = name;
+		level->m_levelName = LevelTools::getAudioTitle(track);
 		level->m_stars = stars;
 		level->m_coins = coins;
 		level->m_levelType = GJLevelType::Local;
@@ -83,7 +83,9 @@ bool MeltdownSelectLayer::init(int page)
 		m_scrollLayer->m_dynamicObjects->addObject(level);
 	}
 
-
+	/*for (int i = 1001; i < 1004; i++) {
+		m_scrollLayer->m_dynamicObjects->addObject(MeltdownSelectLayer::getSpinoffLevels(i,true));
+	}*/
 	auto comingSoon = GJGameLevel::create();
 	comingSoon->m_levelID = -1;
 	m_scrollLayer->m_dynamicObjects->addObject(comingSoon);
@@ -341,6 +343,7 @@ cocos2d::ccColor3B MeltdownSelectLayer::colorForPage(int page)
 
 	return GM->colorForIdx(0);
 }
+
 
 cocos2d::ccColor3B MeltdownSelectLayer::getColorValue(int level, int level2, float a3)
 {
