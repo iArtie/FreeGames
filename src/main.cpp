@@ -381,34 +381,51 @@ class $modify(PauseLayer) {
 		{
 		
 			auto levelID = GM->m_playLayer->m_level->m_levelID;
-			auto worldScene = ownWorldSelectLayer::create(0);
+		/*	auto worldScene = ownWorldSelectLayer::create(0);*/
+			auto specificWorldScene = ownWorldSelectLayer::create(0);
+			auto scene = CCScene::create();
+#ifdef GEODE_IS_WINDOWS
 
+			int colorID = 0;
+	// Crear la escena para Windows usando ownWorldSelectLayer
+			
+			if (levelID > 2000 && levelID < 2006) {
+				specificWorldScene->m_scrollLayer->instantMoveToPage(0);
+				colorID = 4;
+			}
+			else if (levelID > 2005 && levelID < 2011) {
+				specificWorldScene->m_scrollLayer->instantMoveToPage(1);
+				colorID = 6;
+			}
+
+			specificWorldScene->m_background->setColor(GameManager::sharedState()->colorForIdx(colorID));
+			scene->addChild(specificWorldScene);
+			CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene));
+#endif
 
 #ifdef GEODE_IS_ANDROID
 
-			worldScene = WorldSelectLayer::create(0);
-
-#endif
 			int colorID = 0;
-			auto scene = CCScene::create();
-			if (levelID > 2000 && levelID < 2006)
-			{
-				worldScene->m_scrollLayer->instantMoveToPage(0);
+			// Crear la escena para Android directamente con el índice correspondiente
+			if (levelID > 2000 && levelID < 2006) {
+				worldScene = WorldSelectLayer::create(0);
 				colorID = 4;
 			}
-
-			if (levelID > 2005 && levelID < 2011)
-			{
-				worldScene->m_scrollLayer->instantMoveToPage(1);
+			else if (levelID > 2005 && levelID < 2011) {
+				worldScene = WorldSelectLayer::create(1);
 				colorID = 6;
 			}
-		
-			worldScene->m_background->setColor(GameManager::sharedState()->colorForIdx(colorID));
-			
-
+			else {
+				worldScene = WorldSelectLayer::create(0); // Valor por defecto
+			}
 
 			scene->addChild(worldScene);
 			CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene));
+#endif
+
+			
+			
+			/*CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene));*/
 			PauseLayer::onQuit(sender);
 			
 		}
@@ -564,32 +581,48 @@ class $modify(EndLevelLayer) {
 		{
 			
 			auto levelID = GM->m_playLayer->m_level->m_levelID;
-			auto worldScene = ownWorldSelectLayer::create(0);
-			int colorID = 0;
-#ifdef GEODE_IS_ANDROID
-
-			worldScene = WorldSelectLayer::create(0);
-
-#endif
+			/*	auto worldScene = ownWorldSelectLayer::create(0);*/
+			auto specificWorldScene = ownWorldSelectLayer::create(0);
 			auto scene = CCScene::create();
-			if (levelID > 2000 && levelID < 2006)
-			{
-				worldScene->m_scrollLayer->instantMoveToPage(0);
+#ifdef GEODE_IS_WINDOWS
+
+			int colorID = 0;
+			// Crear la escena para Windows usando ownWorldSelectLayer
+
+			if (levelID > 2000 && levelID < 2006) {
+				specificWorldScene->m_scrollLayer->instantMoveToPage(0);
 				colorID = 4;
 			}
-
-			if (levelID > 2005 && levelID < 2011)
-			{
-				worldScene->m_scrollLayer->instantMoveToPage(1);
+			else if (levelID > 2005 && levelID < 2011) {
+				specificWorldScene->m_scrollLayer->instantMoveToPage(1);
 				colorID = 6;
 			}
 
-			worldScene->m_background->setColor(GameManager::sharedState()->colorForIdx(colorID));
+			specificWorldScene->m_background->setColor(GameManager::sharedState()->colorForIdx(colorID));
+			scene->addChild(specificWorldScene);
+			CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene));
+#endif
 
+#ifdef GEODE_IS_ANDROID
 
-		
+			int colorID = 0;
+			// Crear la escena para Android directamente con el índice correspondiente
+			if (levelID > 2000 && levelID < 2006) {
+				worldScene = WorldSelectLayer::create(0);
+				colorID = 4;
+			}
+			else if (levelID > 2005 && levelID < 2011) {
+				worldScene = WorldSelectLayer::create(1);
+				colorID = 6;
+			}
+			else {
+				worldScene = WorldSelectLayer::create(0); // Valor por defecto
+			}
+
 			scene->addChild(worldScene);
 			CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene));
+#endif
+
 			EndLevelLayer::onMenu(sender);
 			
 		}

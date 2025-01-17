@@ -110,15 +110,22 @@ CCArray* MoreGamesLayer::getGames() {
 }
 
 void MoreGamesLayer::onCallback(CCObject* sender) {
+   
+
+#ifdef GEODE_IS_WINDOWS
+
     CCScene* scene = ownWorldSelectLayer::scene(0);
+    CCTransitionFade* fade = CCTransitionFade::create(0.5f, scene);
+    CCDirector::sharedDirector()->pushScene(fade);
+#endif
 
 #ifdef GEODE_IS_ANDROID
 
-    scene = WorldSelectLayer::scene(0);
-
-#endif
+    CCScene* scene = WorldSelectLayer::scene(0);
     CCTransitionFade* fade = CCTransitionFade::create(0.5f, scene);
     CCDirector::sharedDirector()->pushScene(fade);
+#endif
+  
     
 }
 
