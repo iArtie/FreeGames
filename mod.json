@@ -9,6 +9,7 @@
 		"win": "2.2074",
 		"android": "2.2074"
 	},
+	"early-load": true,
 	"links": {
 		"source": "https://github.com/iArtie/FreeGames",
 		"community": "https://discord.gg/gXg8w4xJDA"
