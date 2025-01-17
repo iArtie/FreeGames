@@ -100,25 +100,26 @@ class $modify(LevelTools)
 			level->m_levelName = getAudioTitle(23);
 			level->m_audioTrack = 23;
 			level->m_coins = 3;
+			level->m_levelType = GJLevelType::Default;
 			level->m_stars = 1;
 			level->m_difficulty = GJDifficulty::Easy;
-			level->m_levelType = GJLevelType::Local;
+			
 			break;
 		case 1002:
 			level->m_levelName = getAudioTitle(24);
 			level->m_audioTrack = 24;
 			level->m_coins = 3;
+			level->m_levelType = GJLevelType::Default;
 			level->m_stars = 2;
 			level->m_difficulty = GJDifficulty::Normal;
-			level->m_levelType = GJLevelType::Local;
 			break;
 		case 1003:
 			level->m_levelName = getAudioTitle(25);
 			level->m_audioTrack = 25;
 			level->m_coins = 3;
+			level->m_levelType = GJLevelType::Default;
 			level->m_stars = 3;
 			level->m_difficulty = GJDifficulty::Hard;
-			level->m_levelType = GJLevelType::Local;
 			break;
 		case 2001: //World
 			level->m_levelName = getAudioTitle(27);
@@ -127,7 +128,6 @@ class $modify(LevelTools)
 			level->m_requiredCoins = 0;
 			level->m_stars = 2;
 			level->m_difficulty = GJDifficulty::Easy;
-			level->m_levelType = GJLevelType::Local;
 			break;
 		case 2002:
 			level->m_levelName = getAudioTitle(28);
@@ -136,7 +136,6 @@ class $modify(LevelTools)
 			level->m_requiredCoins = 0;
 			level->m_stars = 2;
 			level->m_difficulty = GJDifficulty::Easy;
-			level->m_levelType = GJLevelType::Local;
 			break;
 		case 2003:
 			level->m_levelName = getAudioTitle(29);
@@ -145,7 +144,6 @@ class $modify(LevelTools)
 			level->m_requiredCoins = 0;
 			level->m_stars = 3;
 			level->m_difficulty = GJDifficulty::Normal;
-			level->m_levelType = GJLevelType::Local;
 			break;
 		case 2004:
 			level->m_levelName = getAudioTitle(30);
@@ -154,7 +152,6 @@ class $modify(LevelTools)
 			level->m_requiredCoins = 0;
 			level->m_stars = 3;
 			level->m_difficulty = GJDifficulty::Normal;
-			level->m_levelType = GJLevelType::Local;
 			break;
 		case 2005:
 			level->m_levelName = getAudioTitle(31);
@@ -163,7 +160,6 @@ class $modify(LevelTools)
 			level->m_requiredCoins = 0;
 			level->m_stars = 3;
 			level->m_difficulty = GJDifficulty::Normal;
-			level->m_levelType = GJLevelType::Local;
 			break;
 		case 2006:
 			level->m_levelName = getAudioTitle(32);
@@ -172,7 +168,6 @@ class $modify(LevelTools)
 			level->m_requiredCoins = 0;
 			level->m_stars = 3;
 			level->m_difficulty = GJDifficulty::Normal;
-			level->m_levelType = GJLevelType::Local;
 			break;
 		case 2007:
 			level->m_levelName = getAudioTitle(33);
@@ -181,7 +176,6 @@ class $modify(LevelTools)
 			level->m_requiredCoins = 0;
 			level->m_stars = 3;
 			level->m_difficulty = GJDifficulty::Normal;
-			level->m_levelType = GJLevelType::Local;
 			break;
 		case 2008:
 			level->m_levelName = getAudioTitle(34);
@@ -190,7 +184,6 @@ class $modify(LevelTools)
 			level->m_requiredCoins = 0;
 			level->m_stars = 3;
 			level->m_difficulty = GJDifficulty::Normal;
-			level->m_levelType = GJLevelType::Local;
 			break;
 		case 2009:
 			level->m_levelName = getAudioTitle(35);
@@ -199,7 +192,6 @@ class $modify(LevelTools)
 			level->m_requiredCoins = 0;
 			level->m_stars = 3;
 			level->m_difficulty = GJDifficulty::Normal;
-			level->m_levelType = GJLevelType::Local;
 			break;
 		case 2010:
 			level->m_levelName = getAudioTitle(36);
@@ -208,37 +200,36 @@ class $modify(LevelTools)
 			level->m_requiredCoins = 0;
 			level->m_stars = 3;
 			level->m_difficulty = GJDifficulty::Normal;
-			level->m_levelType = GJLevelType::Local;
 			break;
 		case 4001: //SubZero
 			level->m_levelName = getAudioTitle(37);
 			level->m_audioTrack = 37;
 			level->m_coins = 3;
+			level->m_levelType = GJLevelType::Default;
 			level->m_stars = 4;
 			level->m_difficulty = GJDifficulty::Normal;
-			level->m_levelType = GJLevelType::Local;
 			break;
 		case 4002:
 			level->m_levelName = getAudioTitle(38);
 			level->m_audioTrack = 38;
 			level->m_coins = 3;
+			level->m_levelType = GJLevelType::Default;
 			level->m_stars = 6;
 			level->m_difficulty = GJDifficulty::Hard;
-			level->m_levelType = GJLevelType::Local;
 			break;
 		case 4003:
 			level->m_levelName = getAudioTitle(39);
 			level->m_audioTrack = 39;
 			level->m_coins = 3;
+			level->m_levelType = GJLevelType::Default;
 			level->m_stars = 8;
 			level->m_difficulty = GJDifficulty::Harder;
-			level->m_levelType = GJLevelType::Local;
 			break;
 		default:
 		
 			return LevelTools::getLevel(levelID, getString);
 		}
-
+		level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(levelID);
 
 		return level;
 	}
