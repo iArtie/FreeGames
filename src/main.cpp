@@ -606,6 +606,7 @@ class $modify(EndLevelLayer) {
 #ifdef GEODE_IS_ANDROID
 
 			int colorID = 0;
+			auto worldScene = WorldSelectLayer::create(0);
 			// Crear la escena para Android directamente con el índice correspondiente
 			if (levelID > 2000 && levelID < 2006) {
 				worldScene = WorldSelectLayer::create(0);
