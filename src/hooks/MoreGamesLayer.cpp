@@ -111,6 +111,12 @@ CCArray* MoreGamesLayer::getGames() {
 
 void MoreGamesLayer::onCallback(CCObject* sender) {
     CCScene* scene = ownWorldSelectLayer::scene(0);
+
+#ifdef GEODE_IS_ANDROID
+
+    scene = WorldSelectLayer::scene(0);
+
+#endif
     CCTransitionFade* fade = CCTransitionFade::create(0.5f, scene);
     CCDirector::sharedDirector()->pushScene(fade);
     

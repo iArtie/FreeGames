@@ -382,6 +382,13 @@ class $modify(PauseLayer) {
 		
 			auto levelID = GM->m_playLayer->m_level->m_levelID;
 			auto worldScene = ownWorldSelectLayer::create(0);
+
+
+#ifdef GEODE_IS_ANDROID
+
+			worldScene = WorldSelectLayer::create(0);
+
+#endif
 			int colorID = 0;
 			auto scene = CCScene::create();
 			if (levelID > 2000 && levelID < 2006)
@@ -559,6 +566,11 @@ class $modify(EndLevelLayer) {
 			auto levelID = GM->m_playLayer->m_level->m_levelID;
 			auto worldScene = ownWorldSelectLayer::create(0);
 			int colorID = 0;
+#ifdef GEODE_IS_ANDROID
+
+			worldScene = WorldSelectLayer::create(0);
+
+#endif
 			auto scene = CCScene::create();
 			if (levelID > 2000 && levelID < 2006)
 			{
