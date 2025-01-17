@@ -108,7 +108,6 @@ class $modify(LevelTools)
 
 		switch (levelID) {
 		case 1001:
-			
 			level->m_levelName = getAudioTitle(23);
 			level->m_audioTrack = 23;
 			level->m_coins = 3;
@@ -116,7 +115,6 @@ class $modify(LevelTools)
 			level->m_difficulty = GJDifficulty::Easy;
 			break;
 		case 1002:
-			
 			level->m_levelName = getAudioTitle(24);
 			level->m_audioTrack = 24;
 			level->m_coins = 3;
@@ -124,12 +122,91 @@ class $modify(LevelTools)
 			level->m_difficulty = GJDifficulty::Normal;
 			break;
 		case 1003:
-		
 			level->m_levelName = getAudioTitle(25);
 			level->m_audioTrack = 25;
 			level->m_coins = 3;
 			level->m_stars = 3;
 			level->m_difficulty = GJDifficulty::Hard;
+			break;
+		case 2001:
+			level->m_levelName = getAudioTitle(27);
+			level->m_audioTrack = 27;
+			level->m_coins = 0;
+			level->m_requiredCoins = 0;
+			level->m_stars = 2;
+			level->m_difficulty = GJDifficulty::Easy;
+			break;
+		case 2002:
+			level->m_levelName = getAudioTitle(28);
+			level->m_audioTrack = 28;
+			level->m_coins = 0;
+			level->m_requiredCoins = 0;
+			level->m_stars = 2;
+			level->m_difficulty = GJDifficulty::Easy;
+			break;
+		case 2003:
+			level->m_levelName = getAudioTitle(29);
+			level->m_audioTrack = 29;
+			level->m_coins = 0;
+			level->m_requiredCoins = 0;
+			level->m_stars = 3;
+			level->m_difficulty = GJDifficulty::Normal;
+			break;
+		case 2004:
+			level->m_levelName = getAudioTitle(30);
+			level->m_audioTrack = 30;
+			level->m_coins = 0;
+			level->m_requiredCoins = 0;
+			level->m_stars = 3;
+			level->m_difficulty = GJDifficulty::Normal;
+			break;
+		case 2005:
+			level->m_levelName = getAudioTitle(31);
+			level->m_audioTrack = 31;
+			level->m_coins = 0;
+			level->m_requiredCoins = 0;
+			level->m_stars = 3;
+			level->m_difficulty = GJDifficulty::Normal;
+			break;
+		case 2006:
+			level->m_levelName = getAudioTitle(32);
+			level->m_audioTrack = 32;
+			level->m_coins = 0;
+			level->m_requiredCoins = 0;
+			level->m_stars = 3;
+			level->m_difficulty = GJDifficulty::Normal;
+			break;
+		case 2007:
+			level->m_levelName = getAudioTitle(33);
+			level->m_audioTrack = 33;
+			level->m_coins = 0;
+			level->m_requiredCoins = 0;
+			level->m_stars = 3;
+			level->m_difficulty = GJDifficulty::Normal;
+			break;
+		case 2008:
+			level->m_levelName = getAudioTitle(34);
+			level->m_audioTrack = 34;
+			level->m_coins = 0;
+			level->m_requiredCoins = 0;
+			level->m_stars = 3;
+			level->m_difficulty = GJDifficulty::Normal;
+			break;
+		case 2009:
+			level->m_levelName = getAudioTitle(35);
+			level->m_audioTrack = 35;
+			level->m_coins = 0;
+			level->m_requiredCoins = 0;
+			level->m_stars = 3;
+			level->m_difficulty = GJDifficulty::Normal;
+			break;
+		case 2010:
+			level->m_levelName = getAudioTitle(36);
+			level->m_audioTrack = 36;
+			level->m_coins = 0;
+			level->m_requiredCoins = 0;
+			level->m_stars = 3;
+			level->m_difficulty = GJDifficulty::Normal;
 			break;
 		default:
 		

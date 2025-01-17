@@ -2531,11 +2531,11 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
     int levellol = 0;
     if (lol == 30)
     {
-        std::string dir = geode::Mod::get()->getResourcesDir().string();
+       /* std::string dir = geode::Mod::get()->getResourcesDir().string();
         std::ifstream mt(dir + "/2001.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
         level21 = GLM->getMainLevel(2001, false);
-        level21->m_levelName = "Payload";
+     /*   level21->m_levelName = "Payload";
         level21->m_levelType = GJLevelType::Local;
         level21->m_stars = 2;
         level21->m_levelString = mtext;
@@ -2543,17 +2543,17 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         level21->m_difficulty = GJDifficulty::Normal;
         level21->m_creatorName = "RobTopGames";
         level21->m_requiredCoins = 0;
-        level21->m_coins = 0;
+        level21->m_coins = 0;*/
     }
 
     if (lol == 31)
     {
-        std::string dir = geode::Mod::get()->getResourcesDir().string();
+       /* std::string dir = geode::Mod::get()->getResourcesDir().string();
         std::ifstream mt(dir + "/2002.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
 
         level21 = GLM->getMainLevel(2002, false);
-        level21->m_levelName = "Beast Mode";
+       /* level21->m_levelName = "Beast Mode";
         level21->m_stars = 2;
         level21->m_levelType = GJLevelType::Local;
         level21->m_levelString = mtext;
@@ -2561,17 +2561,17 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         level21->m_difficulty = GJDifficulty::Normal;
         level21->m_creatorName = "RobTopGames";
         level21->m_requiredCoins = 0;
-        level21->m_coins = 0;
+        level21->m_coins = 0;*/
     }
 
     if (lol == 32)
     {
-        std::string dir = geode::Mod::get()->getResourcesDir().string();
+        /*std::string dir = geode::Mod::get()->getResourcesDir().string();
         std::ifstream mt(dir + "/2003.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
 
         level21 = GLM->getMainLevel(2003, false);
-        level21->m_levelName = "Machina";
+     /*   level21->m_levelName = "Machina";
         level21->m_stars = 3;
         level21->m_levelType = GJLevelType::Local;
         level21->m_levelString = mtext;
@@ -2579,17 +2579,17 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         level21->m_difficulty = GJDifficulty::Normal;
         level21->m_creatorName = "RobTopGames";
         level21->m_requiredCoins = 0;
-        level21->m_coins = 0;
+        level21->m_coins = 0;*/
     }
 
     if (lol == 33)
     {
-        std::string dir = geode::Mod::get()->getResourcesDir().string();
+       /* std::string dir = geode::Mod::get()->getResourcesDir().string();
         std::ifstream mt(dir + "/2004.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
 
         level21 = GLM->getMainLevel(2004, false);
-        level21->m_levelName = "Years";
+    /*    level21->m_levelName = "Years";
         level21->m_stars = 3;
         level21->m_levelType = GJLevelType::Local;
         level21->m_levelString = mtext;
@@ -2597,17 +2597,17 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         level21->m_difficulty = GJDifficulty::Normal;
         level21->m_creatorName = "RobTopGames";
         level21->m_requiredCoins = 0;
-        level21->m_coins = 0;
+        level21->m_coins = 0;*/
     }
     if (lol == 34)
     {
-        std::string dir = geode::Mod::get()->getResourcesDir().string();
+      /*  std::string dir = geode::Mod::get()->getResourcesDir().string();
         std::ifstream mt(dir + "/2005.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
 
 
         level21 = GLM->getMainLevel(2005, false);
-        level21->m_levelName = "Frontlines";
+      /*  level21->m_levelName = "Frontlines";
         level21->m_stars = 3;
         level21->m_levelType = GJLevelType::Local;
         level21->m_levelString = mtext;
@@ -2615,16 +2615,16 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         level21->m_difficulty = GJDifficulty::Normal;
         level21->m_creatorName = "RobTopGames";
         level21->m_requiredCoins = 0;
-        level21->m_coins = 0;
+        level21->m_coins = 0;*/
     }
     if (lol == 35)
     {
-        std::string dir = geode::Mod::get()->getResourcesDir().string();
+       /* std::string dir = geode::Mod::get()->getResourcesDir().string();
         std::ifstream mt(dir + "/2006.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
 
         level21 = GLM->getMainLevel(2006, false);
-        level21->m_levelName = "Space Pirates";
+      /*  level21->m_levelName = "Space Pirates";
         level21->m_stars = 3;
         level21->m_levelType = GJLevelType::Local;
         level21->m_levelString = mtext;
@@ -2632,16 +2632,16 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         level21->m_difficulty = GJDifficulty::Normal;
         level21->m_creatorName = "RobTopGames";
         level21->m_requiredCoins = 0;
-        level21->m_coins = 0;
+        level21->m_coins = 0;*/
     }
     if (lol == 36)
     {
-        std::string dir = geode::Mod::get()->getResourcesDir().string();
+      /*  std::string dir = geode::Mod::get()->getResourcesDir().string();
         std::ifstream mt(dir + "/2007.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
 
         level21 = GLM->getMainLevel(2007, false);
-        level21->m_levelName = "Striker";
+       /* level21->m_levelName = "Striker";
         level21->m_stars = 3;
         level21->m_levelType = GJLevelType::Local;
         level21->m_levelString = mtext;
@@ -2649,16 +2649,16 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         level21->m_difficulty = GJDifficulty::Normal;
         level21->m_creatorName = "RobTopGames";
         level21->m_requiredCoins = 0;
-        level21->m_coins = 0;
+        level21->m_coins = 0;*/
     }
     if (lol == 37)
     {
-        std::string dir = geode::Mod::get()->getResourcesDir().string();
+       /* std::string dir = geode::Mod::get()->getResourcesDir().string();
         std::ifstream mt(dir + "/2008.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
 
         level21 = GLM->getMainLevel(2008, false);
-        level21->m_levelName = "Embers";
+       /* level21->m_levelName = "Embers";
         level21->m_stars = 3;
         level21->m_levelType = GJLevelType::Local;
         level21->m_levelString = mtext;
@@ -2666,33 +2666,33 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         level21->m_difficulty = GJDifficulty::Normal;
         level21->m_creatorName = "RobTopGames";
         level21->m_requiredCoins = 0;
-        level21->m_coins = 0;
+        level21->m_coins = 0;*/
     }
     if (lol == 38)
     {
-        std::string dir = geode::Mod::get()->getResourcesDir().string();
+      /*  std::string dir = geode::Mod::get()->getResourcesDir().string();
         std::ifstream mt(dir + "/2009.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
 
         level21 = GLM->getMainLevel(2009, false);
-        level21->m_levelName = "Round 1";
-        level21->m_stars = 3;
-        level21->m_levelType = GJLevelType::Local;
-        level21->m_levelString = mtext;
-        level21->m_audioTrack = 35;
-        level21->m_difficulty = GJDifficulty::Normal;
-        level21->m_creatorName = "RobTopGames";
-        level21->m_requiredCoins = 0;
-        level21->m_coins = 0;
+        //level21->m_levelName = "Round 1";
+        //level21->m_stars = 3;
+        //level21->m_levelType = GJLevelType::Local;
+        //level21->m_levelString = mtext;
+        //level21->m_audioTrack = 35;
+        //level21->m_difficulty = GJDifficulty::Normal;
+        //level21->m_creatorName = "RobTopGames";
+        //level21->m_requiredCoins = 0;
+        //level21->m_coins = 0;
     }
     if (lol == 39)
     {
-        std::string dir = geode::Mod::get()->getResourcesDir().string();
+     /*   std::string dir = geode::Mod::get()->getResourcesDir().string();
         std::ifstream mt(dir + "/2010.txt");
-        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());
+        std::string mtext((std::istreambuf_iterator<char>(mt)), std::istreambuf_iterator<char>());*/
 
         level21 = GLM->getMainLevel(2010, false);
-        level21->m_levelName = "Monster Dance Off";
+      /*  level21->m_levelName = "Monster Dance Off";
         level21->m_stars = 3;
         level21->m_levelType = GJLevelType::Local;
         level21->m_levelString = mtext;
@@ -2700,7 +2700,7 @@ void ownWorldSelectLayer::onInfo(CCObject* sender) {
         level21->m_difficulty = GJDifficulty::Normal;
         level21->m_creatorName = "RobTopGames";
         level21->m_requiredCoins = 0;
-        level21->m_coins = 0;
+        level21->m_coins = 0;*/
     }
 
     /*std::cout << levellol << std::endl;*/
