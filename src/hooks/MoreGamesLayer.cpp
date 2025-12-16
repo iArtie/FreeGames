@@ -125,6 +125,20 @@ void MoreGamesLayer::onCallback(CCObject* sender) {
     CCTransitionFade* fade = CCTransitionFade::create(0.5f, scene);
     CCDirector::sharedDirector()->pushScene(fade);
 #endif
+
+#ifdef GEODE_IS_MACOS
+
+    CCScene* scene = ownWorldSelectLayer::scene(0);
+    CCTransitionFade* fade = CCTransitionFade::create(0.5f, scene);
+    CCDirector::sharedDirector()->pushScene(fade);
+#endif
+
+#ifdef GEODE_IS_IOS
+
+    CCScene* scene = ownWorldSelectLayer::scene(0);
+    CCTransitionFade* fade = CCTransitionFade::create(0.5f, scene);
+    CCDirector::sharedDirector()->pushScene(fade);
+#endif
   
     
 }

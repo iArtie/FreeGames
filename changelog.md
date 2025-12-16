@@ -1,4 +1,8 @@
 # MoreGames Changelog
+## v1.1.0 (2025-12-16)
+- iOS and Mac support!
+- Built for Geode 4.10.0
+
 ## v1.0.8 (2025-01-17)
 - Big code optimization!
 - SpinOffs levels added on leveltools! (this fix the android crash)

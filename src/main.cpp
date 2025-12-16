@@ -68,6 +68,22 @@ class $modify(LoadingLayer)
 		unzipDir = geode::Mod::get()->getResourcesDir().string() + "/" + "SpinOffGames";
 
 #endif
+#ifdef GEODE_IS_MACOS
+
+
+        zipFilePath = geode::Mod::get()->getResourcesDir().string() + "/" + "SpinOffGames.zip";
+
+        unzipDir = geode::Mod::get()->getResourcesDir().string() + "/" + "SpinOffGames";
+
+#endif
+#ifdef GEODE_IS_IOS
+
+
+        zipFilePath = geode::Mod::get()->getResourcesDir().string() + "/" + "SpinOffGames.zip";
+
+        unzipDir = geode::Mod::get()->getResourcesDir().string() + "/" + "SpinOffGames";
+
+#endif
 		auto result = geode::utils::file::Unzip::intoDir(zipFilePath, unzipDir);
 		
 		CCFileUtils::get()->addTexturePack(CCTexturePack{
@@ -288,7 +304,7 @@ class $modify(GJGarageLayer) {
 			 //page 3 is bug bc BoomScrollLayer is sucks
 			}
 
-			auto transition = CCTransitionMoveInB::create(0.31f, scene);
+			auto transition = CCTransitionMoveInT::create(0.31f, scene);
 
 		
 			CCActionInterval* moveDown = CCMoveBy::create(0.5f, ccp(0, -winSize.height));
@@ -398,6 +414,46 @@ class $modify(PauseLayer) {
 
 			scene->addChild(worldScene);
 			CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene));
+#endif
+
+#ifdef GEODE_IS_MACOS
+
+			int colorID = 0;
+
+			
+			if (levelID > 2000 && levelID < 2006) {
+				specificWorldScene->m_scrollLayer->instantMoveToPage(0);
+				colorID = 4;
+			}
+			else if (levelID > 2005 && levelID < 2011) {
+				specificWorldScene->m_scrollLayer->instantMoveToPage(1);
+				colorID = 6;
+			}
+
+			specificWorldScene->m_background->setColor(GameManager::sharedState()->colorForIdx(colorID));
+			scene->addChild(specificWorldScene);
+			CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene));
+
+#endif
+
+#ifdef GEODE_IS_IOS
+
+			int colorID = 0;
+
+			
+			if (levelID > 2000 && levelID < 2006) {
+				specificWorldScene->m_scrollLayer->instantMoveToPage(0);
+				colorID = 4;
+			}
+			else if (levelID > 2005 && levelID < 2011) {
+				specificWorldScene->m_scrollLayer->instantMoveToPage(1);
+				colorID = 6;
+			}
+
+			specificWorldScene->m_background->setColor(GameManager::sharedState()->colorForIdx(colorID));
+			scene->addChild(specificWorldScene);
+			CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene));
+
 #endif
 
 			
@@ -515,7 +571,7 @@ class $modify(EndLevelLayer) {
 
 			int colorID = 0;
 			auto worldScene = WorldSelectLayer::create(0);
-			// Crear la escena para Android directamente con el índice correspondiente
+			// Crear la escena para Android directamente con el Ã­ndice correspondiente
 			if (levelID > 2000 && levelID < 2006) {
 				worldScene = WorldSelectLayer::create(0);
 				colorID = 4;

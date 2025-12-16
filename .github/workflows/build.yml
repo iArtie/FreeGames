@@ -20,11 +20,11 @@ jobs:
           os: ubuntu-latest
           target: Android64
         # will uncomment mac only when it releases
-        #- name: macOS
-        #  os: macos-latest
-        #- name: iOS
-        #  os: macos-latest
-        #  target: iOS
+        - name: macOS
+          os: macos-latest
+        - name: iOS
+          os: macos-latest
+          target: iOS
       
         
         
@@ -33,7 +33,7 @@ jobs:
     runs-on: ${{ matrix.config.os }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: 'recursive'
           
@@ -41,8 +41,9 @@ jobs:
         #uses: geode-sdk/build-geode-mod@main
         uses: geode-sdk/build-geode-mod@main
         with:
-          bindings: iArtie/bindings
-          bindings-ref: main
+          sdk: nightly
+          # bindings: iArtie/bindings
+          # bindings-ref: main
           combine: true
           export-pdb: true
           target: ${{ matrix.config.target }}
@@ -55,7 +56,7 @@ jobs:
       - uses: geode-sdk/build-geode-mod/combine@main
         id: build
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: MoreGames Build Output
           path: ${{ steps.build.outputs.build-output }}
