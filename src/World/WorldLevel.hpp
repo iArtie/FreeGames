@@ -1,7 +1,7 @@
 #pragma once
 #include <Geode/Bindings.hpp>
 #include <Geode/Geode.hpp>
-class WorldLevel : public geode::Popup<std::string const&> {
+class WorldLevel : public geode::Popup {
 
 protected:
     bool init(std::string const& value);
@@ -20,4 +20,3 @@ private:
     void onClose(CCObject*);
     int m_level;
 };
-

@@ -5,9 +5,12 @@
 using namespace geode::prelude;
 
 
-class WorldLevelPopup : public geode::Popup<std::string const&> {
+class WorldLevelPopup : public geode::Popup {
 protected:
-    bool setup(std::string const& value) override {
+    bool init(std::string const& value)  {
+          if (!Popup::init(320.f, 160.f))
+            return false;
+        
         auto winSize = CCDirector::sharedDirector()->getWinSize();
         this->setID("worldLevelPopup"_spr);
     
@@ -15,6 +18,7 @@ protected:
 
         auto label = CCLabelBMFont::create(value.c_str(), "bigFont.fnt");
         label->setPosition(winSize / 2);
+        
         this->addChild(label);
 
         return true;
@@ -23,9 +27,9 @@ protected:
 public:
     static WorldLevelPopup* create(std::string const& text) {
         auto ret = new WorldLevelPopup();
-
+         
         
-        if (ret && ret->initAnchored(300.f, 260.f, text)) {
+        if (ret && ret->init(text)) {
             ret->autorelease();
             return ret;
         }

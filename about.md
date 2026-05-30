@@ -1,5 +1,7 @@
 # More Games!
 
+THIS VERSION IS NOT THE STATS FIXED VERSION, <cr>USE IT RESPONSIBLY</c>
+
 ## **Ultimate Achievements Fix!**
 - This fix was done by [iristraa](https://github.com/iristraa)
 # Description
