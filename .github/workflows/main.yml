@@ -8,53 +8,76 @@ on:
 
 jobs:
   build:
+    name: ${{ matrix.config.name }}
+
     strategy:
       fail-fast: false
       matrix:
         config:
-        - name: Windows
-          os: windows-latest
+          - name: Windows
+            os: windows-latest
+            target: Win64
 
-        - name: macOS
-          os: macos-latest
+          - name: macOS
+            os: macos-latest
+            target: MacOS
 
-        - name: iOS
-          os: macos-latest
-          target: iOS
+          - name: iOS
+            os: macos-latest
+            target: iOS
 
-        - name: Android32
-          os: ubuntu-latest
-          target: Android32
+          - name: Android32
+            os: ubuntu-latest
+            target: Android32
 
-        - name: Android64
-          os: ubuntu-latest
-          target: Android64
+          - name: Android64
+            os: ubuntu-latest
+            target: Android64
 
-    name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Build the mod
-        continue-on-error: ${{ matrix.config.name == 'macOS' || matrix.config.name == 'iOS' || matrix.config.name == 'Android32' }}
         uses: geode-sdk/build-geode-mod@main
         with:
-          combine: true
+          # Use the current stable Geode SDK
+          sdk: latest
+
+          # Use the current stable Geode CLI
+          cli: latest
+
+          # Build all supported platforms
           target: ${{ matrix.config.target }}
+
+          # Required for the package job below
+          combine: true
+
+          # Smaller final binaries
+          use-lto: true
+
+          # Android minimum supported API
+          android-min-sdk: 23
+
+          # Avoid reusing stale CPM dependencies
+          use-cpm-cache: true
 
   package:
     name: Package builds
     runs-on: ubuntu-latest
-    # run even if one of the platforms fails
-    if: '!cancelled()'
+
     needs: build
+    if: ${{ !cancelled() }}
 
     steps:
-      - uses: geode-sdk/build-geode-mod/combine@main
+      - name: Combine builds
+        uses: geode-sdk/build-geode-mod/combine@main
         id: build
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload combined Geode mod
+        uses: actions/upload-artifact@v4
         with:
-          name: Build Output
+          name: Build-Output
           path: ${{ steps.build.outputs.build-output }}
